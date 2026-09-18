@@ -1,0 +1,17 @@
+# Archivos temporales
+*.tmp
+*.log
+*.bak
+~$*
+
+# Configuración local
+.env
+.vscode/
+.idea/
+
+# Archivos del sistema
+Thumbs.db
+.DS_Store
+
+# Contraseñas o configuraciones sensibles
+credenciales.txt
