@@ -157,3 +157,63 @@ CREATE TABLE IF NOT EXISTS unidad_servicio (
         ON DELETE RESTRICT
 );
 
+-- Registra clinicas, camillas, quirofanos, salas y camas hospitalarias.
+CREATE TABLE IF NOT EXISTS espacio_hospitalario (
+    espacio_hospitalario_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    hospital_id BIGINT NOT NULL,
+    unidad_medica_id BIGINT,
+    codigo VARCHAR(20) NOT NULL,
+    tipo VARCHAR(15) NOT NULL,
+    nombre VARCHAR(100),
+    estado VARCHAR(20) NOT NULL DEFAULT 'Disponible',
+    costo_diario NUMERIC(12,2),
+    CONSTRAINT pk_espacio_hospitalario PRIMARY KEY (espacio_hospitalario_id),
+    CONSTRAINT uq_espacio_hospitalario_codigo UNIQUE (hospital_id, codigo),
+    
+    CONSTRAINT ck_espacio_hospitalario_tipo
+        CHECK (tipo IN ('Clinica', 'Camilla', 'Quirofano', 'Sala', 'Cama')),
+    
+    CONSTRAINT ck_espacio_hospitalario_estado
+        CHECK (estado IN ('Disponible', 'Ocupado', 'Mantenimiento', 'Inactivo')),
+    
+    CONSTRAINT ck_espacio_hospitalario_costo_diario
+        CHECK (costo_diario IS NULL OR costo_diario >= 0),
+    
+    CONSTRAINT ck_espacio_hospitalario_codigo_no_vacio
+        CHECK (BTRIM(codigo) <> ''),
+    CONSTRAINT fk_espacio_hospitalario_hospital
+        FOREIGN KEY (hospital_id)
+        REFERENCES hospital (hospital_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_espacio_hospitalario_unidad
+        FOREIGN KEY (unidad_medica_id)
+        REFERENCES unidad_medica (unidad_medica_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
+
+-- Registra establecimientos externos utilizados en referencias y traslados.
+CREATE TABLE IF NOT EXISTS institucion_externa (
+    institucion_externa_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    direccion_id BIGINT,
+    nombre VARCHAR(150) NOT NULL,
+    tipo VARCHAR(30) NOT NULL,
+    telefono VARCHAR(20),
+    CONSTRAINT pk_institucion_externa PRIMARY KEY (institucion_externa_id),
+    CONSTRAINT uq_institucion_externa_nombre UNIQUE (nombre),
+    
+    CONSTRAINT ck_institucion_externa_tipo
+        CHECK (tipo IN ('Hospital', 'Clinica', 'Laboratorio', 'Organizacion', 'Otra')),
+    
+    CONSTRAINT ck_institucion_externa_nombre_no_vacio
+        CHECK (BTRIM(nombre) <> ''),
+    
+    CONSTRAINT ck_institucion_externa_telefono_formato
+        CHECK (telefono IS NULL OR telefono ~ '^[-+() 0-9]{8,20}$'),
+    CONSTRAINT fk_institucion_externa_direccion
+        FOREIGN KEY (direccion_id)
+        REFERENCES direccion (direccion_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
