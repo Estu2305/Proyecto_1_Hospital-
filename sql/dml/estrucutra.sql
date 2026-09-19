@@ -9,7 +9,7 @@ BEGIN;
 CREATE SCHEMA IF NOT EXISTS hospital;
 SET search_path TO hospital, public;
 
--- Organicacion y Ubicacion--
+--1. Organicacion y Ubicacion--
 
 -- Catalogo de departamentos --
 CREATE TABLE IF NOT EXISTS departamento (
@@ -216,4 +216,71 @@ CREATE TABLE IF NOT EXISTS institucion_externa (
         REFERENCES direccion (direccion_id)
         ON UPDATE CASCADE
         ON DELETE SET NULL
+);
+
+-- 2. PERSONAS, PACIENTES Y PERSONAL --
+
+-- Centraliza la informacion comun de pacientes, encargados y trabajadores.
+CREATE TABLE IF NOT EXISTS persona (
+    persona_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    direccion_id BIGINT,
+    nombres VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(100) NOT NULL,
+    dpi CHAR(13),
+    fecha_nacimiento DATE NOT NULL,
+    sexo VARCHAR(10) NOT NULL,
+    estado_civil VARCHAR(15),
+    telefono VARCHAR(20),
+    correo VARCHAR(120),
+    CONSTRAINT pk_persona PRIMARY KEY (persona_id),
+    CONSTRAINT uq_persona_dpi UNIQUE (dpi),
+    
+    CONSTRAINT ck_persona_nombres_no_vacios
+        CHECK (BTRIM(nombres) <> ''),
+    
+    CONSTRAINT ck_persona_apellidos_no_vacios
+        CHECK (BTRIM(apellidos) <> ''),
+    
+    CONSTRAINT ck_persona_sexo
+        CHECK (sexo IN ('Masculino', 'Femenino')),
+    
+    CONSTRAINT ck_persona_estado_civil
+        CHECK (estado_civil IS NULL OR estado_civil IN ('Soltero', 'Casado', 'Unido', 'Divorciado', 'Viudo')),
+    
+    CONSTRAINT ck_persona_fecha_nacimiento
+        CHECK (fecha_nacimiento >= DATE '1900-01-01'),
+    
+    CONSTRAINT ck_persona_dpi_formato
+        CHECK (dpi IS NULL OR dpi ~ '^[0-9]{13}$'),
+    
+    CONSTRAINT ck_persona_telefono_formato
+        CHECK (telefono IS NULL OR telefono ~ '^[-+() 0-9]{8,20}$'),
+    
+    CONSTRAINT ck_persona_correo_formato
+        CHECK (correo IS NULL OR correo ~* '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$'),
+    CONSTRAINT fk_persona_direccion
+        FOREIGN KEY (direccion_id)
+        REFERENCES direccion (direccion_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
+
+-- Amplia a persona con los datos administrativos propios de un paciente.
+CREATE TABLE IF NOT EXISTS paciente (
+    paciente_id BIGINT,
+    numero_expediente VARCHAR(25) NOT NULL,
+    numero_seguro_social VARCHAR(30),
+    fecha_registro DATE NOT NULL DEFAULT CURRENT_DATE,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_paciente PRIMARY KEY (paciente_id),
+    CONSTRAINT uq_paciente_expediente UNIQUE (numero_expediente),
+    CONSTRAINT uq_paciente_seguro_social UNIQUE (numero_seguro_social),
+    
+    CONSTRAINT ck_paciente_expediente_no_vacio
+        CHECK (BTRIM(numero_expediente) <> ''),
+    CONSTRAINT fk_paciente_persona
+        FOREIGN KEY (paciente_id)
+        REFERENCES persona (persona_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );
