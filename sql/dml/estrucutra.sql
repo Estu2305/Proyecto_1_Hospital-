@@ -93,3 +93,67 @@ CREATE TABLE IF NOT EXISTS hospital (
         ON DELETE RESTRICT
 );
 
+-- Registra las cuatro unidades medicas que funcionan en cada hospital.
+CREATE TABLE IF NOT EXISTS unidad_medica (
+    unidad_medica_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    hospital_id BIGINT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    tipo VARCHAR(20) NOT NULL,
+    ubicacion VARCHAR(150),
+    telefono_extension VARCHAR(10),
+    activa BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_unidad_medica PRIMARY KEY (unidad_medica_id),
+    CONSTRAINT uq_unidad_medica_hospital_tipo UNIQUE (hospital_id, tipo),
+    
+    CONSTRAINT ck_unidad_medica_tipo
+        CHECK (tipo IN ('Consulta Externa', 'Emergencias', 'Cirugia', 'Hospitalizacion')),
+    
+    CONSTRAINT ck_unidad_medica_nombre_no_vacio
+        CHECK (BTRIM(nombre) <> ''),
+    CONSTRAINT fk_unidad_medica_hospital
+        FOREIGN KEY (hospital_id)
+        REFERENCES hospital (hospital_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+-- Cataloga los servicios y tipos de atencion medica ofrecidos.
+CREATE TABLE IF NOT EXISTS servicio_medico (
+    servicio_medico_id SMALLINT GENERATED ALWAYS AS IDENTITY,
+    nombre VARCHAR(120) NOT NULL,
+    categoria VARCHAR(25) NOT NULL,
+    descripcion VARCHAR(300),
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_servicio_medico PRIMARY KEY (servicio_medico_id),
+    CONSTRAINT uq_servicio_medico_nombre UNIQUE (nombre),
+   
+    CONSTRAINT ck_servicio_medico_categoria
+        CHECK (categoria IN ('Consulta Externa', 'Emergencias', 'Cirugia', 'Hospitalizacion', 'General')),
+   
+    CONSTRAINT ck_servicio_medico_nombre_no_vacio
+        CHECK (BTRIM(nombre) <> '')
+);
+
+-- Resuelve la relacion muchos a muchos entre unidades y servicios.
+CREATE TABLE IF NOT EXISTS unidad_servicio (
+    unidad_medica_id BIGINT NOT NULL,
+    servicio_medico_id SMALLINT NOT NULL,
+    costo_base NUMERIC(12,2) NOT NULL DEFAULT 0,
+    disponible BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_unidad_servicio
+        PRIMARY KEY (unidad_medica_id, servicio_medico_id),
+  
+    CONSTRAINT ck_unidad_servicio_costo_base
+        CHECK (costo_base >= 0),
+    CONSTRAINT fk_unidad_servicio_unidad
+        FOREIGN KEY (unidad_medica_id)
+        REFERENCES unidad_medica (unidad_medica_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT fk_unidad_servicio_servicio
+        FOREIGN KEY (servicio_medico_id)
+        REFERENCES servicio_medico (servicio_medico_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
