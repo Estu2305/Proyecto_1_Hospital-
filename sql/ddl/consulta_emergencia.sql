@@ -161,3 +161,52 @@ CREATE TABLE receta_detalle (
     CONSTRAINT fk_receta_detalle_medicamento FOREIGN KEY (medicamento_id)
         REFERENCES medicamento (medicamento_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- Registra ordenes de laboratorio solicitadas durante la consulta.
+CREATE TABLE orden_laboratorio (
+    orden_laboratorio_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    consulta_externa_id BIGINT NOT NULL,
+    fecha_emision TIMESTAMPTZ NOT NULL,
+    indicaciones TEXT,
+    estado VARCHAR(12) NOT NULL DEFAULT 'Pendiente',
+    CONSTRAINT pk_orden_laboratorio PRIMARY KEY (orden_laboratorio_id),
+   
+    CONSTRAINT ck_orden_laboratorio_estado CHECK (
+        estado IN ('Pendiente', 'Realizada', 'Cancelada')
+    ),
+    CONSTRAINT fk_orden_consulta FOREIGN KEY (consulta_externa_id)
+        REFERENCES consulta_externa (consulta_externa_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Detalla los examenes incluidos en una orden de laboratorio.
+CREATE TABLE orden_laboratorio_detalle (
+    orden_laboratorio_detalle_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    orden_laboratorio_id BIGINT NOT NULL,
+    examen VARCHAR(150) NOT NULL,
+    observaciones TEXT,
+    CONSTRAINT pk_orden_laboratorio_detalle PRIMARY KEY (orden_laboratorio_detalle_id),
+   
+    CONSTRAINT ck_orden_detalle_examen CHECK (BTRIM(examen) <> ''),
+    CONSTRAINT fk_orden_detalle_orden FOREIGN KEY (orden_laboratorio_id)
+        REFERENCES orden_laboratorio (orden_laboratorio_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Registra la evaluacion, prioridad y resultado de un ingreso por emergencia.
+CREATE TABLE atencion_emergencia (
+    atencion_emergencia_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    ingreso_id BIGINT NOT NULL,
+    fecha_evaluacion TIMESTAMPTZ NOT NULL,
+    prioridad SMALLINT NOT NULL,
+    estado_clinico TEXT NOT NULL,
+    resultado TEXT,
+    CONSTRAINT pk_atencion_emergencia PRIMARY KEY (atencion_emergencia_id),
+    CONSTRAINT uq_atencion_emergencia_ingreso UNIQUE (ingreso_id),
+    
+    CONSTRAINT ck_emergencia_prioridad CHECK (prioridad BETWEEN 1 AND 5),
+    
+    CONSTRAINT ck_emergencia_estado_clinico CHECK (BTRIM(estado_clinico) <> ''),
+    CONSTRAINT fk_emergencia_ingreso FOREIGN KEY (ingreso_id)
+        REFERENCES ingreso (ingreso_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
