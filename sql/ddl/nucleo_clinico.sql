@@ -126,3 +126,68 @@ CREATE TABLE egreso (
         REFERENCES institucion_externa (institucion_externa_id)
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- Asocia diagnosticos principales y secundarios a un egreso.
+CREATE TABLE egreso_diagnostico (
+    egreso_id BIGINT NOT NULL,
+    diagnostico_id BIGINT NOT NULL,
+    tipo VARCHAR(10) NOT NULL,
+    observaciones TEXT,
+    CONSTRAINT pk_egreso_diagnostico PRIMARY KEY (egreso_id, diagnostico_id),
+    -- Distingue el diagnostico principal de los secundarios.
+    CONSTRAINT ck_egreso_diagnostico_tipo CHECK (tipo IN ('Principal', 'Secundario')),
+    CONSTRAINT fk_egreso_diagnostico_egreso FOREIGN KEY (egreso_id)
+        REFERENCES egreso (egreso_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_egreso_diagnostico_diagnostico FOREIGN KEY (diagnostico_id)
+        REFERENCES diagnostico (diagnostico_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Registra un traslado entre unidades de la cadena o hacia otra institucion.
+CREATE TABLE traslado (
+    traslado_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    episodio_atencion_id BIGINT NOT NULL,
+    ingreso_origen_id BIGINT,
+    medico_indicador_id BIGINT NOT NULL,
+    unidad_origen_id BIGINT NOT NULL,
+    unidad_destino_id BIGINT,
+    institucion_destino_id BIGINT,
+    servicio_destino_id SMALLINT,
+    fecha_traslado TIMESTAMPTZ NOT NULL,
+    tipo VARCHAR(10) NOT NULL,
+    motivo TEXT NOT NULL,
+    codigo_traslado VARCHAR(40) NOT NULL,
+    CONSTRAINT pk_traslado PRIMARY KEY (traslado_id),
+    CONSTRAINT uq_traslado_codigo UNIQUE (codigo_traslado),
+    -- Diferencia un traslado interno de uno externo.
+    CONSTRAINT ck_traslado_tipo CHECK (tipo IN ('Interno', 'Externo')),
+    -- Interno requiere unidad destino; externo requiere institucion externa.
+    CONSTRAINT ck_traslado_destino CHECK (
+        (tipo = 'Interno' AND unidad_destino_id IS NOT NULL AND institucion_destino_id IS NULL)
+        OR (tipo = 'Externo' AND unidad_destino_id IS NULL AND institucion_destino_id IS NOT NULL)
+    ),
+    -- Impide indicar la misma unidad como origen y destino internos.
+    CONSTRAINT ck_traslado_unidades_distintas CHECK (
+        unidad_destino_id IS NULL OR unidad_origen_id <> unidad_destino_id
+    ),
+    -- El motivo del traslado debe estar documentado.
+    CONSTRAINT ck_traslado_motivo CHECK (BTRIM(motivo) <> ''),
+    CONSTRAINT fk_traslado_episodio FOREIGN KEY (episodio_atencion_id)
+        REFERENCES episodio_atencion (episodio_atencion_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_traslado_ingreso_episodio
+        FOREIGN KEY (ingreso_origen_id, episodio_atencion_id)
+        REFERENCES ingreso (ingreso_id, episodio_atencion_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_traslado_medico FOREIGN KEY (medico_indicador_id)
+        REFERENCES medico (medico_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_traslado_origen FOREIGN KEY (unidad_origen_id)
+        REFERENCES unidad_medica (unidad_medica_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_traslado_destino FOREIGN KEY (unidad_destino_id)
+        REFERENCES unidad_medica (unidad_medica_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_traslado_institucion FOREIGN KEY (institucion_destino_id)
+        REFERENCES institucion_externa (institucion_externa_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_traslado_servicio FOREIGN KEY (servicio_destino_id)
+        REFERENCES servicio_medico (servicio_medico_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
+);
