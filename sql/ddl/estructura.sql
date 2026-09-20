@@ -534,3 +534,5 @@ CREATE UNIQUE INDEX IF NOT EXISTS uq_medico_especialidad_principal
     WHERE es_principal = TRUE;
 
 COMMIT;
+
+
