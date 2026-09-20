@@ -242,3 +242,60 @@ CREATE TABLE consentimiento_quirurgico (
         REFERENCES persona (persona_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- Registra la clasificacion ASA y el plan de anestesia preoperatorio.
+CREATE TABLE chequeo_preanestesico (
+    chequeo_preanestesico_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    cirugia_id BIGINT NOT NULL,
+    medico_evaluador_id BIGINT NOT NULL,
+    anestesista_id BIGINT NOT NULL,
+    clasificacion_asa VARCHAR(3) NOT NULL,
+    plan_anestesia TEXT NOT NULL,
+    fecha_evaluacion TIMESTAMPTZ NOT NULL,
+    firma_evaluador_confirmada BOOLEAN NOT NULL,
+    observaciones TEXT,
+    CONSTRAINT pk_chequeo_preanestesico PRIMARY KEY (chequeo_preanestesico_id),
+    CONSTRAINT uq_chequeo_preanestesico_cirugia UNIQUE (cirugia_id),
+    
+    CONSTRAINT ck_chequeo_asa CHECK (
+        clasificacion_asa IN ('I', 'II', 'III', 'IV', 'V', 'VI')
+    ),
+    
+    CONSTRAINT ck_chequeo_plan CHECK (BTRIM(plan_anestesia) <> ''),
+    CONSTRAINT fk_chequeo_cirugia FOREIGN KEY (cirugia_id)
+        REFERENCES cirugia (cirugia_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_chequeo_evaluador FOREIGN KEY (medico_evaluador_id)
+        REFERENCES medico (medico_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_chequeo_anestesista FOREIGN KEY (anestesista_id)
+        REFERENCES medico (medico_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Registra preoperatorio, intraoperatorio y postoperatorio de cada cirugia.
+CREATE TABLE etapa_cirugia (
+    etapa_cirugia_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    cirugia_id BIGINT NOT NULL,
+    enfermero_responsable_id BIGINT NOT NULL,
+    etapa VARCHAR(16) NOT NULL,
+    fecha_inicio TIMESTAMPTZ NOT NULL,
+    fecha_fin TIMESTAMPTZ,
+    fecha_envio_secretaria TIMESTAMPTZ,
+    observaciones TEXT,
+    CONSTRAINT pk_etapa_cirugia PRIMARY KEY (etapa_cirugia_id),
+    CONSTRAINT uq_etapa_cirugia_tipo UNIQUE (cirugia_id, etapa),
+    CONSTRAINT uq_etapa_cirugia_tipo_ref UNIQUE (etapa_cirugia_id, etapa),
+   
+    CONSTRAINT ck_etapa_tipo CHECK (
+        etapa IN ('Preoperatorio', 'Intraoperatorio', 'Postoperatorio')
+    ),
+   
+    CONSTRAINT ck_etapa_fechas CHECK (fecha_fin IS NULL OR fecha_fin >= fecha_inicio),
+   
+    CONSTRAINT ck_etapa_envio CHECK (
+        fecha_envio_secretaria IS NULL OR
+        (fecha_fin IS NOT NULL AND fecha_envio_secretaria >= fecha_fin)
+    ),
+    CONSTRAINT fk_etapa_cirugia FOREIGN KEY (cirugia_id)
+        REFERENCES cirugia (cirugia_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_etapa_enfermero FOREIGN KEY (enfermero_responsable_id)
+        REFERENCES enfermero (enfermero_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
