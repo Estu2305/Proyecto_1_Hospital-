@@ -191,3 +191,37 @@ CREATE TABLE traslado (
         REFERENCES servicio_medico (servicio_medico_id)
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- Conserva el consentimiento para traslado, cirugia u hospitalizacion.
+CREATE TABLE consentimiento_general (
+    consentimiento_general_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    episodio_atencion_id BIGINT NOT NULL,
+    firmante_persona_id BIGINT NOT NULL,
+    medico_solicitante_id BIGINT NOT NULL,
+    tipo VARCHAR(17) NOT NULL,
+    fecha TIMESTAMPTZ NOT NULL,
+    aceptado BOOLEAN NOT NULL,
+    descripcion_procedimiento TEXT NOT NULL,
+    observaciones TEXT,
+    CONSTRAINT pk_consentimiento_general PRIMARY KEY (consentimiento_general_id),
+    -- Limita el consentimiento a los procedimientos generales indicados.
+    CONSTRAINT ck_consentimiento_general_tipo
+        CHECK (tipo IN ('Traslado', 'Cirugia', 'Hospitalizacion')),
+    -- Exige una descripcion clara del procedimiento aceptado o rechazado.
+    CONSTRAINT ck_consentimiento_general_descripcion
+        CHECK (BTRIM(descripcion_procedimiento) <> ''),
+    CONSTRAINT fk_consentimiento_episodio FOREIGN KEY (episodio_atencion_id)
+        REFERENCES episodio_atencion (episodio_atencion_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_consentimiento_firmante FOREIGN KEY (firmante_persona_id)
+        REFERENCES persona (persona_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_consentimiento_medico FOREIGN KEY (medico_solicitante_id)
+        REFERENCES medico (medico_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Como maximo puede existir un diagnostico principal por egreso.
+CREATE UNIQUE INDEX uq_egreso_un_diagnostico_principal
+    ON egreso_diagnostico (egreso_id)
+    WHERE tipo = 'Principal';
+
+COMMIT;
