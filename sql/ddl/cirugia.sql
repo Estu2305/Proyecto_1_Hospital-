@@ -299,3 +299,82 @@ CREATE TABLE etapa_cirugia (
         REFERENCES enfermero (enfermero_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- Cataloga verificaciones de cada fase del proceso quirurgico.
+CREATE TABLE item_control_quirurgico (
+    item_control_quirurgico_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    etapa VARCHAR(16) NOT NULL,
+    grupo VARCHAR(40) NOT NULL,
+    descripcion VARCHAR(250) NOT NULL,
+    tipo_resultado VARCHAR(12) NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_item_control_quirurgico PRIMARY KEY (item_control_quirurgico_id),
+    CONSTRAINT uq_item_control_grupo_descripcion UNIQUE (etapa, grupo, descripcion),
+    CONSTRAINT uq_item_control_etapa_ref UNIQUE (item_control_quirurgico_id, etapa),
+   
+    CONSTRAINT ck_item_control_etapa CHECK (
+        etapa IN ('Preoperatorio', 'Intraoperatorio', 'Postoperatorio')
+    ),
+    
+    CONSTRAINT ck_item_control_tipo CHECK (tipo_resultado IN ('ExitoFalla', 'Aceptacion')),
+   
+    CONSTRAINT ck_item_control_grupo CHECK (BTRIM(grupo) <> ''),
+    
+    CONSTRAINT ck_item_control_descripcion CHECK (BTRIM(descripcion) <> '')
+);
+
+-- Registra el resultado de cada verificacion y su hora.
+CREATE TABLE resultado_control_quirurgico (
+    resultado_control_quirurgico_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    etapa_cirugia_id BIGINT NOT NULL,
+    item_control_quirurgico_id BIGINT NOT NULL,
+    etapa VARCHAR(16) NOT NULL,
+    resultado VARCHAR(25) NOT NULL,
+    fecha_registro TIMESTAMPTZ NOT NULL,
+    registrado_por_enfermero_id BIGINT NOT NULL,
+    observaciones TEXT,
+    CONSTRAINT pk_resultado_control PRIMARY KEY (resultado_control_quirurgico_id),
+    CONSTRAINT uq_resultado_control_item UNIQUE (etapa_cirugia_id, item_control_quirurgico_id),
+    
+    CONSTRAINT ck_resultado_control_valor CHECK (
+        resultado IN ('Exito', 'Falla', 'Aceptable',
+                      'Medianamente aceptable', 'No aceptable')
+    ),
+    CONSTRAINT fk_resultado_etapa FOREIGN KEY (etapa_cirugia_id, etapa)
+        REFERENCES etapa_cirugia (etapa_cirugia_id, etapa)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_resultado_item FOREIGN KEY (item_control_quirurgico_id, etapa)
+        REFERENCES item_control_quirurgico (item_control_quirurgico_id, etapa)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_resultado_enfermero FOREIGN KEY (registrado_por_enfermero_id)
+        REFERENCES enfermero (enfermero_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Conserva historia clinica, signos, exploraciones y cuidados de cirugia.
+CREATE TABLE registro_clinico_cirugia (
+    registro_clinico_cirugia_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    cirugia_id BIGINT NOT NULL,
+    etapa_cirugia_id BIGINT,
+    registrador_persona_id BIGINT NOT NULL,
+    categoria VARCHAR(32) NOT NULL,
+    descripcion TEXT NOT NULL,
+    valor TEXT,
+    fecha_registro TIMESTAMPTZ NOT NULL,
+    CONSTRAINT pk_registro_clinico_cirugia PRIMARY KEY (registro_clinico_cirugia_id),
+    
+    CONSTRAINT ck_registro_clinico_categoria CHECK (categoria IN (
+        'Interrogatorio', 'Antecedentes', 'Exploracion fisica',
+        'Signos vitales', 'Balance hidrico', 'Medicamentos',
+        'Transfusion', 'Evolucion', 'Otro'
+    )),
+    -- El registro debe describir el hallazgo o cuidado.
+    CONSTRAINT ck_registro_clinico_descripcion CHECK (BTRIM(descripcion) <> ''),
+    CONSTRAINT fk_registro_clinico_cirugia FOREIGN KEY (cirugia_id)
+        REFERENCES cirugia (cirugia_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_registro_clinico_etapa FOREIGN KEY (etapa_cirugia_id)
+        REFERENCES etapa_cirugia (etapa_cirugia_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_registro_clinico_persona FOREIGN KEY (registrador_persona_id)
+        REFERENCES persona (persona_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+COMMIT;
