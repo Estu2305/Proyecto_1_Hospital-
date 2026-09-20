@@ -64,3 +64,181 @@ CREATE TABLE evaluacion_solicitud_cirugia (
         REFERENCES medico (medico_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- Registra la cirugia aprobada, el quirofano y el horario asignado.
+CREATE TABLE cirugia (
+    cirugia_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    solicitud_cirugia_id BIGINT NOT NULL,
+    evaluacion_solicitud_cirugia_id BIGINT NOT NULL,
+    decision_requerida VARCHAR(10) NOT NULL DEFAULT 'Aprobada',
+    quirofano_id BIGINT NOT NULL,
+    fecha_programada TIMESTAMPTZ NOT NULL,
+    fecha_inicio TIMESTAMPTZ,
+    fecha_fin TIMESTAMPTZ,
+    estado VARCHAR(12) NOT NULL DEFAULT 'Programada',
+    procedimiento_realizado TEXT,
+    CONSTRAINT pk_cirugia PRIMARY KEY (cirugia_id),
+    CONSTRAINT uq_cirugia_solicitud UNIQUE (solicitud_cirugia_id),
+    CONSTRAINT uq_cirugia_evaluacion UNIQUE (evaluacion_solicitud_cirugia_id),
+    
+    CONSTRAINT ck_cirugia_aprobada CHECK (decision_requerida = 'Aprobada'),
+    
+    CONSTRAINT ck_cirugia_estado CHECK (
+        estado IN ('Programada', 'En curso', 'Finalizada', 'Cancelada')
+    ),
+    
+    CONSTRAINT ck_cirugia_fechas CHECK (
+        (fecha_fin IS NULL OR fecha_inicio IS NOT NULL)
+        AND (fecha_fin IS NULL OR fecha_fin >= fecha_inicio)
+    ),
+    
+    CONSTRAINT ck_cirugia_finalizada CHECK (
+        estado <> 'Finalizada' OR
+        (fecha_inicio IS NOT NULL AND fecha_fin IS NOT NULL
+         AND NULLIF(BTRIM(procedimiento_realizado), '') IS NOT NULL)
+    ),
+    CONSTRAINT fk_cirugia_solicitud FOREIGN KEY (solicitud_cirugia_id)
+        REFERENCES solicitud_cirugia (solicitud_cirugia_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_cirugia_evaluacion_aprobada
+        FOREIGN KEY (evaluacion_solicitud_cirugia_id, solicitud_cirugia_id, decision_requerida)
+        REFERENCES evaluacion_solicitud_cirugia
+            (evaluacion_solicitud_cirugia_id, solicitud_cirugia_id, decision)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_cirugia_quirofano FOREIGN KEY (quirofano_id)
+        REFERENCES espacio_hospitalario (espacio_hospitalario_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Resuelve la participacion de cirujanos, anestesistas y enfermeros.
+CREATE TABLE participante_cirugia (
+    participante_cirugia_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    cirugia_id BIGINT NOT NULL,
+    persona_id BIGINT NOT NULL,
+    rol VARCHAR(25) NOT NULL,
+    observaciones TEXT,
+    CONSTRAINT pk_participante_cirugia PRIMARY KEY (participante_cirugia_id),
+    CONSTRAINT uq_participante_cirugia_rol UNIQUE (cirugia_id, persona_id, rol),
+   
+    CONSTRAINT ck_participante_rol CHECK (rol IN (
+        'Cirujano', 'Anestesiologo', 'Enfermero',
+        'Practicante medicina', 'Practicante enfermeria', 'Otro'
+    )),
+    CONSTRAINT fk_participante_cirugia FOREIGN KEY (cirugia_id)
+        REFERENCES cirugia (cirugia_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_participante_persona FOREIGN KEY (persona_id)
+        REFERENCES persona (persona_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Cataloga insumos, instrumentos y equipos utilizados en cirugia.
+CREATE TABLE recurso (
+    recurso_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    nombre VARCHAR(150) NOT NULL,
+    descripcion TEXT,
+    categoria VARCHAR(11) NOT NULL,
+    tipo VARCHAR(12) NOT NULL,
+    material VARCHAR(100),
+    funcion VARCHAR(20),
+    costo_unitario NUMERIC(12,2) NOT NULL DEFAULT 0,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_recurso PRIMARY KEY (recurso_id),
+    CONSTRAINT uq_recurso_nombre_categoria UNIQUE (nombre, categoria),
+   
+    CONSTRAINT ck_recurso_categoria CHECK (
+        categoria IN ('Insumo', 'Instrumento', 'Equipo')
+    ),
+  
+    CONSTRAINT ck_recurso_tipo CHECK (tipo IN ('Medico', 'Quirurgico', 'Otro')),
+   
+    CONSTRAINT ck_recurso_funcion CHECK (
+        funcion IS NULL OR funcion IN (
+            'Corte', 'Contenido', 'Hemostatica', 'Retractor',
+            'Accesorio', 'Implante', 'Exploracion', 'Diagnostico',
+            'Tratamiento', 'Rehabilitacion', 'Otro'
+        )
+    ),
+  
+    CONSTRAINT ck_recurso_costo CHECK (costo_unitario >= 0),
+   
+    CONSTRAINT ck_recurso_nombre CHECK (BTRIM(nombre) <> ''),
+   
+    CONSTRAINT ck_recurso_material_insumo CHECK (
+        categoria <> 'Insumo' OR NULLIF(BTRIM(material), '') IS NOT NULL
+    ),
+   
+    CONSTRAINT ck_recurso_funcion_equipo CHECK (
+        categoria = 'Insumo' OR funcion IS NOT NULL
+    )
+);
+
+-- Relaciona la solicitud con los recursos requeridos en el agendamiento.
+CREATE TABLE solicitud_recurso (
+    solicitud_cirugia_id BIGINT NOT NULL,
+    recurso_id BIGINT NOT NULL,
+    cantidad NUMERIC(10,2) NOT NULL,
+    observaciones TEXT,
+    CONSTRAINT pk_solicitud_recurso PRIMARY KEY (solicitud_cirugia_id, recurso_id),
+  
+    CONSTRAINT ck_solicitud_recurso_cantidad CHECK (cantidad > 0),
+    CONSTRAINT fk_solicitud_recurso_solicitud FOREIGN KEY (solicitud_cirugia_id)
+        REFERENCES solicitud_cirugia (solicitud_cirugia_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_solicitud_recurso_recurso FOREIGN KEY (recurso_id)
+        REFERENCES recurso (recurso_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Conserva cantidades y costos historicos de recursos usados realmente.
+CREATE TABLE uso_recurso_cirugia (
+    uso_recurso_cirugia_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    cirugia_id BIGINT NOT NULL,
+    recurso_id BIGINT NOT NULL,
+    cantidad NUMERIC(10,2) NOT NULL,
+    costo_unitario_aplicado NUMERIC(12,2) NOT NULL,
+    fecha_uso TIMESTAMPTZ NOT NULL,
+    observaciones TEXT,
+    CONSTRAINT pk_uso_recurso_cirugia PRIMARY KEY (uso_recurso_cirugia_id),
+    
+    CONSTRAINT ck_uso_recurso_cantidad CHECK (cantidad > 0),
+   
+    CONSTRAINT ck_uso_recurso_costo CHECK (costo_unitario_aplicado >= 0),
+    CONSTRAINT fk_uso_recurso_cirugia FOREIGN KEY (cirugia_id)
+        REFERENCES cirugia (cirugia_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_uso_recurso_catalogo FOREIGN KEY (recurso_id)
+        REFERENCES recurso (recurso_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Documenta el consentimiento informado especifico del procedimiento.
+CREATE TABLE consentimiento_quirurgico (
+    consentimiento_quirurgico_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    cirugia_id BIGINT NOT NULL,
+    medico_firmante_id BIGINT NOT NULL,
+    firmante_persona_id BIGINT NOT NULL,
+    calidad_firmante VARCHAR(20) NOT NULL,
+    procedimiento TEXT NOT NULL,
+    objetivo TEXT NOT NULL,
+    caracteristicas TEXT NOT NULL,
+    riesgos TEXT NOT NULL,
+    fecha_obtencion TIMESTAMPTZ NOT NULL,
+    firma_medico_confirmada BOOLEAN NOT NULL,
+    firma_paciente_o_representante_confirmada BOOLEAN NOT NULL,
+    CONSTRAINT pk_consentimiento_quirurgico PRIMARY KEY (consentimiento_quirurgico_id),
+    CONSTRAINT uq_consentimiento_quirurgico_cirugia UNIQUE (cirugia_id),
+    
+    CONSTRAINT ck_consentimiento_quirurgico_firmante CHECK (
+        calidad_firmante IN ('Paciente', 'Familiar', 'Tutor', 'Representante')
+    ),
+    
+    CONSTRAINT ck_consentimiento_quirurgico_procedimiento CHECK (BTRIM(procedimiento) <> ''),
+   
+    CONSTRAINT ck_consentimiento_quirurgico_objetivo CHECK (BTRIM(objetivo) <> ''),
+    
+    CONSTRAINT ck_consentimiento_quirurgico_caracteristicas CHECK (BTRIM(caracteristicas) <> ''),
+    
+    CONSTRAINT ck_consentimiento_quirurgico_riesgos CHECK (BTRIM(riesgos) <> ''),
+    CONSTRAINT fk_consentimiento_quirurgico_cirugia FOREIGN KEY (cirugia_id)
+        REFERENCES cirugia (cirugia_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_consentimiento_quirurgico_medico FOREIGN KEY (medico_firmante_id)
+        REFERENCES medico (medico_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_consentimiento_quirurgico_persona FOREIGN KEY (firmante_persona_id)
+        REFERENCES persona (persona_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
