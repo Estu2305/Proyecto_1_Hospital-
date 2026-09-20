@@ -284,3 +284,82 @@ CREATE TABLE IF NOT EXISTS paciente (
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 );
+
+-- Relaciona cada paciente con uno o varios encargados autorizados.
+CREATE TABLE IF NOT EXISTS encargado_paciente (
+    encargado_paciente_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    paciente_id BIGINT NOT NULL,
+    encargado_persona_id BIGINT NOT NULL,
+    parentesco VARCHAR(40) NOT NULL,
+    es_principal BOOLEAN NOT NULL DEFAULT FALSE,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_encargado_paciente PRIMARY KEY (encargado_paciente_id),
+    CONSTRAINT uq_encargado_paciente_relacion
+        UNIQUE (paciente_id, encargado_persona_id),
+    
+    CONSTRAINT ck_encargado_paciente_parentesco_no_vacio
+        CHECK (BTRIM(parentesco) <> ''),
+    
+    CONSTRAINT ck_encargado_paciente_personas_distintas
+        CHECK (paciente_id <> encargado_persona_id),
+    CONSTRAINT fk_encargado_paciente_paciente
+        FOREIGN KEY (paciente_id)
+        REFERENCES paciente (paciente_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_encargado_paciente_persona
+        FOREIGN KEY (encargado_persona_id)
+        REFERENCES persona (persona_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+-- Registra personal contratado directamente por un hospital.
+CREATE TABLE IF NOT EXISTS empleado (
+    empleado_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    persona_id BIGINT NOT NULL,
+    hospital_id BIGINT NOT NULL,
+    codigo_empleado VARCHAR(20) NOT NULL,
+    tipo_empleado VARCHAR(25) NOT NULL,
+    fecha_contratacion DATE NOT NULL,
+    fecha_finalizacion DATE,
+    estado_laboral VARCHAR(15) NOT NULL DEFAULT 'Activo',
+    CONSTRAINT pk_empleado PRIMARY KEY (empleado_id),
+    CONSTRAINT uq_empleado_hospital_codigo UNIQUE (hospital_id, codigo_empleado),
+    CONSTRAINT uq_empleado_persona_hospital UNIQUE (persona_id, hospital_id),
+    
+    CONSTRAINT ck_empleado_tipo
+        CHECK (tipo_empleado IN ('Medico', 'Enfermero', 'Practicante', 'Recepcionista', 'Administrativo', 'Otro')),
+    
+    CONSTRAINT ck_empleado_estado_laboral
+        CHECK (estado_laboral IN ('Activo', 'Suspendido', 'Finalizado')),
+    
+    CONSTRAINT ck_empleado_fechas
+        CHECK (fecha_finalizacion IS NULL OR fecha_finalizacion >= fecha_contratacion),
+    
+    CONSTRAINT ck_empleado_codigo_no_vacio
+        CHECK (BTRIM(codigo_empleado) <> ''),
+    CONSTRAINT fk_empleado_persona
+        FOREIGN KEY (persona_id)
+        REFERENCES persona (persona_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_empleado_hospital
+        FOREIGN KEY (hospital_id)
+        REFERENCES hospital (hospital_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+-- Cataloga especialidades medicas de consulta externa, emergencia y cirugia.
+CREATE TABLE IF NOT EXISTS especialidad (
+    especialidad_id SMALLINT GENERATED ALWAYS AS IDENTITY,
+    nombre VARCHAR(120) NOT NULL,
+    descripcion VARCHAR(300),
+    activa BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_especialidad PRIMARY KEY (especialidad_id),
+    CONSTRAINT uq_especialidad_nombre UNIQUE (nombre),
+    
+    CONSTRAINT ck_especialidad_nombre_no_vacio
+        CHECK (BTRIM(nombre) <> '')
+);
