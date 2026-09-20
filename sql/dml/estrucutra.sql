@@ -415,3 +415,122 @@ CREATE TABLE IF NOT EXISTS medico_especialidad (
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 );
+
+-- Registra la vinculacion de un medico con uno o varios hospitales.
+CREATE TABLE IF NOT EXISTS medico_hospital (
+    medico_hospital_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    medico_id BIGINT NOT NULL,
+    hospital_id BIGINT NOT NULL,
+    condicion VARCHAR(12) NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_medico_hospital PRIMARY KEY (medico_hospital_id),
+    CONSTRAINT uq_medico_hospital_vinculo UNIQUE (medico_id, hospital_id, fecha_inicio),
+    
+    CONSTRAINT ck_medico_hospital_condicion
+        CHECK (condicion IN ('Residente', 'Interno', 'Externo')),
+    
+    CONSTRAINT ck_medico_hospital_fechas
+        CHECK (fecha_fin IS NULL OR fecha_fin >= fecha_inicio),
+    CONSTRAINT fk_medico_hospital_medico
+        FOREIGN KEY (medico_id)
+        REFERENCES medico (medico_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_medico_hospital_hospital
+        FOREIGN KEY (hospital_id)
+        REFERENCES hospital (hospital_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+-- Especializa a un empleado con los datos profesionales de enfermeria.
+CREATE TABLE IF NOT EXISTS enfermero (
+    enfermero_id BIGINT,
+    numero_registro VARCHAR(25),
+    nivel VARCHAR(12) NOT NULL,
+    CONSTRAINT pk_enfermero PRIMARY KEY (enfermero_id),
+    CONSTRAINT uq_enfermero_numero_registro UNIQUE (numero_registro),
+    
+    CONSTRAINT ck_enfermero_nivel
+        CHECK (nivel IN ('Registrado', 'Practicante')),
+    
+    CONSTRAINT ck_enfermero_registro_segun_nivel
+        CHECK (
+            (nivel = 'Registrado' AND numero_registro IS NOT NULL AND BTRIM(numero_registro) <> '')
+            OR nivel = 'Practicante'
+        ),
+    CONSTRAINT fk_enfermero_empleado
+        FOREIGN KEY (enfermero_id)
+        REFERENCES empleado (empleado_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+-- Especializa a un empleado que realiza practica profesional de medicina.
+CREATE TABLE IF NOT EXISTS practicante_medicina (
+    practicante_id BIGINT,
+    institucion_educativa VARCHAR(150) NOT NULL,
+    numero_carnet VARCHAR(30) NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    CONSTRAINT pk_practicante_medicina PRIMARY KEY (practicante_id),
+    CONSTRAINT uq_practicante_medicina_carnet UNIQUE (institucion_educativa, numero_carnet),
+    
+    CONSTRAINT ck_practicante_institucion_no_vacia
+        CHECK (BTRIM(institucion_educativa) <> ''),
+    
+    CONSTRAINT ck_practicante_carnet_no_vacio
+        CHECK (BTRIM(numero_carnet) <> ''),
+    
+    CONSTRAINT ck_practicante_fechas
+        CHECK (fecha_fin >= fecha_inicio),
+    CONSTRAINT fk_practicante_medicina_empleado
+        FOREIGN KEY (practicante_id)
+        REFERENCES empleado (empleado_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+-- Registra los turnos asignados al personal en una unidad medica.
+CREATE TABLE IF NOT EXISTS turno_personal (
+    turno_personal_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    empleado_id BIGINT NOT NULL,
+    unidad_medica_id BIGINT NOT NULL,
+    fecha DATE NOT NULL,
+    hora_inicio TIME NOT NULL,
+    hora_fin TIME NOT NULL,
+    estado VARCHAR(12) NOT NULL DEFAULT 'Programado',
+    CONSTRAINT pk_turno_personal PRIMARY KEY (turno_personal_id),
+    CONSTRAINT uq_turno_personal_asignacion
+        UNIQUE (empleado_id, unidad_medica_id, fecha, hora_inicio),
+    
+    CONSTRAINT ck_turno_personal_horas
+        CHECK (hora_fin > hora_inicio),
+    
+    CONSTRAINT ck_turno_personal_estado
+        CHECK (estado IN ('Programado', 'Cumplido', 'Cancelado')),
+    CONSTRAINT fk_turno_personal_empleado
+        FOREIGN KEY (empleado_id)
+        REFERENCES empleado (empleado_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_turno_personal_unidad
+        FOREIGN KEY (unidad_medica_id)
+        REFERENCES unidad_medica (unidad_medica_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+-- Solo puede existir un encargado principal activo por paciente.
+CREATE UNIQUE INDEX IF NOT EXISTS uq_encargado_principal_activo
+    ON encargado_paciente (paciente_id)
+    WHERE es_principal = TRUE AND activo = TRUE;
+
+-- Solo puede existir una especialidad principal por medico.
+CREATE UNIQUE INDEX IF NOT EXISTS uq_medico_especialidad_principal
+    ON medico_especialidad (medico_id)
+    WHERE es_principal = TRUE;
+
+COMMIT;
