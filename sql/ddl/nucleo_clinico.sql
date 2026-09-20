@@ -80,3 +80,49 @@ CREATE TABLE ingreso (
         REFERENCES espacio_hospitalario (espacio_hospitalario_id, hospital_id)
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- Cataloga diagnosticos clinicos que pueden documentarse en el egreso.
+CREATE TABLE diagnostico (
+    diagnostico_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    codigo VARCHAR(25),
+    nombre VARCHAR(200) NOT NULL,
+    descripcion TEXT,
+    CONSTRAINT pk_diagnostico PRIMARY KEY (diagnostico_id),
+    CONSTRAINT uq_diagnostico_codigo UNIQUE (codigo),
+    
+    CONSTRAINT ck_diagnostico_nombre CHECK (BTRIM(nombre) <> '')
+);
+
+-- Documenta el egreso de la unidad y su destino o motivo de salida.
+CREATE TABLE egreso (
+    egreso_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    ingreso_id BIGINT NOT NULL,
+    medico_asignado_id BIGINT NOT NULL,
+    institucion_referida_id BIGINT,
+    fecha_egreso TIMESTAMPTZ NOT NULL,
+    motivo_egreso TEXT NOT NULL,
+    codigo_egreso VARCHAR(10) NOT NULL,
+    sin_consentimiento_medico BOOLEAN NOT NULL DEFAULT FALSE,
+    motivo_sin_consentimiento TEXT,
+    operaciones_intervenciones TEXT,
+    codigo_traslado VARCHAR(40),
+    observaciones TEXT,
+    CONSTRAINT pk_egreso PRIMARY KEY (egreso_id),
+    CONSTRAINT uq_egreso_ingreso UNIQUE (ingreso_id),
+    
+    CONSTRAINT ck_egreso_codigo CHECK (codigo_egreso IN ('Vivo', 'Muerto', 'Embarazo', 'Parto')),
+    
+    CONSTRAINT ck_egreso_sin_consentimiento CHECK (
+        (sin_consentimiento_medico AND NULLIF(BTRIM(motivo_sin_consentimiento), '') IS NOT NULL)
+        OR (NOT sin_consentimiento_medico AND motivo_sin_consentimiento IS NULL)
+    ),
+    
+    CONSTRAINT ck_egreso_motivo CHECK (BTRIM(motivo_egreso) <> ''),
+    CONSTRAINT fk_egreso_ingreso FOREIGN KEY (ingreso_id)
+        REFERENCES ingreso (ingreso_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_egreso_medico FOREIGN KEY (medico_asignado_id)
+        REFERENCES medico (medico_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_egreso_institucion FOREIGN KEY (institucion_referida_id)
+        REFERENCES institucion_externa (institucion_externa_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
+);
