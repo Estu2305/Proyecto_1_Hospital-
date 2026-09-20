@@ -72,3 +72,40 @@ CREATE TABLE cita (
     CONSTRAINT fk_cita_anterior FOREIGN KEY (cita_anterior_id)
         REFERENCES cita (cita_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- Conserva el historial de transiciones y sus motivos para cada cita.
+CREATE TABLE historial_estado_cita (
+    historial_estado_cita_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    cita_id BIGINT NOT NULL,
+    estado_anterior VARCHAR(15),
+    estado_nuevo VARCHAR(15) NOT NULL,
+    fecha_cambio TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    motivo TEXT,
+    CONSTRAINT pk_historial_estado_cita PRIMARY KEY (historial_estado_cita_id),
+    
+    CONSTRAINT ck_historial_estado_anterior CHECK (estado_anterior IS NULL OR
+        estado_anterior IN ('Programada', 'Realizada', 'Reprogramada', 'Cancelada')),
+    
+    CONSTRAINT ck_historial_estado_nuevo CHECK (estado_nuevo IN
+        ('Programada', 'Realizada', 'Reprogramada', 'Cancelada')),
+    CONSTRAINT fk_historial_cita FOREIGN KEY (cita_id)
+        REFERENCES cita (cita_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Documenta la consulta realizada, su diagnostico y observaciones.
+CREATE TABLE consulta_externa (
+    consulta_externa_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    cita_id BIGINT NOT NULL,
+    fecha_atencion TIMESTAMPTZ NOT NULL,
+    diagnostico TEXT NOT NULL,
+    datos_interes TEXT,
+    observaciones TEXT,
+    orientacion_paciente TEXT,
+    CONSTRAINT pk_consulta_externa PRIMARY KEY (consulta_externa_id),
+    CONSTRAINT uq_consulta_externa_cita UNIQUE (cita_id),
+    
+    CONSTRAINT ck_consulta_diagnostico CHECK (BTRIM(diagnostico) <> ''),
+    CONSTRAINT fk_consulta_cita FOREIGN KEY (cita_id)
+        REFERENCES cita (cita_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
