@@ -109,3 +109,55 @@ CREATE TABLE consulta_externa (
         REFERENCES cita (cita_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- Registra recetas emitidas durante una consulta.
+CREATE TABLE receta (
+    receta_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    consulta_externa_id BIGINT NOT NULL,
+    fecha_emision DATE NOT NULL,
+    fecha_proxima_cita DATE,
+    indicaciones TEXT,
+    CONSTRAINT pk_receta PRIMARY KEY (receta_id),
+   
+    CONSTRAINT ck_receta_proxima_cita CHECK (
+        fecha_proxima_cita IS NULL OR fecha_proxima_cita >= fecha_emision
+    ),
+    CONSTRAINT fk_receta_consulta FOREIGN KEY (consulta_externa_id)
+        REFERENCES consulta_externa (consulta_externa_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Cataloga medicamentos con su presentacion farmacologica.
+CREATE TABLE medicamento (
+    medicamento_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    nombre VARCHAR(120) NOT NULL,
+    presentacion VARCHAR(100) NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_medicamento PRIMARY KEY (medicamento_id),
+    CONSTRAINT uq_medicamento_nombre_presentacion UNIQUE (nombre, presentacion),
+    
+    CONSTRAINT ck_medicamento_nombre CHECK (BTRIM(nombre) <> ''),
+    
+    CONSTRAINT ck_medicamento_presentacion CHECK (BTRIM(presentacion) <> '')
+);
+
+-- Detalla el medicamento, dosis y duracion indicada en una receta.
+CREATE TABLE receta_detalle (
+    receta_detalle_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    receta_id BIGINT NOT NULL,
+    medicamento_id BIGINT NOT NULL,
+    dosis VARCHAR(100) NOT NULL,
+    frecuencia VARCHAR(100) NOT NULL,
+    duracion_dias SMALLINT NOT NULL,
+    instrucciones TEXT,
+    CONSTRAINT pk_receta_detalle PRIMARY KEY (receta_detalle_id),
+    
+    CONSTRAINT ck_receta_detalle_duracion CHECK (duracion_dias > 0),
+    
+    CONSTRAINT ck_receta_detalle_dosis CHECK (BTRIM(dosis) <> ''),
+    
+    CONSTRAINT ck_receta_detalle_frecuencia CHECK (BTRIM(frecuencia) <> ''),
+    CONSTRAINT fk_receta_detalle_receta FOREIGN KEY (receta_id)
+        REFERENCES receta (receta_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_receta_detalle_medicamento FOREIGN KEY (medicamento_id)
+        REFERENCES medicamento (medicamento_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
