@@ -210,3 +210,74 @@ CREATE TABLE atencion_emergencia (
     CONSTRAINT fk_emergencia_ingreso FOREIGN KEY (ingreso_id)
         REFERENCES ingreso (ingreso_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- Cataloga los procedimientos basicos y especializados de emergencias.
+CREATE TABLE procedimiento_emergencia (
+    procedimiento_emergencia_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    nombre VARCHAR(180) NOT NULL,
+    tipo VARCHAR(15) NOT NULL,
+    descripcion TEXT,
+    costo_base NUMERIC(12,2) NOT NULL DEFAULT 0,
+    CONSTRAINT pk_procedimiento_emergencia PRIMARY KEY (procedimiento_emergencia_id),
+    CONSTRAINT uq_procedimiento_emergencia_nombre UNIQUE (nombre),
+    -- Diferencia la atencion basica de la especializada.
+    CONSTRAINT ck_procedimiento_emergencia_tipo CHECK (tipo IN ('Basico', 'Especializado')),
+    -- El costo base no puede ser negativo.
+    CONSTRAINT ck_procedimiento_emergencia_costo CHECK (costo_base >= 0),
+    -- Exige un nombre para el procedimiento.
+    CONSTRAINT ck_procedimiento_emergencia_nombre CHECK (BTRIM(nombre) <> '')
+);
+
+-- Documenta los procedimientos realizados a un paciente en emergencia.
+CREATE TABLE emergencia_procedimiento (
+    emergencia_procedimiento_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    atencion_emergencia_id BIGINT NOT NULL,
+    procedimiento_emergencia_id BIGINT NOT NULL,
+    medico_id BIGINT NOT NULL,
+    fecha_realizacion TIMESTAMPTZ NOT NULL,
+    resultado TEXT,
+    costo_aplicado NUMERIC(12,2) NOT NULL,
+    CONSTRAINT pk_emergencia_procedimiento PRIMARY KEY (emergencia_procedimiento_id),
+    -- El costo historico aplicado no puede ser negativo.
+    CONSTRAINT ck_emergencia_procedimiento_costo CHECK (costo_aplicado >= 0),
+    CONSTRAINT fk_emergencia_procedimiento_atencion FOREIGN KEY (atencion_emergencia_id)
+        REFERENCES atencion_emergencia (atencion_emergencia_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_emergencia_procedimiento_catalogo FOREIGN KEY (procedimiento_emergencia_id)
+        REFERENCES procedimiento_emergencia (procedimiento_emergencia_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_emergencia_procedimiento_medico FOREIGN KEY (medico_id)
+        REFERENCES medico (medico_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Registra la espera por camilla segun prioridad y orden de llegada.
+CREATE TABLE cola_emergencia (
+    cola_emergencia_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    atencion_emergencia_id BIGINT NOT NULL,
+    fecha_inicio TIMESTAMPTZ NOT NULL,
+    fecha_fin TIMESTAMPTZ,
+    prioridad SMALLINT NOT NULL,
+    estado VARCHAR(12) NOT NULL DEFAULT 'Esperando',
+    CONSTRAINT pk_cola_emergencia PRIMARY KEY (cola_emergencia_id),
+    -- La prioridad de espera va de uno a cinco.
+    CONSTRAINT ck_cola_prioridad CHECK (prioridad BETWEEN 1 AND 5),
+    -- Limita los estados de la cola de espera.
+    CONSTRAINT ck_cola_estado CHECK (estado IN ('Esperando', 'Asignado', 'Cancelado')),
+    -- El fin de espera debe ser posterior al inicio.
+    CONSTRAINT ck_cola_fechas CHECK (fecha_fin IS NULL OR fecha_fin >= fecha_inicio),
+    -- Solo la espera activa carece de fecha final.
+    CONSTRAINT ck_cola_cierre CHECK (
+        (estado = 'Esperando' AND fecha_fin IS NULL)
+        OR (estado <> 'Esperando' AND fecha_fin IS NOT NULL)
+    ),
+    CONSTRAINT fk_cola_atencion FOREIGN KEY (atencion_emergencia_id)
+        REFERENCES atencion_emergencia (atencion_emergencia_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Un paciente no puede estar dos veces en la cola activa de una atencion.
+CREATE UNIQUE INDEX uq_cola_emergencia_activa
+    ON cola_emergencia (atencion_emergencia_id)
+    WHERE estado = 'Esperando';
+
+COMMIT;
