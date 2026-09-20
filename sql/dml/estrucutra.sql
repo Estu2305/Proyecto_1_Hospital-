@@ -363,3 +363,55 @@ CREATE TABLE IF NOT EXISTS especialidad (
     CONSTRAINT ck_especialidad_nombre_no_vacio
         CHECK (BTRIM(nombre) <> '')
 );
+
+-- Registra los datos profesionales de medicos internos, residentes o externos.
+CREATE TABLE IF NOT EXISTS medico (
+    medico_id BIGINT,
+    numero_colegiado VARCHAR(25) NOT NULL,
+    clase_medico VARCHAR(12) NOT NULL,
+    institucion_externa_id BIGINT,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT pk_medico PRIMARY KEY (medico_id),
+    CONSTRAINT uq_medico_numero_colegiado UNIQUE (numero_colegiado),
+    
+    CONSTRAINT ck_medico_clase
+        CHECK (clase_medico IN ('Residente', 'Interno', 'Externo')),
+    
+    CONSTRAINT ck_medico_institucion_externa
+        CHECK (
+            (clase_medico = 'Externo' AND institucion_externa_id IS NOT NULL)
+            OR (clase_medico IN ('Residente', 'Interno') AND institucion_externa_id IS NULL)
+        ),
+    
+    CONSTRAINT ck_medico_colegiado_no_vacio
+        CHECK (BTRIM(numero_colegiado) <> ''),
+    CONSTRAINT fk_medico_persona
+        FOREIGN KEY (medico_id)
+        REFERENCES persona (persona_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_medico_institucion_externa
+        FOREIGN KEY (institucion_externa_id)
+        REFERENCES institucion_externa (institucion_externa_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+-- Resuelve la relacion muchos a muchos entre medicos y especialidades.
+CREATE TABLE IF NOT EXISTS medico_especialidad (
+    medico_id BIGINT NOT NULL,
+    especialidad_id SMALLINT NOT NULL,
+    es_principal BOOLEAN NOT NULL DEFAULT FALSE,
+    CONSTRAINT pk_medico_especialidad
+        PRIMARY KEY (medico_id, especialidad_id),
+    CONSTRAINT fk_medico_especialidad_medico
+        FOREIGN KEY (medico_id)
+        REFERENCES medico (medico_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT fk_medico_especialidad_especialidad
+        FOREIGN KEY (especialidad_id)
+        REFERENCES especialidad (especialidad_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
