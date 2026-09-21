@@ -207,3 +207,79 @@ BEGIN
     INSERT INTO cuota (plan_pago_id,numero,fecha_vencimiento,monto)
         VALUES (v_plan,2,'2026-10-16',250);
 
+    -- Cirugia: solicitud aprobada, quirofano, equipo y control preoperatorio.
+    INSERT INTO episodio_atencion (paciente_id,hospital_id,fecha_apertura,motivo_apertura)
+        VALUES (v_p3,v_hosp,'2026-09-17 07:00:00-06','Procedimiento simulado')
+        RETURNING episodio_atencion_id INTO v_ep3;
+    INSERT INTO solicitud_cirugia
+        (paciente_id,hospital_id,cirujano_id,episodio_atencion_id,fecha_solicitud,
+         caracter,historia_clinica,procedimiento_propuesto,duracion_estimada_minutos,tipo_anestesia)
+        VALUES (v_p3,v_hosp,v_m2,v_ep3,'2026-09-17 07:10:00-06','Programado',
+                'Antecedentes ficticios revisados','Intervencion simulada',60,'General')
+        RETURNING solicitud_cirugia_id INTO v_solicitud;
+    INSERT INTO evaluacion_solicitud_cirugia
+        (solicitud_cirugia_id,medico_evaluador_id,fecha_evaluacion,decision)
+        VALUES (v_solicitud,v_m1,'2026-09-17 07:30:00-06','Aprobada')
+        RETURNING evaluacion_solicitud_cirugia_id INTO v_evaluacion;
+    INSERT INTO cirugia (solicitud_cirugia_id,evaluacion_solicitud_cirugia_id,
+        quirofano_id,fecha_programada,fecha_inicio,fecha_fin,estado,procedimiento_realizado)
+        VALUES (v_solicitud,v_evaluacion,v_quirofano,'2026-09-17 09:00:00-06',
+                '2026-09-17 09:00:00-06','2026-09-17 10:00:00-06','Finalizada',
+                'Intervencion ficticia concluida')
+        RETURNING cirugia_id INTO v_cirugia;
+    INSERT INTO participante_cirugia (cirugia_id,persona_id,rol)
+        VALUES (v_cirugia,v_m2,'Cirujano'),(v_cirugia,v_m1,'Anestesiologo'),
+               (v_cirugia,v_enfermero_persona,'Enfermero');
+    INSERT INTO recurso (nombre,categoria,tipo,material,costo_unitario)
+        VALUES ('Insumo esteril ficticio','Insumo','Quirurgico','Material de prueba',100)
+        RETURNING recurso_id INTO v_recurso;
+    INSERT INTO solicitud_recurso (solicitud_cirugia_id,recurso_id,cantidad)
+        VALUES (v_solicitud,v_recurso,1);
+    INSERT INTO uso_recurso_cirugia
+        (cirugia_id,recurso_id,cantidad,costo_unitario_aplicado,fecha_uso)
+        VALUES (v_cirugia,v_recurso,1,100,'2026-09-17 09:20:00-06');
+    INSERT INTO consentimiento_quirurgico
+        (cirugia_id,medico_firmante_id,firmante_persona_id,calidad_firmante,
+         procedimiento,objetivo,caracteristicas,riesgos,fecha_obtencion,
+         firma_medico_confirmada,firma_paciente_o_representante_confirmada)
+        VALUES (v_cirugia,v_m2,v_p3,'Paciente','Intervencion simulada',
+                'Prueba academica','Procedimiento sin pacientes reales',
+                'Riesgos ficticios explicados','2026-09-17 08:00:00-06',TRUE,TRUE);
+    INSERT INTO chequeo_preanestesico
+        (cirugia_id,medico_evaluador_id,anestesista_id,
+         clasificacion_asa,plan_anestesia,fecha_evaluacion,firma_evaluador_confirmada)
+        VALUES (v_cirugia,v_m2,v_m1,'I','Plan simulado',
+                '2026-09-17 08:10:00-06',TRUE);
+    INSERT INTO etapa_cirugia
+        (cirugia_id,enfermero_responsable_id,etapa,fecha_inicio,fecha_fin,
+         fecha_envio_secretaria)
+        VALUES (v_cirugia,v_empleado,'Preoperatorio','2026-09-17 08:00:00-06',
+                '2026-09-17 09:00:00-06','2026-09-17 11:00:00-06')
+        RETURNING etapa_cirugia_id INTO v_etapa;
+    INSERT INTO item_control_quirurgico (etapa,grupo,descripcion,tipo_resultado)
+        VALUES ('Preoperatorio','Entrada','Identidad confirmada','ExitoFalla')
+        RETURNING item_control_quirurgico_id INTO v_item;
+    INSERT INTO resultado_control_quirurgico
+        (etapa_cirugia_id,item_control_quirurgico_id,etapa,resultado,
+         fecha_registro,registrado_por_enfermero_id)
+        VALUES (v_etapa,v_item,'Preoperatorio','Exito',
+                '2026-09-17 08:20:00-06',v_empleado);
+    INSERT INTO ingreso (episodio_atencion_id,hospital_id,unidad_medica_id,
+        servicio_medico_id,medico_encargado_id,espacio_hospitalario_id,
+        fecha_ingreso,motivo_ingreso,diagnostico_presuntivo)
+        VALUES (v_ep3,v_hosp,v_cir,v_scir,v_m2,v_quirofano,
+                '2026-09-17 08:45:00-06','Cirugia programada',
+                'Diagnostico quirurgico simulado')
+        RETURNING ingreso_id INTO v_i3;
+    INSERT INTO egreso (ingreso_id,medico_asignado_id,fecha_egreso,motivo_egreso,codigo_egreso)
+        VALUES (v_i3,v_m2,'2026-09-17 12:00:00-06','Alta posoperatoria','Vivo');
+    UPDATE ingreso SET estado='Cerrado' WHERE ingreso_id=v_i3;
+    INSERT INTO factura (numero_factura,paciente_id,hospital_id,ingreso_id,descripcion)
+        VALUES ('FAC-DEMO-003',v_p3,v_hosp,v_i3,'Cirugia de demostracion')
+        RETURNING factura_id INTO v_f;
+    INSERT INTO factura_detalle (factura_id,concepto,cantidad,precio_unitario)
+        VALUES (v_f,'Procedimiento quirurgico',1,2500),
+               (v_f,'Insumo esteril',1,100);
+    INSERT INTO pago (factura_id,unidad_recepcion_id,fecha_pago,monto,metodo)
+        VALUES (v_f,v_cir,'2026-09-17 12:15:00-06',2600,'Tarjeta');
+    UPDATE factura SET estado='Pagada' WHERE factura_id=v_f;
