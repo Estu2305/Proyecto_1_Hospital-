@@ -34,3 +34,42 @@ FROM consulta_externa ce
 JOIN cita c ON c.cita_id = ce.cita_id
 JOIN unidad_medica u ON u.unidad_medica_id = c.unidad_medica_id
 WHERE u.tipo = 'Consulta Externa' AND c.estado = 'Realizada';
+
+-- V05: al menos una emergencia ingresada con procedimiento aplicado.
+SELECT 'V05 emergencia con procedimiento' AS prueba,
+       COUNT(DISTINCT ae.atencion_emergencia_id)::TEXT AS resultado,
+       COUNT(DISTINCT ae.atencion_emergencia_id) >= 1 AS correcto
+FROM atencion_emergencia ae
+JOIN ingreso i ON i.ingreso_id = ae.ingreso_id
+JOIN unidad_medica u ON u.unidad_medica_id = i.unidad_medica_id
+JOIN emergencia_procedimiento ep
+  ON ep.atencion_emergencia_id = ae.atencion_emergencia_id
+WHERE u.tipo = 'Emergencias';
+
+-- V06: la cirugia corresponde a la solicitud evaluada y aprobada.
+SELECT 'V06 cirugia aprobada' AS prueba,
+       COUNT(*)::TEXT AS resultado,
+       COUNT(*) >= 1 AS correcto
+FROM cirugia c
+JOIN evaluacion_solicitud_cirugia e
+  ON e.evaluacion_solicitud_cirugia_id = c.evaluacion_solicitud_cirugia_id
+ AND e.solicitud_cirugia_id = c.solicitud_cirugia_id
+WHERE e.decision = 'Aprobada';
+
+-- V07: existe hospitalizacion con cama y fechas de ocupacion.
+SELECT 'V07 hospitalizacion con cama' AS prueba,
+       COUNT(DISTINCT h.hospitalizacion_id)::TEXT AS resultado,
+       COUNT(DISTINCT h.hospitalizacion_id) >= 1 AS correcto
+FROM hospitalizacion h
+JOIN asignacion_cama a ON a.hospitalizacion_id = h.hospitalizacion_id
+JOIN ingreso i ON i.ingreso_id = h.ingreso_id
+JOIN unidad_medica u ON u.unidad_medica_id = i.unidad_medica_id
+WHERE u.tipo = 'Hospitalizacion';
+
+-- V08: cuatro facturas de los cuatro escenarios.
+SELECT 'V08 facturas por escenario' AS prueba,
+       COUNT(*)::TEXT AS resultado,
+       COUNT(*) = 4 AS correcto
+FROM factura
+WHERE numero_factura LIKE 'FAC-DEMO-%';
+
