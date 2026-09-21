@@ -121,7 +121,7 @@ CREATE TABLE pago (
     CONSTRAINT ck_pago_metodo CHECK (
         metodo IN ('Efectivo', 'Tarjeta', 'Transferencia', 'Deposito')
     ),
-    -- Una cuota solo puede asociarse a un plan informado.
+  
     CONSTRAINT ck_pago_plan_cuota CHECK (cuota_id IS NULL OR plan_pago_id IS NOT NULL),
     CONSTRAINT fk_pago_factura FOREIGN KEY (factura_id)
         REFERENCES factura (factura_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -136,3 +136,65 @@ CREATE TABLE pago (
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- Recoge la opinion de un paciente sobre su atencion en un hospital.
+CREATE TABLE evaluacion_calidad (
+    evaluacion_calidad_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    paciente_id BIGINT NOT NULL,
+    hospital_id BIGINT NOT NULL,
+    ingreso_id BIGINT,
+    consulta_externa_id BIGINT,
+    fecha_evaluacion TIMESTAMPTZ NOT NULL,
+    observaciones TEXT,
+    CONSTRAINT pk_evaluacion_calidad PRIMARY KEY (evaluacion_calidad_id),
+    
+    CONSTRAINT ck_evaluacion_calidad_origen CHECK (
+        (ingreso_id IS NOT NULL AND consulta_externa_id IS NULL)
+        OR (ingreso_id IS NULL AND consulta_externa_id IS NOT NULL)
+    ),
+    CONSTRAINT fk_calidad_paciente FOREIGN KEY (paciente_id)
+        REFERENCES paciente (paciente_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_calidad_hospital FOREIGN KEY (hospital_id)
+        REFERENCES hospital (hospital_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_calidad_ingreso FOREIGN KEY (ingreso_id)
+        REFERENCES ingreso (ingreso_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_calidad_consulta FOREIGN KEY (consulta_externa_id)
+        REFERENCES consulta_externa (consulta_externa_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Califica a un hospital o a una persona participante de la atencion.
+CREATE TABLE evaluacion_objetivo (
+    evaluacion_objetivo_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    evaluacion_calidad_id BIGINT NOT NULL,
+    hospital_objetivo_id BIGINT,
+    persona_objetivo_id BIGINT,
+    nota SMALLINT NOT NULL,
+    comentario TEXT,
+    CONSTRAINT pk_evaluacion_objetivo PRIMARY KEY (evaluacion_objetivo_id),
+   
+    CONSTRAINT ck_evaluacion_objetivo_unico CHECK (
+        (hospital_objetivo_id IS NOT NULL AND persona_objetivo_id IS NULL)
+        OR (hospital_objetivo_id IS NULL AND persona_objetivo_id IS NOT NULL)
+    ),
+    
+    CONSTRAINT ck_evaluacion_nota CHECK (nota BETWEEN 1 AND 5),
+    CONSTRAINT fk_objetivo_evaluacion FOREIGN KEY (evaluacion_calidad_id)
+        REFERENCES evaluacion_calidad (evaluacion_calidad_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_objetivo_hospital FOREIGN KEY (hospital_objetivo_id)
+        REFERENCES hospital (hospital_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_objetivo_persona FOREIGN KEY (persona_objetivo_id)
+        REFERENCES persona (persona_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Evita calificar dos veces al mismo hospital en una evaluacion.
+CREATE UNIQUE INDEX uq_calidad_hospital_objetivo
+    ON evaluacion_objetivo (evaluacion_calidad_id, hospital_objetivo_id)
+    WHERE hospital_objetivo_id IS NOT NULL;
+
+-- Evita calificar dos veces a la misma persona en una evaluacion.
+CREATE UNIQUE INDEX uq_calidad_persona_objetivo
+    ON evaluacion_objetivo (evaluacion_calidad_id, persona_objetivo_id)
+    WHERE persona_objetivo_id IS NOT NULL;
+
+COMMIT;
