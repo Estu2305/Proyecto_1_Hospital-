@@ -73,3 +73,54 @@ SELECT 'V08 facturas por escenario' AS prueba,
 FROM factura
 WHERE numero_factura LIKE 'FAC-DEMO-%';
 
+-- V09: el importe de cada factura es la suma de sus detalles y pagos.
+SELECT f.numero_factura,
+       COALESCE(d.total, 0) AS total_facturado,
+       COALESCE(p.total, 0) AS total_pagado,
+       COALESCE(d.total, 0) - COALESCE(p.total, 0) AS saldo,
+       f.estado
+FROM factura f
+LEFT JOIN (
+    SELECT factura_id, SUM(subtotal) AS total
+    FROM factura_detalle GROUP BY factura_id
+) d ON d.factura_id = f.factura_id
+LEFT JOIN (
+    SELECT factura_id, SUM(monto) AS total
+    FROM pago GROUP BY factura_id
+) p ON p.factura_id = f.factura_id
+WHERE f.numero_factura LIKE 'FAC-DEMO-%'
+ORDER BY f.numero_factura;
+
+-- V10: el plan de pagos de emergencia suma exactamente Q500 y tiene dos cuotas.
+SELECT 'V10 cuotas de emergencia' AS prueba,
+       FORMAT('cuotas=%s, suma=%s', COUNT(*), SUM(c.monto)) AS resultado,
+       COUNT(*) = 2 AND SUM(c.monto) = 500 AS correcto
+FROM cuota c
+JOIN plan_pago pp ON pp.plan_pago_id = c.plan_pago_id
+JOIN factura f ON f.factura_id = pp.factura_id
+WHERE f.numero_factura = 'FAC-DEMO-002';
+
+-- V11: el auditor puede leer y no puede insertar; el admin puede insertar.
+SELECT 'V11 privilegios' AS prueba,
+       FORMAT('lectura=%s, escritura_lectura=%s, escritura_admin=%s',
+           HAS_TABLE_PRIVILEGE('hospital_lectura','hospital.paciente','SELECT'),
+           HAS_TABLE_PRIVILEGE('hospital_lectura','hospital.paciente','INSERT'),
+           HAS_TABLE_PRIVILEGE('hospital_admin','hospital.paciente','INSERT'))
+           AS resultado,
+       HAS_TABLE_PRIVILEGE('hospital_lectura','hospital.paciente','SELECT')
+       AND NOT HAS_TABLE_PRIVILEGE('hospital_lectura','hospital.paciente','INSERT')
+       AND HAS_TABLE_PRIVILEGE('hospital_admin','hospital.paciente','INSERT')
+           AS correcto;
+
+-- V12: el administrador es propietario del esquema y las tablas.
+SELECT 'V12 propiedad administrativa' AS prueba,
+       FORMAT('esquema=%s, tablas=%s', PG_GET_USERBYID(n.nspowner),
+           (SELECT COUNT(*) FROM pg_class c
+            WHERE c.relnamespace = n.oid AND c.relkind IN ('r','p')
+              AND PG_GET_USERBYID(c.relowner) = 'hospital_admin')) AS resultado,
+       PG_GET_USERBYID(n.nspowner) = 'hospital_admin'
+       AND (SELECT COUNT(*) FROM pg_class c
+            WHERE c.relnamespace = n.oid AND c.relkind IN ('r','p')
+              AND PG_GET_USERBYID(c.relowner) = 'hospital_admin') = 64
+           AS correcto
+FROM pg_namespace n WHERE n.nspname = 'hospital';
