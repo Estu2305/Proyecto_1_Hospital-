@@ -63,3 +63,76 @@ CREATE TABLE factura_detalle (
     CONSTRAINT fk_factura_detalle_factura FOREIGN KEY (factura_id)
         REFERENCES factura (factura_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- Permite distribuir el costo de un ingreso en una a doce cuotas.
+CREATE TABLE plan_pago (
+    plan_pago_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    factura_id BIGINT NOT NULL,
+    numero_cuotas SMALLINT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    estado VARCHAR(12) NOT NULL DEFAULT 'Activo',
+    CONSTRAINT pk_plan_pago PRIMARY KEY (plan_pago_id),
+    CONSTRAINT uq_plan_pago_factura UNIQUE (factura_id),
+    CONSTRAINT uq_plan_pago_factura_ref UNIQUE (plan_pago_id, factura_id),
+ 
+    CONSTRAINT ck_plan_pago_cuotas CHECK (numero_cuotas BETWEEN 1 AND 12),
+  
+    CONSTRAINT ck_plan_pago_estado CHECK (estado IN ('Activo', 'Liquidado', 'Cancelado')),
+    CONSTRAINT fk_plan_pago_factura FOREIGN KEY (factura_id)
+        REFERENCES factura (factura_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Registra los vencimientos y montos de un plan de pago.
+CREATE TABLE cuota (
+    cuota_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    plan_pago_id BIGINT NOT NULL,
+    numero SMALLINT NOT NULL,
+    fecha_vencimiento DATE NOT NULL,
+    monto NUMERIC(12,2) NOT NULL,
+    estado VARCHAR(12) NOT NULL DEFAULT 'Pendiente',
+    CONSTRAINT pk_cuota PRIMARY KEY (cuota_id),
+    CONSTRAINT uq_cuota_numero UNIQUE (plan_pago_id, numero),
+    CONSTRAINT uq_cuota_plan_ref UNIQUE (cuota_id, plan_pago_id),
+   
+    CONSTRAINT ck_cuota_numero CHECK (numero BETWEEN 1 AND 12),
+   
+    CONSTRAINT ck_cuota_monto CHECK (monto > 0),
+   
+    CONSTRAINT ck_cuota_estado CHECK (estado IN ('Pendiente', 'Parcial', 'Pagada')),
+    CONSTRAINT fk_cuota_plan FOREIGN KEY (plan_pago_id)
+        REFERENCES plan_pago (plan_pago_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- Documenta los pagos recibidos y la recepcion donde se cobraron.
+CREATE TABLE pago (
+    pago_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    factura_id BIGINT NOT NULL,
+    plan_pago_id BIGINT,
+    cuota_id BIGINT,
+    unidad_recepcion_id BIGINT NOT NULL,
+    fecha_pago TIMESTAMPTZ NOT NULL,
+    monto NUMERIC(12,2) NOT NULL,
+    metodo VARCHAR(15) NOT NULL,
+    referencia VARCHAR(80),
+    CONSTRAINT pk_pago PRIMARY KEY (pago_id),
+   
+    CONSTRAINT ck_pago_monto CHECK (monto > 0),
+   
+    CONSTRAINT ck_pago_metodo CHECK (
+        metodo IN ('Efectivo', 'Tarjeta', 'Transferencia', 'Deposito')
+    ),
+    -- Una cuota solo puede asociarse a un plan informado.
+    CONSTRAINT ck_pago_plan_cuota CHECK (cuota_id IS NULL OR plan_pago_id IS NOT NULL),
+    CONSTRAINT fk_pago_factura FOREIGN KEY (factura_id)
+        REFERENCES factura (factura_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_pago_plan_factura FOREIGN KEY (plan_pago_id, factura_id)
+        REFERENCES plan_pago (plan_pago_id, factura_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_pago_cuota_plan FOREIGN KEY (cuota_id, plan_pago_id)
+        REFERENCES cuota (cuota_id, plan_pago_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_pago_recepcion FOREIGN KEY (unidad_recepcion_id)
+        REFERENCES unidad_medica (unidad_medica_id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
