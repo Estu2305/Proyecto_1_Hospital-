@@ -116,3 +116,94 @@ BEGIN
         RETURNING empleado_id INTO v_empleado;
     INSERT INTO enfermero (enfermero_id,numero_registro,nivel)
         VALUES (v_empleado,'REG-DEMO-01','Registrado');
+
+    -- Consulta externa: cita realizada, diagnostico, receta, laboratorio y pago.
+    INSERT INTO horario_consulta (medico_id,unidad_medica_id,clinica_id,dia_semana,hora_inicio,hora_fin)
+        VALUES (v_m1,v_ce,v_clinica,2,'08:00','12:00');
+    INSERT INTO cita
+        (paciente_id,medico_id,unidad_medica_id,clinica_id,fecha_hora,canal,tipo,estado,precio_base)
+        VALUES (v_p1,v_m1,v_ce,v_clinica,'2026-09-15 09:00:00-06','Telefono',
+                'Primera','Realizada',200)
+        RETURNING cita_id INTO v_cita;
+    INSERT INTO historial_estado_cita (cita_id,estado_nuevo)
+        VALUES (v_cita,'Programada');
+    INSERT INTO historial_estado_cita (cita_id,estado_anterior,estado_nuevo)
+        VALUES (v_cita,'Programada','Realizada');
+    INSERT INTO consulta_externa (cita_id,fecha_atencion,diagnostico,orientacion_paciente)
+        VALUES (v_cita,'2026-09-15 09:10:00-06',
+                'Evaluacion general ficticia sin hallazgos criticos',
+                'Orientacion preventiva de demostracion')
+        RETURNING consulta_externa_id INTO v_consulta;
+    INSERT INTO medicamento (nombre,presentacion)
+        VALUES ('Medicamento Modelo','Tableta ficticia')
+        RETURNING medicamento_id INTO v_medicamento;
+    INSERT INTO receta (consulta_externa_id,fecha_emision,fecha_proxima_cita)
+        VALUES (v_consulta,'2026-09-15','2026-10-15')
+        RETURNING receta_id INTO v_receta;
+    INSERT INTO receta_detalle (receta_id,medicamento_id,dosis,frecuencia,duracion_dias)
+        VALUES (v_receta,v_medicamento,'Una tableta','Cada 24 horas',3);
+    INSERT INTO orden_laboratorio (consulta_externa_id,fecha_emision)
+        VALUES (v_consulta,'2026-09-15 09:20:00-06')
+        RETURNING orden_laboratorio_id INTO v_orden;
+    INSERT INTO orden_laboratorio_detalle (orden_laboratorio_id,examen)
+        VALUES (v_orden,'Examen general ficticio');
+    INSERT INTO factura (numero_factura,paciente_id,hospital_id,consulta_externa_id,descripcion)
+        VALUES ('FAC-DEMO-001',v_p1,v_hosp,v_consulta,'Consulta externa de demostracion')
+        RETURNING factura_id INTO v_f;
+    INSERT INTO factura_detalle (factura_id,concepto,cantidad,precio_unitario)
+        VALUES (v_f,'Primera consulta',1,200);
+    INSERT INTO pago (factura_id,unidad_recepcion_id,fecha_pago,monto,metodo)
+        VALUES (v_f,v_ce,'2026-09-15 09:45:00-06',200,'Efectivo');
+    UPDATE factura SET estado='Pagada' WHERE factura_id=v_f;
+
+    -- Emergencia: ingreso, triaje, procedimiento, egreso y dos cuotas.
+    INSERT INTO episodio_atencion (paciente_id,hospital_id,fecha_apertura,motivo_apertura)
+        VALUES (v_p2,v_hosp,'2026-09-16 07:00:00-06','Atencion urgente simulada')
+        RETURNING episodio_atencion_id INTO v_ep2;
+    INSERT INTO ingreso (episodio_atencion_id,hospital_id,unidad_medica_id,
+        servicio_medico_id,medico_encargado_id,espacio_hospitalario_id,
+        fecha_ingreso,motivo_ingreso,diagnostico_presuntivo)
+        VALUES (v_ep2,v_hosp,v_urg,v_surg,v_m1,v_camilla,
+                '2026-09-16 07:05:00-06','Evaluacion inmediata ficticia',
+                'Necesidad de observacion clinica')
+        RETURNING ingreso_id INTO v_i2;
+    INSERT INTO atencion_emergencia (ingreso_id,fecha_evaluacion,prioridad,estado_clinico,resultado)
+        VALUES (v_i2,'2026-09-16 07:07:00-06',2,
+                'Paciente ficticio consciente','Estabilizado')
+        RETURNING atencion_emergencia_id INTO v_emergencia;
+    INSERT INTO procedimiento_emergencia (nombre,tipo,costo_base)
+        VALUES ('Observacion y estabilizacion ficticia','Basico',500)
+        RETURNING procedimiento_emergencia_id INTO v_proc;
+    INSERT INTO emergencia_procedimiento
+        (atencion_emergencia_id,procedimiento_emergencia_id,medico_id,
+         fecha_realizacion,costo_aplicado)
+        VALUES (v_emergencia,v_proc,v_m1,'2026-09-16 07:30:00-06',500);
+    INSERT INTO diagnostico (codigo,nombre)
+        VALUES ('DEMO-001','Diagnostico clinico ficticio')
+        RETURNING diagnostico_id INTO v_diag;
+    INSERT INTO egreso (ingreso_id,medico_asignado_id,fecha_egreso,motivo_egreso,codigo_egreso)
+        VALUES (v_i2,v_m1,'2026-09-16 11:00:00-06','Alta tras estabilizacion','Vivo')
+        RETURNING egreso_id INTO v_egreso;
+    INSERT INTO egreso_diagnostico (egreso_id,diagnostico_id,tipo)
+        VALUES (v_egreso,v_diag,'Principal');
+    UPDATE ingreso SET estado='Cerrado' WHERE ingreso_id=v_i2;
+    UPDATE episodio_atencion
+        SET estado='Cerrado',fecha_cierre='2026-09-16 11:00:00-06'
+        WHERE episodio_atencion_id=v_ep2;
+    INSERT INTO factura (numero_factura,paciente_id,hospital_id,ingreso_id,descripcion)
+        VALUES ('FAC-DEMO-002',v_p2,v_hosp,v_i2,'Servicio de emergencias de demostracion')
+        RETURNING factura_id INTO v_f;
+    INSERT INTO factura_detalle (factura_id,concepto,cantidad,precio_unitario)
+        VALUES (v_f,'Estabilizacion',1,500);
+    INSERT INTO plan_pago (factura_id,numero_cuotas,fecha_inicio)
+        VALUES (v_f,2,'2026-09-16') RETURNING plan_pago_id INTO v_plan;
+    INSERT INTO cuota (plan_pago_id,numero,fecha_vencimiento,monto)
+        VALUES (v_plan,1,'2026-09-16',250) RETURNING cuota_id INTO v_cuota;
+    INSERT INTO pago (factura_id,plan_pago_id,cuota_id,unidad_recepcion_id,
+        fecha_pago,monto,metodo)
+        VALUES (v_f,v_plan,v_cuota,v_hospit,'2026-09-16 11:10:00-06',250,'Efectivo');
+    UPDATE cuota SET estado='Pagada' WHERE cuota_id=v_cuota;
+    UPDATE factura SET estado='Parcial' WHERE factura_id=v_f;
+    INSERT INTO cuota (plan_pago_id,numero,fecha_vencimiento,monto)
+        VALUES (v_plan,2,'2026-10-16',250);
+
