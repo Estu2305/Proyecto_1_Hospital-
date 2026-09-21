@@ -283,3 +283,63 @@ BEGIN
     INSERT INTO pago (factura_id,unidad_recepcion_id,fecha_pago,monto,metodo)
         VALUES (v_f,v_cir,'2026-09-17 12:15:00-06',2600,'Tarjeta');
     UPDATE factura SET estado='Pagada' WHERE factura_id=v_f;
+
+    -- Hospitalizacion: ingreso, ocupacion de cama y costo diario.
+    INSERT INTO episodio_atencion (paciente_id,hospital_id,fecha_apertura,motivo_apertura)
+        VALUES (v_p4,v_hosp,'2026-09-18 10:00:00-06','Observacion hospitalaria')
+        RETURNING episodio_atencion_id INTO v_ep4;
+    INSERT INTO ingreso (episodio_atencion_id,hospital_id,unidad_medica_id,
+        servicio_medico_id,medico_encargado_id,espacio_hospitalario_id,
+        fecha_ingreso,motivo_ingreso,diagnostico_presuntivo)
+        VALUES (v_ep4,v_hosp,v_hospit,v_shosp,v_m1,v_cama,
+                '2026-09-18 10:00:00-06','Observacion simulada',
+                'Necesidad de vigilancia clinica ficticia')
+        RETURNING ingreso_id INTO v_i4;
+    INSERT INTO hospitalizacion
+        (ingreso_id,medico_encargado_id,fecha_alta_prevista,fecha_alta_real,costo_diario_aplicado)
+        VALUES (v_i4,v_m1,'2026-09-19 10:00:00-06','2026-09-19 10:00:00-06',350)
+        RETURNING hospitalizacion_id INTO v_estadia;
+    INSERT INTO asignacion_cama (hospitalizacion_id,cama_id,fecha_inicio,fecha_fin)
+        VALUES (v_estadia,v_cama,'2026-09-18 10:00:00-06','2026-09-19 10:00:00-06');
+    INSERT INTO hospitalizacion_servicio
+        (hospitalizacion_id,servicio_medico_id,medico_id,fecha_servicio,descripcion,costo_aplicado)
+        VALUES (v_estadia,v_shosp,v_m1,'2026-09-18 11:00:00-06',
+                'Atencion medica de demostracion',150);
+    INSERT INTO hospitalizacion_insumo
+        (hospitalizacion_id,recurso_id,fecha_uso,cantidad,costo_unitario_aplicado)
+        VALUES (v_estadia,v_recurso,'2026-09-18 12:00:00-06',1,100);
+    INSERT INTO egreso (ingreso_id,medico_asignado_id,fecha_egreso,motivo_egreso,codigo_egreso)
+        VALUES (v_i4,v_m1,'2026-09-19 10:00:00-06','Fin de observacion','Vivo');
+    UPDATE ingreso SET estado='Cerrado' WHERE ingreso_id=v_i4;
+    UPDATE episodio_atencion
+        SET estado='Cerrado',fecha_cierre='2026-09-19 10:00:00-06'
+        WHERE episodio_atencion_id=v_ep4;
+    INSERT INTO factura (numero_factura,paciente_id,hospital_id,ingreso_id,descripcion)
+        VALUES ('FAC-DEMO-004',v_p4,v_hosp,v_i4,'Hospitalizacion de demostracion')
+        RETURNING factura_id INTO v_f;
+    INSERT INTO factura_detalle (factura_id,concepto,cantidad,precio_unitario)
+        VALUES (v_f,'Un dia de hospitalizacion',1,350),
+               (v_f,'Servicio medico',1,150),
+               (v_f,'Insumo utilizado',1,100);
+    INSERT INTO pago (factura_id,unidad_recepcion_id,fecha_pago,monto,metodo)
+        VALUES (v_f,v_hospit,'2026-09-19 10:15:00-06',600,'Transferencia');
+    UPDATE factura SET estado='Pagada' WHERE factura_id=v_f;
+    INSERT INTO evaluacion_calidad
+        (paciente_id,hospital_id,ingreso_id,fecha_evaluacion,observaciones)
+        VALUES (v_p4,v_hosp,v_i4,'2026-09-19 11:00:00-06',
+                'Evaluacion ficticia de demostracion')
+        RETURNING evaluacion_calidad_id INTO v_calidad;
+    INSERT INTO evaluacion_objetivo
+        (evaluacion_calidad_id,hospital_objetivo_id,nota,comentario)
+        VALUES (v_calidad,v_hosp,5,'Atencion simulada satisfactoria');
+    INSERT INTO evaluacion_objetivo
+        (evaluacion_calidad_id,persona_objetivo_id,nota,comentario)
+        VALUES (v_calidad,v_m1,4,'Calificacion ficticia del medico');
+END
+$$;
+COMMIT;
+
+/* Comprobacion: cuatro pacientes, cuatro unidades y cuatro facturas. */
+SELECT (SELECT COUNT(*) FROM hospital.paciente) AS pacientes,
+       (SELECT COUNT(*) FROM hospital.unidad_medica) AS unidades,
+       (SELECT COUNT(*) FROM hospital.factura) AS facturas;
