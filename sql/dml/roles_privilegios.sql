@@ -63,3 +63,24 @@ ALTER DEFAULT PRIVILEGES FOR ROLE hospital_admin IN SCHEMA hospital
     GRANT SELECT ON TABLES TO hospital_lectura;
 
 COMMIT;
+
+/*
+ Para crear usuarios concretos mas adelante, dentro de psql:
+   CREATE ROLE auditor_hospital LOGIN PASSWORD 'contraseña elegida por ti';
+   GRANT hospital_lectura TO auditor_hospital;
+   CREATE ROLE gestor_hospital LOGIN PASSWORD 'otra contraseña elegida por ti';
+   GRANT hospital_admin TO gestor_hospital;
+
+ Nunca guarde contraseñas reales en este archivo ni en Git.
+
+ Verificación de privilegios:
+ SELECT
+     has_table_privilege('hospital_lectura','hospital.paciente','SELECT') AS lectura_select,
+     has_table_privilege('hospital_lectura','hospital.paciente','INSERT') AS lectura_insert,
+     has_table_privilege('hospital_admin','hospital.paciente','INSERT') AS admin_insert;
+ Resultado esperado: true, false, true.
+
+ El rol hospital_admin es propietario de las tablas y del esquema.
+ Los miembros a los que se otorgue este rol podran administrar su contenido
+ y estructura sin concederles privilegios de superusuario.
+*/
