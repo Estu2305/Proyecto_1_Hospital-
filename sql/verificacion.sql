@@ -124,3 +124,20 @@ SELECT 'V12 propiedad administrativa' AS prueba,
               AND PG_GET_USERBYID(c.relowner) = 'hospital_admin') = 64
            AS correcto
 FROM pg_namespace n WHERE n.nspname = 'hospital';
+
+-- V13: estas restricciones CHECK deben encontrarse realmente instaladas.
+SELECT 'V13 dominios CHECK' AS prueba,
+       COUNT(*)::TEXT AS resultado,
+       COUNT(*) >= 100 AS correcto
+FROM pg_constraint con
+JOIN pg_namespace n ON n.oid = con.connamespace
+WHERE n.nspname = 'hospital' AND con.contype = 'c';
+
+-- V14: cada FK debe indicar DELETE y UPDATE en el diccionario;
+-- la consulta expone cuantas relaciones hay que documentar.
+SELECT 'V14 llaves foraneas' AS prueba,
+       COUNT(*)::TEXT AS resultado,
+       COUNT(*) > 0 AS correcto
+FROM pg_constraint con
+JOIN pg_namespace n ON n.oid = con.connamespace
+WHERE n.nspname = 'hospital' AND con.contype = 'f';
