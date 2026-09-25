@@ -1,0 +1,1628 @@
+<mxfile host="app.diagrams.net" agent="Codex" pages="8">
+  <diagram id="general" name="Mapa completo de relaciones">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="2440" pageHeight="2240" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;departamento&lt;/b&gt;&lt;hr&gt;# departamento_id: SMALLINT&lt;br&gt;* nombre: VARCHAR(60)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="190" y="129.25" as="geometry" />
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;municipio&lt;/b&gt;&lt;hr&gt;# municipio_id: INTEGER&lt;br&gt;* departamento_id: SMALLINT FK&lt;br&gt;* nombre: VARCHAR(80)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="108.5" width="218" x="782" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-23" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="W216YLvA0-byAtieuV0a-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1610" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;direccion&lt;/b&gt;&lt;hr&gt;# direccion_id: BIGINT&lt;br&gt;* municipio_id: INTEGER FK&lt;br&gt;* detalle: VARCHAR(250)&lt;br&gt;o zona: VARCHAR(20)&lt;br&gt;o codigo_postal: VARCHAR(10)&lt;br&gt;* area: VARCHAR(10)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="172" width="200" x="1240" y="129.25" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-26" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="W216YLvA0-byAtieuV0a-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="97.5" y="-30" />
+              <mxPoint x="1980" y="-30" />
+              <mxPoint x="1980" y="418.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lyPsWvHgXv9kks3u9BTt-1" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="90.14" y="1556" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-39" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="ENDkvH0ltEvqRJxN4sRo-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-15" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;" target="60TU0hukjpQpf6IOMylg-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-599.91" y="465.36" />
+              <mxPoint x="-599.91" y="-1039.91" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-17" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="60TU0hukjpQpf6IOMylg-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1489.95" y="422.32" />
+              <mxPoint x="-1489.95" y="-500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-18" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="60TU0hukjpQpf6IOMylg-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2A7m98ymh7wUPFQ3hAn7-4" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;strokeWidth=2;" target="RthiWszPzpKjHQFpdMJ1-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="70.07" y="100" />
+              <mxPoint x="1340.07" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;hospital&lt;/b&gt;&lt;hr&gt;# hospital_id: BIGINT&lt;br&gt;* direccion_id: BIGINT FK&lt;br&gt;* codigo: VARCHAR(15)&lt;br&gt;* nombre: VARCHAR(120)&lt;br&gt;* telefono: VARCHAR(20)&lt;br&gt;o correo: VARCHAR(120)&lt;br&gt;* activo: BOOLEAN&lt;/div&gt;" vertex="1">
+          <mxGeometry height="172" width="190" x="50" y="379.25" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-28" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="W216YLvA0-byAtieuV0a-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200.09" y="349.36" />
+              <mxPoint x="1200.09" y="630.09" />
+              <mxPoint x="1980.09" y="630.09" />
+              <mxPoint x="1980.09" y="1190.09" />
+              <mxPoint x="2775" y="1190.09" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-25" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="cp5vdXdx6px89jyfEH1T-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1160.05" y="330.05" />
+              <mxPoint x="1160.05" y="-279.95" />
+              <mxPoint x="4898.05" y="-279.95" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-16" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="60TU0hukjpQpf6IOMylg-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1323.94" y="320.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;unidad_medica&lt;/b&gt;&lt;hr/&gt;# unidad_medica_id: BIGINT&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* nombre: VARCHAR(100)&lt;br/&gt;* tipo: VARCHAR(20)&lt;br/&gt;o ubicacion: VARCHAR(150)&lt;br/&gt;o telefono_extension: VARCHAR(10)&lt;br/&gt;* activa: BOOLEAN" vertex="1">
+          <mxGeometry height="160" width="230" x="810" y="269.25" as="geometry" />
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-10" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1590" y="880" />
+              <mxPoint x="4620" y="880" />
+            </Array>
+            <mxPoint x="1590" y="519.25" as="sourcePoint" />
+            <mxPoint x="4620" y="-2750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GcL5ZQe20X5uq9nixjLZ-2" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="wI9DEdBGnRGPMCVetftJ-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1575" y="310" />
+              <mxPoint x="2400" y="310" />
+              <mxPoint x="2400" y="-3090" />
+              <mxPoint x="4605" y="-3090" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;servicio_medico&lt;/b&gt;&lt;hr/&gt;# servicio_medico_id: SMALLINT&lt;br/&gt;* nombre: VARCHAR(120)&lt;br/&gt;* categoria: VARCHAR(25)&lt;br/&gt;o descripcion: VARCHAR(300)&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="140" width="210" x="1470" y="379.25" as="geometry" />
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;unidad_servicio&lt;/b&gt;&lt;hr/&gt;# unidad_medica_id: BIGINT FK&lt;br/&gt;# servicio_medico_id: SMALLINT FK&lt;br/&gt;* costo_base: NUMERIC(12,2)&lt;br/&gt;* disponible: BOOLEAN" vertex="1">
+          <mxGeometry height="125" width="240" x="390" y="734.25" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-26" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="cp5vdXdx6px89jyfEH1T-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970" y="1010" />
+              <mxPoint x="1820" y="1010" />
+              <mxPoint x="1820" y="-400" />
+              <mxPoint x="4820" y="-400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-28" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="cp5vdXdx6px89jyfEH1T-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1150" y="783.5" />
+              <mxPoint x="1150" y="1160" />
+              <mxPoint x="2950" y="1160" />
+              <mxPoint x="2950" y="-470" />
+              <mxPoint x="5622.5" y="-470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-40" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="ENDkvH0ltEvqRJxN4sRo-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="860" y="980" />
+              <mxPoint x="-25" y="980" />
+              <mxPoint x="-25" y="-3209.6" />
+            </Array>
+            <mxPoint x="-25" y="-3130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-9" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="wI9DEdBGnRGPMCVetftJ-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="919" y="1210" />
+              <mxPoint x="4180" y="1210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;espacio_hospitalario&lt;/b&gt;&lt;hr/&gt;# espacio_hospitalario_id: BIGINT&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;o unidad_medica_id: BIGINT FK&lt;br/&gt;* codigo: VARCHAR(20)&lt;br/&gt;* tipo: VARCHAR(15)&lt;br/&gt;o nombre: VARCHAR(100)&lt;br/&gt;* estado: VARCHAR(20)&lt;br/&gt;o costo_diario: NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="197" width="218" x="810" y="734.25" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-27" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="W216YLvA0-byAtieuV0a-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1335" y="1300.09" />
+              <mxPoint x="3445" y="1300.09" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pZ1g8gCmWP6rjo2NsFIs-6" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1520.09" y="814.27" />
+              <mxPoint x="1520.09" y="2000.09" />
+              <mxPoint x="2170.09" y="2000.09" />
+              <mxPoint x="2170.09" y="2090.09" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;institucion_externa&lt;/b&gt;&lt;hr/&gt;# institucion_externa_id: BIGINT&lt;br/&gt;o direccion_id: BIGINT FK&lt;br/&gt;* nombre: VARCHAR(150)&lt;br/&gt;* tipo: VARCHAR(30)&lt;br/&gt;o telefono: VARCHAR(20)" vertex="1">
+          <mxGeometry height="160" width="210" x="1230" y="734.25" as="geometry" />
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-10" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="RthiWszPzpKjHQFpdMJ1-2" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-11" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="RthiWszPzpKjHQFpdMJ1-3" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-12" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="RthiWszPzpKjHQFpdMJ1-4" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="170.04" y="249.32" />
+            </Array>
+            <mxPoint x="1240" y="249.25" as="sourcePoint" />
+            <mxPoint x="586" y="483.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-13" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="RthiWszPzpKjHQFpdMJ1-5" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="525" y="479.29" />
+              <mxPoint x="525" y="572.73" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-14" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="RthiWszPzpKjHQFpdMJ1-7" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-15" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="RthiWszPzpKjHQFpdMJ1-7" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540.04" y="547.77" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-16" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="RthiWszPzpKjHQFpdMJ1-8" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-17" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="RthiWszPzpKjHQFpdMJ1-8" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="581.72" />
+              <mxPoint x="960" y="581.72" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RthiWszPzpKjHQFpdMJ1-18" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="RthiWszPzpKjHQFpdMJ1-9" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-20" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1860.09" y="100.09" />
+              <mxPoint x="1860.09" y="1256.09" />
+              <mxPoint x="1580.09" y="1256.09" />
+              <mxPoint x="1580.09" y="2435" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-32" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;" target="ENDkvH0ltEvqRJxN4sRo-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-21" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="60TU0hukjpQpf6IOMylg-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;persona&lt;/b&gt;&lt;hr/&gt;# persona_id: BIGINT&lt;br/&gt;o direccion_id: BIGINT FK&lt;br/&gt;* nombres: VARCHAR(100)&lt;br/&gt;* apellidos: VARCHAR(100)&lt;br/&gt;o dpi: CHAR(13)&lt;br/&gt;* fecha_nacimiento: DATE&lt;br/&gt;* sexo: VARCHAR(10)&lt;br/&gt;o estado_civil: VARCHAR(15)&lt;br/&gt;o telefono: VARCHAR(20)&lt;br/&gt;o correo: VARCHAR(120)" vertex="1">
+          <mxGeometry height="222" width="190" x="2160" y="-40" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-15" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="k_v2favwxOSKdw6R-U63-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2705" y="-189.91" />
+              <mxPoint x="1780.09" y="-189.91" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-29" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;entryX=0.685;entryY=0.983;entryDx=0;entryDy=0;entryPerimeter=0;" target="ENDkvH0ltEvqRJxN4sRo-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="-100" />
+              <mxPoint x="20" y="-3205.23" />
+            </Array>
+            <mxPoint x="50" y="-3170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-20" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="60TU0hukjpQpf6IOMylg-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2620" y="-319.97" />
+              <mxPoint x="-1700" y="-319.97" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;paciente&lt;/b&gt;&lt;hr/&gt;# paciente_id: BIGINT FK&lt;br/&gt;* numero_expediente: VARCHAR(25)&lt;br/&gt;o numero_seguro_social: VARCHAR(30)&lt;br/&gt;* fecha_registro: DATE&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="140" width="250" x="2580" y="-140" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;encargado_paciente&lt;/b&gt;&lt;hr/&gt;# encargado_paciente_id: BIGINT&lt;br/&gt;* paciente_id: BIGINT FK&lt;br/&gt;* encargado_persona_id: BIGINT FK&lt;br/&gt;* parentesco: VARCHAR(40)&lt;br/&gt;* es_principal: BOOLEAN&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="172" width="240" x="3020" y="-200" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;empleado&lt;/b&gt;&lt;hr/&gt;# empleado_id: BIGINT&lt;br/&gt;* persona_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* codigo_empleado: VARCHAR(20)&lt;br/&gt;* tipo_empleado: VARCHAR(25)&lt;br/&gt;* fecha_contratacion: DATE&lt;br/&gt;o fecha_finalizacion: DATE&lt;br/&gt;* estado_laboral: VARCHAR(15)" vertex="1">
+          <mxGeometry height="197" width="220" x="2050" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;especialidad&lt;/b&gt;&lt;hr/&gt;# especialidad_id: SMALLINT&lt;br/&gt;* nombre: VARCHAR(120)&lt;br/&gt;o descripcion: VARCHAR(300)&lt;br/&gt;* activa: BOOLEAN" vertex="1">
+          <mxGeometry height="130" width="196" x="2585" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-16" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="k_v2favwxOSKdw6R-U63-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3520" y="1250" />
+              <mxPoint x="2425" y="1250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-18" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="k_v2favwxOSKdw6R-U63-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="4090.09" y="410.09" />
+              <mxPoint x="4090.09" y="2270.09" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-19" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="4140.09" y="380.09" />
+              <mxPoint x="4140.09" y="2090.09" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-21" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3469.86" y="2640" />
+              <mxPoint x="2215" y="2640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-31" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="cp5vdXdx6px89jyfEH1T-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="4490" y="445" />
+              <mxPoint x="4490" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-32" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;" target="cp5vdXdx6px89jyfEH1T-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3560.05" y="1700" />
+              <mxPoint x="5700.05" y="1700" />
+              <mxPoint x="5700.05" y="1270" />
+            </Array>
+            <mxPoint x="3731.548324092742" y="1510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-33" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;" target="ENDkvH0ltEvqRJxN4sRo-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3502.67" y="-956" />
+              <mxPoint x="2450" y="-956" />
+              <mxPoint x="2450" y="-2620" />
+              <mxPoint x="1030" y="-2620" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-11" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="wI9DEdBGnRGPMCVetftJ-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3445.08" y="-1204.92" />
+              <mxPoint x="4050" y="-1204.92" />
+              <mxPoint x="4050" y="-2794.92" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-12" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.609;exitY=0;exitDx=0;exitDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;exitPerimeter=0;" target="wI9DEdBGnRGPMCVetftJ-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3470.07" y="-1180" />
+              <mxPoint x="4430.07" y="-1180" />
+              <mxPoint x="4430.07" y="-2810" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2A7m98ymh7wUPFQ3hAn7-3" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;" target="ENDkvH0ltEvqRJxN4sRo-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3360.07" y="260" />
+              <mxPoint x="2850.07" y="260" />
+              <mxPoint x="2850.07" y="-2460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;medico&lt;/b&gt;&lt;hr/&gt;# medico_id: BIGINT FK&lt;br/&gt;* numero_colegiado: VARCHAR(25)&lt;br/&gt;* clase_medico: VARCHAR(12)&lt;br/&gt;o institucion_externa_id: BIGINT FK&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="140" width="230" x="3330" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;medico_especialidad&lt;/b&gt;&lt;hr/&gt;# medico_id: BIGINT FK&lt;br/&gt;# especialidad_id: SMALLINT FK&lt;br/&gt;* es_principal: BOOLEAN" vertex="1">
+          <mxGeometry height="110" width="210" x="2290" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;medico_hospital&lt;/b&gt;&lt;hr/&gt;# medico_hospital_id: BIGINT&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* condicion: VARCHAR(12)&lt;br/&gt;* fecha_inicio: DATE&lt;br/&gt;o fecha_fin: DATE&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="180" width="190" x="2530" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-36" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;" target="ENDkvH0ltEvqRJxN4sRo-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3142.45" y="320.09" />
+              <mxPoint x="3300.09" y="320.09" />
+              <mxPoint x="3300.09" y="-599.55" />
+              <mxPoint x="1410.09" y="-599.55" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-37" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="ENDkvH0ltEvqRJxN4sRo-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3160.09" y="350.09" />
+              <mxPoint x="3320.09" y="350.09" />
+              <mxPoint x="3320.09" y="-569.91" />
+              <mxPoint x="325" y="-569.91" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;enfermero&lt;/b&gt;&lt;hr/&gt;# enfermero_id: BIGINT FK&lt;br/&gt;o numero_registro: VARCHAR(25)&lt;br/&gt;* nivel: VARCHAR(12)" vertex="1">
+          <mxGeometry height="110" width="210" x="3090" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;practicante_medicina&lt;/b&gt;&lt;hr/&gt;# practicante_id: BIGINT FK&lt;br/&gt;* institucion_educativa: VARCHAR(150)&lt;br/&gt;* numero_carnet: VARCHAR(30)&lt;br/&gt;* fecha_inicio: DATE&lt;br/&gt;* fecha_fin: DATE" vertex="1">
+          <mxGeometry height="155" width="260" x="2160" y="915" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;turno_personal&lt;/b&gt;&lt;hr/&gt;# turno_personal_id: BIGINT&lt;br/&gt;* empleado_id: BIGINT FK&lt;br/&gt;* unidad_medica_id: BIGINT FK&lt;br/&gt;* fecha: DATE&lt;br/&gt;* hora_inicio: TIME&lt;br/&gt;* hora_fin: TIME&lt;br/&gt;* estado: VARCHAR(12)" vertex="1">
+          <mxGeometry height="165" width="210" x="2670" y="915" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-12" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-2" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-13" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-3" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-14" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-3" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3140" y="90.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-15" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-4" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-16" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-6" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3196" y="40" />
+              <mxPoint x="3196" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-17" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-7" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-18" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-7" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2380" y="265" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-19" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-8" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2625.06" y="429.94000000000005" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-20" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-9" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3196" y="389.94000000000005" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-21" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-10" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W216YLvA0-byAtieuV0a-22" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="W216YLvA0-byAtieuV0a-11" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2776" y="469.94000000000005" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GcL5ZQe20X5uq9nixjLZ-3" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;endFill=0;startArrow=ERone;startFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1820.07" y="1430" />
+              <mxPoint x="2910.07" y="1430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2A7m98ymh7wUPFQ3hAn7-2" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="ENDkvH0ltEvqRJxN4sRo-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1725" y="-889.47" />
+              <mxPoint x="-279.93" y="-889.47" />
+              <mxPoint x="-279.93" y="-3410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;episodio_atencion&lt;/b&gt;&lt;hr/&gt;# episodio_atencion_id: BIGINT&lt;br/&gt;* paciente_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* fecha_apertura: TIMESTAMPTZ&lt;br/&gt;o fecha_cierre: TIMESTAMPTZ&lt;br/&gt;* estado: VARCHAR(12)&lt;br/&gt;* motivo_apertura: TEXT" vertex="1">
+          <mxGeometry height="172" width="220" x="1670" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-33" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="cp5vdXdx6px89jyfEH1T-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3770" y="1730.11" />
+              <mxPoint x="3770" y="1256.11" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-22" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="60TU0hukjpQpf6IOMylg-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;ingreso&lt;/b&gt;&lt;hr/&gt;# ingreso_id: BIGINT&lt;br/&gt;* episodio_atencion_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* unidad_medica_id: BIGINT FK&lt;br/&gt;* servicio_medico_id: SMALLINT FK&lt;br/&gt;* medico_encargado_id: BIGINT FK&lt;br/&gt;o encargado_paciente_id: BIGINT FK&lt;br/&gt;o espacio_hospitalario_id: BIGINT FK&lt;br/&gt;* fecha_ingreso: TIMESTAMPTZ&lt;br/&gt;* motivo_ingreso: TEXT&lt;br/&gt;* diagnostico_presuntivo: TEXT&lt;br/&gt;* estado: VARCHAR(10)" vertex="1">
+          <mxGeometry height="260" width="230" x="2310" y="1550" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;diagnostico&lt;/b&gt;&lt;hr/&gt;# diagnostico_id: BIGINT&lt;br/&gt;o codigo: VARCHAR(25)&lt;br/&gt;* nombre: VARCHAR(200)&lt;br/&gt;o descripcion: TEXT" vertex="1">
+          <mxGeometry height="120" width="170" x="2940" y="1410" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;egreso&lt;/b&gt;&lt;hr/&gt;# egreso_id: BIGINT&lt;br/&gt;* ingreso_id: BIGINT FK&lt;br/&gt;* medico_asignado_id: BIGINT FK&lt;br/&gt;o institucion_referida_id: BIGINT FK&lt;br/&gt;* fecha_egreso: TIMESTAMPTZ&lt;br/&gt;* motivo_egreso: TEXT&lt;br/&gt;* codigo_egreso: VARCHAR(10)&lt;br/&gt;* sin_consentimiento_medico: BOOLEAN&lt;br/&gt;o motivo_sin_consentimiento: TEXT&lt;br/&gt;o operaciones_intervenciones: TEXT&lt;br/&gt;o codigo_traslado: VARCHAR(40)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="250" width="260" x="1760" y="2080" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;egreso_diagnostico&lt;/b&gt;&lt;hr/&gt;# egreso_id: BIGINT FK&lt;br/&gt;# diagnostico_id: BIGINT FK&lt;br/&gt;* tipo: VARCHAR(10)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="130" width="190" x="2460" y="1940" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;traslado&lt;/b&gt;&lt;hr/&gt;# traslado_id: BIGINT&lt;br/&gt;* episodio_atencion_id: BIGINT FK&lt;br/&gt;o ingreso_origen_id: BIGINT FK&lt;br/&gt;* medico_indicador_id: BIGINT FK&lt;br/&gt;* unidad_origen_id: BIGINT FK&lt;br/&gt;o unidad_destino_id: BIGINT FK&lt;br/&gt;o institucion_destino_id: BIGINT FK&lt;br/&gt;o servicio_destino_id: SMALLINT FK&lt;br/&gt;* fecha_traslado: TIMESTAMPTZ&lt;br/&gt;* tipo: VARCHAR(10)&lt;br/&gt;* motivo: TEXT&lt;br/&gt;* codigo_traslado: VARCHAR(40)" vertex="1">
+          <mxGeometry height="260" width="240" x="2730" y="1960" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;consentimiento_general&lt;/b&gt;&lt;hr/&gt;# consentimiento_general_id: BIGINT&lt;br/&gt;* episodio_atencion_id: BIGINT FK&lt;br/&gt;* firmante_persona_id: BIGINT FK&lt;br/&gt;* medico_solicitante_id: BIGINT FK&lt;br/&gt;* tipo: VARCHAR(17)&lt;br/&gt;* fecha: TIMESTAMPTZ&lt;br/&gt;* aceptado: BOOLEAN&lt;br/&gt;* descripcion_procedimiento: TEXT&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="210" width="230" x="2100" y="2330" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-8" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="k_v2favwxOSKdw6R-U63-2" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2100.04" y="1556.04" />
+              <mxPoint x="2100.04" y="1630.04" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-9" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="k_v2favwxOSKdw6R-U63-4" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1890.04" y="1650.04" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-10" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="k_v2favwxOSKdw6R-U63-5" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-11" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="k_v2favwxOSKdw6R-U63-5" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2973.95" y="1499.997619047619" as="sourcePoint" />
+            <mxPoint x="2589.997619047619" y="1969.9499999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-12" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="k_v2favwxOSKdw6R-U63-6" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2870" y="1534.03" />
+            </Array>
+            <mxPoint x="1890" y="1534.0276190476188" as="sourcePoint" />
+            <mxPoint x="2926.047619047619" y="1937.98" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-13" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="k_v2favwxOSKdw6R-U63-6" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-14" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="k_v2favwxOSKdw6R-U63-7" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2215" y="1580.05" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k_v2favwxOSKdw6R-U63-17" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.691;entryY=0.013;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3690.09" y="-113.91" />
+              <mxPoint x="3690.09" y="1330.09" />
+              <mxPoint x="2468.82" y="1330.09" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pZ1g8gCmWP6rjo2NsFIs-1" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1010" y="680" />
+              <mxPoint x="2080" y="680" />
+              <mxPoint x="2080" y="1760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pZ1g8gCmWP6rjo2NsFIs-2" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.002;entryY=0.68;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510.09" y="1726.82" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pZ1g8gCmWP6rjo2NsFIs-3" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.316;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890.09" y="1830.09" />
+              <mxPoint x="2382.64" y="1830.09" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pZ1g8gCmWP6rjo2NsFIs-4" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.003;entryY=0.67;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1210" y="814.33" />
+              <mxPoint x="1210" y="2247.44" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pZ1g8gCmWP6rjo2NsFIs-5" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=3;" target="k_v2favwxOSKdw6R-U63-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1370" y="400" />
+              <mxPoint x="1370" y="590" />
+              <mxPoint x="1940.14" y="590" />
+              <mxPoint x="1940.14" y="1900" />
+              <mxPoint x="2810.29" y="1900" />
+            </Array>
+            <mxPoint x="1040" y="399.99999999999994" as="sourcePoint" />
+            <mxPoint x="2810.16" y="2055.6799999999994" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pZ1g8gCmWP6rjo2NsFIs-7" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="k_v2favwxOSKdw6R-U63-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2030.09" y="480.09" />
+              <mxPoint x="2030.09" y="2130.09" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;horario_consulta&lt;/b&gt;&lt;hr/&gt;# horario_consulta_id: BIGINT&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* unidad_medica_id: BIGINT FK&lt;br/&gt;* clinica_id: BIGINT FK&lt;br/&gt;* dia_semana: SMALLINT&lt;br/&gt;* hora_inicio: TIME&lt;br/&gt;* hora_fin: TIME&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="197" width="196" x="4800" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;cita&lt;/b&gt;&lt;hr/&gt;# cita_id: BIGINT&lt;br/&gt;* paciente_id: BIGINT FK&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* unidad_medica_id: BIGINT FK&lt;br/&gt;* clinica_id: BIGINT FK&lt;br/&gt;o cita_anterior_id: BIGINT FK&lt;br/&gt;* fecha_hora: TIMESTAMPTZ&lt;br/&gt;* canal: VARCHAR(10)&lt;br/&gt;* tipo: VARCHAR(12)&lt;br/&gt;* estado: VARCHAR(15)&lt;br/&gt;* precio_base: NUMERIC(12,2)&lt;br/&gt;* aplica_recargo_cancelacion: BOOLEAN&lt;br/&gt;o motivo_cancelacion: TEXT&lt;br/&gt;* fecha_registro: TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="300" width="270" x="5420" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;historial_estado_cita&lt;/b&gt;&lt;hr/&gt;# historial_estado_cita_id: BIGINT&lt;br/&gt;* cita_id: BIGINT FK&lt;br/&gt;o estado_anterior: VARCHAR(15)&lt;br/&gt;* estado_nuevo: VARCHAR(15)&lt;br/&gt;* fecha_cambio: TIMESTAMPTZ&lt;br/&gt;o motivo: TEXT" vertex="1">
+          <mxGeometry height="160" width="210" x="5840" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-25" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="60TU0hukjpQpf6IOMylg-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5031" y="859.29" />
+              <mxPoint x="1738" y="859.29" />
+              <mxPoint x="1738" y="-255.57" />
+              <mxPoint x="-1600" y="-255.57" />
+            </Array>
+            <mxPoint x="5076" y="859.2499999999991" as="sourcePoint" />
+            <mxPoint x="-1600" y="-265.75" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;consulta_externa&lt;/b&gt;&lt;hr/&gt;# consulta_externa_id: BIGINT&lt;br/&gt;* cita_id: BIGINT FK&lt;br/&gt;* fecha_atencion: TIMESTAMPTZ&lt;br/&gt;* diagnostico: TEXT&lt;br/&gt;o datos_interes: TEXT&lt;br/&gt;o observaciones: TEXT&lt;br/&gt;o orientacion_paciente: TEXT" vertex="1">
+          <mxGeometry height="190" width="210" x="4926" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;receta&lt;/b&gt;&lt;hr/&gt;# receta_id: BIGINT&lt;br/&gt;* consulta_externa_id: BIGINT FK&lt;br/&gt;* fecha_emision: DATE&lt;br/&gt;o fecha_proxima_cita: DATE&lt;br/&gt;o indicaciones: TEXT" vertex="1">
+          <mxGeometry height="150" width="210" x="5470" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;medicamento&lt;/b&gt;&lt;hr/&gt;# medicamento_id: BIGINT&lt;br/&gt;* nombre: VARCHAR(120)&lt;br/&gt;* presentacion: VARCHAR(100)&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="130" width="196" x="5840" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;receta_detalle&lt;/b&gt;&lt;hr/&gt;# receta_detalle_id: BIGINT&lt;br/&gt;* receta_id: BIGINT FK&lt;br/&gt;* medicamento_id: BIGINT FK&lt;br/&gt;* dosis: VARCHAR(100)&lt;br/&gt;* frecuencia: VARCHAR(100)&lt;br/&gt;* duracion_dias: SMALLINT&lt;br/&gt;o instrucciones: TEXT" vertex="1">
+          <mxGeometry height="172" width="190" x="5150" y="885" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;orden_laboratorio&lt;/b&gt;&lt;hr/&gt;# orden_laboratorio_id: BIGINT&lt;br/&gt;* consulta_externa_id: BIGINT FK&lt;br/&gt;* fecha_emision: TIMESTAMPTZ&lt;br/&gt;o indicaciones: TEXT&lt;br/&gt;* estado: VARCHAR(12)" vertex="1">
+          <mxGeometry height="150" width="210" x="5420" y="885" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;orden_laboratorio_detalle&lt;/b&gt;&lt;hr/&gt;# orden_laboratorio_detalle_id: BIGINT&lt;br/&gt;* orden_laboratorio_id: BIGINT FK&lt;br/&gt;* examen: VARCHAR(150)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="130" width="240" x="5840" y="885" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;atencion_emergencia&lt;/b&gt;&lt;hr/&gt;# atencion_emergencia_id: BIGINT&lt;br/&gt;* ingreso_id: BIGINT FK&lt;br/&gt;* fecha_evaluacion: TIMESTAMPTZ&lt;br/&gt;* prioridad: SMALLINT&lt;br/&gt;* estado_clinico: TEXT&lt;br/&gt;o resultado: TEXT" vertex="1">
+          <mxGeometry height="172" width="220" x="5000" y="1170" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;procedimiento_emergencia&lt;/b&gt;&lt;hr/&gt;# procedimiento_emergencia_id: BIGINT&lt;br/&gt;* nombre: VARCHAR(180)&lt;br/&gt;* tipo: VARCHAR(15)&lt;br/&gt;o descripcion: TEXT&lt;br/&gt;* costo_base: NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="140" width="250" x="5430" y="1080" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;emergencia_procedimiento&lt;/b&gt;&lt;hr/&gt;# emergencia_procedimiento_id: BIGINT&lt;br/&gt;* atencion_emergencia_id: BIGINT FK&lt;br/&gt;* procedimiento_emergencia_id: BIGINT FK&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* fecha_realizacion: TIMESTAMPTZ&lt;br/&gt;o resultado: TEXT&lt;br/&gt;* costo_aplicado: NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="172" width="270" x="5940" y="1160" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;cola_emergencia&lt;/b&gt;&lt;hr/&gt;# cola_emergencia_id: BIGINT&lt;br/&gt;* atencion_emergencia_id: BIGINT FK&lt;br/&gt;* fecha_inicio: TIMESTAMPTZ&lt;br/&gt;o fecha_fin: TIMESTAMPTZ&lt;br/&gt;* prioridad: SMALLINT&lt;br/&gt;* estado: VARCHAR(12)" vertex="1">
+          <mxGeometry height="165" width="230" x="4995" y="1455" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-14" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-2" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-15" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-3" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-16" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-4" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-17" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-5" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-18" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-7" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5245" y="550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-19" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-7" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5270" y="665" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-20" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-8" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5540" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-21" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-9" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-22" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-12" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-23" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-12" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="5810" y="1150" />
+              <mxPoint x="5810" y="1230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-24" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cp5vdXdx6px89jyfEH1T-13" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-27" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.333;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="cp5vdXdx6px89jyfEH1T-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="370" />
+              <mxPoint x="1180" y="-450" />
+              <mxPoint x="5509.93" y="-450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-29" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.406;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="cp5vdXdx6px89jyfEH1T-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3445" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cp5vdXdx6px89jyfEH1T-30" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.111;entryY=0.027;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="cp5vdXdx6px89jyfEH1T-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2767.5" y="-240" />
+              <mxPoint x="5450" y="-240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;solicitud_cirugia&lt;/b&gt;&lt;hr/&gt;# solicitud_cirugia_id: BIGINT&lt;br/&gt;* paciente_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* cirujano_id: BIGINT FK&lt;br/&gt;o episodio_atencion_id: BIGINT FK&lt;br/&gt;* fecha_solicitud: TIMESTAMPTZ&lt;br/&gt;* caracter: VARCHAR(10)&lt;br/&gt;* historia_clinica: TEXT&lt;br/&gt;* procedimiento_propuesto: TEXT&lt;br/&gt;* duracion_estimada_minutos: INTEGER&lt;br/&gt;* tipo_anestesia: VARCHAR(80)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="260" width="250" x="-150" y="-3509" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;evaluacion_solicitud_cirugia&lt;/b&gt;&lt;hr/&gt;# evaluacion_solicitud_cirugia_id: BIGINT&lt;br/&gt;* solicitud_cirugia_id: BIGINT FK&lt;br/&gt;* medico_evaluador_id: BIGINT FK&lt;br/&gt;* fecha_evaluacion: TIMESTAMPTZ&lt;br/&gt;* decision: VARCHAR(10)&lt;br/&gt;o razones: TEXT" vertex="1">
+          <mxGeometry height="161" width="250" x="870" y="-3540" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;cirugia&lt;/b&gt;&lt;hr/&gt;# cirugia_id: BIGINT&lt;br/&gt;* solicitud_cirugia_id: BIGINT FK&lt;br/&gt;* evaluacion_solicitud_cirugia_id: BIGINT FK&lt;br/&gt;* decision_requerida: VARCHAR(10) FK&lt;br/&gt;* quirofano_id: BIGINT FK&lt;br/&gt;* fecha_programada: TIMESTAMPTZ&lt;br/&gt;o fecha_inicio: TIMESTAMPTZ&lt;br/&gt;o fecha_fin: TIMESTAMPTZ&lt;br/&gt;* estado: VARCHAR(12)&lt;br/&gt;o procedimiento_realizado: TEXT" vertex="1">
+          <mxGeometry height="230" width="270" x="1580" y="-3399" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;participante_cirugia&lt;/b&gt;&lt;hr/&gt;# participante_cirugia_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* persona_id: BIGINT FK&lt;br/&gt;* rol: VARCHAR(25)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="140" width="210" x="70" y="-3009" as="geometry" />
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-13" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="wI9DEdBGnRGPMCVetftJ-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="-2930" />
+              <mxPoint x="2295.12" y="-2930" />
+              <mxPoint x="2295.12" y="-2660" />
+              <mxPoint x="3700" y="-2660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;recurso&lt;/b&gt;&lt;hr/&gt;# recurso_id: BIGINT&lt;br/&gt;* nombre: VARCHAR(150)&lt;br/&gt;o descripcion: TEXT&lt;br/&gt;* categoria: VARCHAR(11)&lt;br/&gt;* tipo: VARCHAR(12)&lt;br/&gt;o material: VARCHAR(100)&lt;br/&gt;o funcion: VARCHAR(20)&lt;br/&gt;* costo_unitario: NUMERIC(12,2)&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="210" width="220" x="720" y="-2897" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;solicitud_recurso&lt;/b&gt;&lt;hr/&gt;# solicitud_cirugia_id: BIGINT FK&lt;br/&gt;# recurso_id: BIGINT FK&lt;br/&gt;* cantidad: NUMERIC(10,2)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="120" width="210" x="1210" y="-2852" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;uso_recurso_cirugia&lt;/b&gt;&lt;hr/&gt;# uso_recurso_cirugia_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* recurso_id: BIGINT FK&lt;br/&gt;* cantidad: NUMERIC(10,2)&lt;br/&gt;* costo_unitario_aplicado: NUMERIC(12,2)&lt;br/&gt;* fecha_uso: TIMESTAMPTZ&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="186" width="270" x="260" y="-2539" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;consentimiento_quirurgico&lt;/b&gt;&lt;hr/&gt;# consentimiento_quirurgico_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* medico_firmante_id: BIGINT FK&lt;br/&gt;* firmante_persona_id: BIGINT FK&lt;br/&gt;* calidad_firmante: VARCHAR(20)&lt;br/&gt;* procedimiento: TEXT&lt;br/&gt;* objetivo: TEXT&lt;br/&gt;* caracteristicas: TEXT&lt;br/&gt;* riesgos: TEXT&lt;br/&gt;* fecha_obtencion: TIMESTAMPTZ&lt;br/&gt;* firma_medico_confirmada: BOOLEAN&lt;br/&gt;* firma_paciente_o_representante_confirmada: BOOLEAN" vertex="1">
+          <mxGeometry height="272" width="360" x="850" y="-2524" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;chequeo_preanestesico&lt;/b&gt;&lt;hr/&gt;# chequeo_preanestesico_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* medico_evaluador_id: BIGINT FK&lt;br/&gt;* anestesista_id: BIGINT FK&lt;br/&gt;* clasificacion_asa: VARCHAR(3)&lt;br/&gt;* plan_anestesia: TEXT&lt;br/&gt;* fecha_evaluacion: TIMESTAMPTZ&lt;br/&gt;* firma_evaluador_confirmada: BOOLEAN&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="230" width="270" x="1460" y="-2529" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;etapa_cirugia&lt;/b&gt;&lt;hr/&gt;# etapa_cirugia_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* enfermero_responsable_id: BIGINT FK&lt;br/&gt;* etapa: VARCHAR(16)&lt;br/&gt;* fecha_inicio: TIMESTAMPTZ&lt;br/&gt;o fecha_fin: TIMESTAMPTZ&lt;br/&gt;o fecha_envio_secretaria: TIMESTAMPTZ&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="222" width="260" x="260" y="-2099" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;item_control_quirurgico&lt;/b&gt;&lt;hr/&gt;# item_control_quirurgico_id: BIGINT&lt;br/&gt;* etapa: VARCHAR(16)&lt;br/&gt;* grupo: VARCHAR(40)&lt;br/&gt;* descripcion: VARCHAR(250)&lt;br/&gt;* tipo_resultado: VARCHAR(12)&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="175" width="230" x="850" y="-2219" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;resultado_control_quirurgico&lt;/b&gt;&lt;hr/&gt;# resultado_control_quirurgico_id: BIGINT&lt;br/&gt;* etapa_cirugia_id: BIGINT FK&lt;br/&gt;* item_control_quirurgico_id: BIGINT FK&lt;br/&gt;* etapa: VARCHAR(16) FK&lt;br/&gt;* resultado: VARCHAR(25)&lt;br/&gt;* fecha_registro: TIMESTAMPTZ&lt;br/&gt;* registrado_por_enfermero_id: BIGINT FK&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="210" width="260" x="1280" y="-2049" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;registro_clinico_cirugia&lt;/b&gt;&lt;hr/&gt;# registro_clinico_cirugia_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;o etapa_cirugia_id: BIGINT FK&lt;br/&gt;* registrador_persona_id: BIGINT FK&lt;br/&gt;* categoria: VARCHAR(32)&lt;br/&gt;* descripcion: TEXT&lt;br/&gt;o valor: TEXT&lt;br/&gt;* fecha_registro: TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="210" width="230" x="540" y="-1799" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-14" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-2" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="484.95000000000005" y="-3409" />
+              <mxPoint x="484.95000000000005" y="-3459.5299999999997" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-15" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-3" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-16" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-3" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1350" y="-3459.5299999999997" />
+              <mxPoint x="1350" y="-3329" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-17" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-4" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-18" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-6" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1314.9499999999998" y="-3359" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-19" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-6" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-20" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-7" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-21" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-7" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="-2791.92" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-22" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-8" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-23" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-9" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-24" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-10" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="626" y="-3309" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-25" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-12" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-26" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-12" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="-2131.46" />
+              <mxPoint x="1180" y="-1959" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-27" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-13" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="626" y="-3249" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-28" edge="1" parent="1" source="ENDkvH0ltEvqRJxN4sRo-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ENDkvH0ltEvqRJxN4sRo-13" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="655.0799999999999" y="-2029" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-30" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.28;entryY=0.958;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;" target="ENDkvH0ltEvqRJxN4sRo-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3387.56" y="530" />
+              <mxPoint x="2880" y="530" />
+              <mxPoint x="2880" y="-230" />
+              <mxPoint x="-80" y="-230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-31" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.079;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;" target="ENDkvH0ltEvqRJxN4sRo-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-34" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="ENDkvH0ltEvqRJxN4sRo-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2330" y="-2590" />
+              <mxPoint x="1160" y="-2590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-35" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.991;entryY=0.528;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;" target="ENDkvH0ltEvqRJxN4sRo-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3420" y="-489.85" />
+              <mxPoint x="2290.15" y="-489.85" />
+              <mxPoint x="2290.15" y="-2407.54" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ENDkvH0ltEvqRJxN4sRo-38" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.442;entryY=1.019;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="ENDkvH0ltEvqRJxN4sRo-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2255" y="-509.91" />
+              <mxPoint x="641.73" y="-509.91" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;hospitalizacion&lt;/b&gt;&lt;hr/&gt;# hospitalizacion_id: BIGINT&lt;br/&gt;* ingreso_id: BIGINT FK&lt;br/&gt;* medico_encargado_id: BIGINT FK&lt;br/&gt;o fecha_alta_prevista: TIMESTAMPTZ&lt;br/&gt;o fecha_alta_real: TIMESTAMPTZ&lt;br/&gt;* costo_diario_aplicado: NUMERIC(12,2)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="180" width="260" x="3650" y="-2930" as="geometry" />
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;asignacion_cama&lt;/b&gt;&lt;hr/&gt;# asignacion_cama_id: BIGINT&lt;br/&gt;* hospitalizacion_id: BIGINT FK&lt;br/&gt;* cama_id: BIGINT FK&lt;br/&gt;* fecha_inicio: TIMESTAMPTZ&lt;br/&gt;o fecha_fin: TIMESTAMPTZ&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="150" width="220" x="4070" y="-3060" as="geometry" />
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;hospitalizacion_servicio&lt;/b&gt;&lt;hr/&gt;# hospitalizacion_servicio_id: BIGINT&lt;br/&gt;* hospitalizacion_id: BIGINT FK&lt;br/&gt;* servicio_medico_id: SMALLINT FK&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* fecha_servicio: TIMESTAMPTZ&lt;br/&gt;* descripcion: TEXT&lt;br/&gt;* costo_aplicado: NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="180" width="230" x="4490" y="-2930" as="geometry" />
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;hospitalizacion_insumo&lt;/b&gt;&lt;hr/&gt;# hospitalizacion_insumo_id: BIGINT&lt;br/&gt;* hospitalizacion_id: BIGINT FK&lt;br/&gt;* recurso_id: BIGINT FK&lt;br/&gt;* fecha_uso: TIMESTAMPTZ&lt;br/&gt;* cantidad: NUMERIC(10,2)&lt;br/&gt;* costo_unitario_aplicado: NUMERIC(12,2)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="180" width="260" x="3650" y="-2640" as="geometry" />
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-5" edge="1" parent="1" source="wI9DEdBGnRGPMCVetftJ-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="wI9DEdBGnRGPMCVetftJ-2" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3990" y="-2859.94" />
+              <mxPoint x="3990" y="-2985" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-6" edge="1" parent="1" source="wI9DEdBGnRGPMCVetftJ-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="wI9DEdBGnRGPMCVetftJ-3" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-7" edge="1" parent="1" source="wI9DEdBGnRGPMCVetftJ-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="wI9DEdBGnRGPMCVetftJ-4" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wI9DEdBGnRGPMCVetftJ-8" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.611;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="wI9DEdBGnRGPMCVetftJ-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2367.5" y="1120" />
+              <mxPoint x="2510" y="1120" />
+              <mxPoint x="2510" y="-2820" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;factura&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;hr&gt;&lt;/li&gt;&lt;li&gt;# factura_id: BIGINT&lt;/li&gt;&lt;li&gt;* numero_factura: VARCHAR(30)&lt;/li&gt;&lt;li&gt;* paciente_id: BIGINT FK&lt;/li&gt;&lt;li&gt;* hospital_id: BIGINT FK&lt;/li&gt;&lt;li&gt;o ingreso_id: BIGINT FK&lt;/li&gt;&lt;li&gt;o consulta_externa_id: BIGINT FK&lt;/li&gt;&lt;li&gt;* fecha_emision: TIMESTAMPTZ&lt;/li&gt;&lt;li&gt;* descripcion: VARCHAR(300)&lt;/li&gt;&lt;li&gt;* estado: VARCHAR(12)&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="222" width="262" x="-2050" y="-1112" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;factura_detalle&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;hr&gt;&lt;/li&gt;&lt;li&gt;# factura_detalle_id: BIGINT&lt;/li&gt;&lt;li&gt;* factura_id: BIGINT FK&lt;/li&gt;&lt;li&gt;* concepto: VARCHAR(250)&lt;/li&gt;&lt;li&gt;* cantidad: NUMERIC(10,2)&lt;/li&gt;&lt;li&gt;* precio_unitario: NUMERIC(12,2)&lt;/li&gt;&lt;li&gt;* porcentaje_descuento: NUMERIC(5,2)&lt;/li&gt;&lt;li&gt;* porcentaje_recargo: NUMERIC(5,2)&lt;/li&gt;&lt;li&gt;o subtotal: NUMERIC(14,2)&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="280" x="-1070" y="-970" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;plan_pago&lt;/b&gt;&lt;hr&gt;# plan_pago_id: BIGINT&lt;br&gt;* factura_id: BIGINT FK&lt;br&gt;* numero_cuotas: SMALLINT&lt;br&gt;* fecha_inicio: DATE&lt;br&gt;* estado: VARCHAR(12)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="197" width="180" x="-1660" y="-1510" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;cuota&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;hr&gt;&lt;/li&gt;&lt;li&gt;# cuota_id: BIGINT&lt;/li&gt;&lt;li&gt;* plan_pago_id: BIGINT FK&lt;/li&gt;&lt;li&gt;* numero: SMALLINT&lt;/li&gt;&lt;li&gt;* fecha_vencimiento: DATE&lt;/li&gt;&lt;li&gt;* monto: NUMERIC(12,2)&lt;/li&gt;&lt;li&gt;* estado: VARCHAR(12)&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="210" x="-2430" y="-860" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;pago&lt;/b&gt;&lt;hr&gt;# pago_id: BIGINT&lt;br&gt;* factura_id: BIGINT FK&lt;br&gt;o plan_pago_id: BIGINT FK&lt;br&gt;o cuota_id: BIGINT FK&lt;br&gt;* unidad_recepcion_id: BIGINT FK&lt;br&gt;* fecha_pago: TIMESTAMPTZ&lt;br&gt;* monto: NUMERIC(12,2)&lt;br&gt;* metodo: VARCHAR(15)&lt;br&gt;o referencia: VARCHAR(80)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="232" x="-1440" y="-690" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;evaluacion_calidad&lt;/b&gt;&lt;hr&gt;# evaluacion_calidad_id: BIGINT&lt;br&gt;* paciente_id: BIGINT FK&lt;br&gt;* hospital_id: BIGINT FK&lt;br&gt;o ingreso_id: BIGINT FK&lt;br&gt;o consulta_externa_id: BIGINT FK&lt;br&gt;* fecha_evaluacion: TIMESTAMPTZ&lt;br&gt;o observaciones: TEXT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="260" x="-1860" y="-620" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;evaluacion_objetivo&lt;/b&gt;&lt;hr&gt;# evaluacion_objetivo_id: BIGINT&lt;br&gt;* evaluacion_calidad_id: BIGINT FK&lt;br&gt;o hospital_objetivo_id: BIGINT FK&lt;br&gt;o persona_objetivo_id: BIGINT FK&lt;br&gt;* nota: SMALLINT&lt;br&gt;o comentario: TEXT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="232" x="-1846" y="-50" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-8" edge="1" parent="1" source="60TU0hukjpQpf6IOMylg-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="60TU0hukjpQpf6IOMylg-2" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1428.97" y="-980" />
+              <mxPoint x="-1428.97" y="-864.97" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-9" edge="1" parent="1" source="60TU0hukjpQpf6IOMylg-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="60TU0hukjpQpf6IOMylg-3" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-10" edge="1" parent="1" source="60TU0hukjpQpf6IOMylg-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="60TU0hukjpQpf6IOMylg-4" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-11" edge="1" parent="1" source="60TU0hukjpQpf6IOMylg-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="60TU0hukjpQpf6IOMylg-5" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1324" y="-960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-12" edge="1" parent="1" source="60TU0hukjpQpf6IOMylg-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="60TU0hukjpQpf6IOMylg-5" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-13" edge="1" parent="1" source="60TU0hukjpQpf6IOMylg-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="60TU0hukjpQpf6IOMylg-5" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1350" y="-770" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-14" edge="1" parent="1" source="60TU0hukjpQpf6IOMylg-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="60TU0hukjpQpf6IOMylg-7" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-19" edge="1" parent="1" source="W216YLvA0-byAtieuV0a-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.58;entryY=0.022;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="60TU0hukjpQpf6IOMylg-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2642.6" y="-1150" />
+              <mxPoint x="-1898" y="-1150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-23" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;strokeWidth=2;" target="60TU0hukjpQpf6IOMylg-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1869.93" y="1700" />
+              <mxPoint x="-1869.93" y="-200" />
+              <mxPoint x="-1769.93" y="-200" />
+            </Array>
+            <mxPoint x="2310" y="1700.039999999999" as="sourcePoint" />
+            <mxPoint x="-1769.9599999999998" y="-420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60TU0hukjpQpf6IOMylg-24" edge="1" parent="1" source="cp5vdXdx6px89jyfEH1T-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="60TU0hukjpQpf6IOMylg-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="4963.13" y="830" />
+              <mxPoint x="2380" y="830" />
+              <mxPoint x="2380" y="700" />
+              <mxPoint x="-1980" y="700" />
+            </Array>
+            <mxPoint x="4963.09" y="770.5700000000006" as="sourcePoint" />
+            <mxPoint x="-1979.9579999999999" y="-789.9999999999995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GcL5ZQe20X5uq9nixjLZ-1" edge="1" parent="1" source="RthiWszPzpKjHQFpdMJ1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.667;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" target="W216YLvA0-byAtieuV0a-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1450" y="465.25" />
+              <mxPoint x="1450" y="650" />
+              <mxPoint x="2110" y="650" />
+              <mxPoint x="2110" y="760.13" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2A7m98ymh7wUPFQ3hAn7-1" edge="1" parent="1" source="k_v2favwxOSKdw6R-U63-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERmany;startFill=0;endArrow=ERone;endFill=0;strokeWidth=2;" target="RthiWszPzpKjHQFpdMJ1-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2850.07" y="2590" />
+              <mxPoint x="780.07" y="2590" />
+              <mxPoint x="780.07" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="1" name="Organizacion">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1282" pageHeight="990" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="departamento" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;departamento&lt;/b&gt;&lt;hr&gt;# departamento_id: SMALLINT&lt;br&gt;* nombre: VARCHAR(60)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="-180" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="municipio" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;municipio&lt;/b&gt;&lt;hr&gt;# municipio_id: INTEGER&lt;br&gt;* departamento_id: SMALLINT FK&lt;br&gt;* nombre: VARCHAR(80)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="108.5" width="218" x="412" y="30.75" as="geometry" />
+        </mxCell>
+        <mxCell id="direccion" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;direccion&lt;/b&gt;&lt;hr&gt;# direccion_id: BIGINT&lt;br&gt;* municipio_id: INTEGER FK&lt;br&gt;* detalle: VARCHAR(250)&lt;br&gt;o zona: VARCHAR(20)&lt;br&gt;o codigo_postal: VARCHAR(10)&lt;br&gt;* area: VARCHAR(10)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="172" width="200" x="870" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hospital" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;hospital&lt;/b&gt;&lt;hr&gt;# hospital_id: BIGINT&lt;br&gt;* direccion_id: BIGINT FK&lt;br&gt;* codigo: VARCHAR(15)&lt;br&gt;* nombre: VARCHAR(120)&lt;br&gt;* telefono: VARCHAR(20)&lt;br&gt;o correo: VARCHAR(120)&lt;br&gt;* activo: BOOLEAN&lt;/div&gt;" vertex="1">
+          <mxGeometry height="172" width="190" x="-320" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="unidad_medica" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;unidad_medica&lt;/b&gt;&lt;hr/&gt;# unidad_medica_id: BIGINT&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* nombre: VARCHAR(100)&lt;br/&gt;* tipo: VARCHAR(20)&lt;br/&gt;o ubicacion: VARCHAR(150)&lt;br/&gt;o telefono_extension: VARCHAR(10)&lt;br/&gt;* activa: BOOLEAN" vertex="1">
+          <mxGeometry height="160" width="230" x="440" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="servicio_medico" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;servicio_medico&lt;/b&gt;&lt;hr/&gt;# servicio_medico_id: SMALLINT&lt;br/&gt;* nombre: VARCHAR(120)&lt;br/&gt;* categoria: VARCHAR(25)&lt;br/&gt;o descripcion: VARCHAR(300)&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="140" width="210" x="1100" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="unidad_servicio" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;unidad_servicio&lt;/b&gt;&lt;hr/&gt;# unidad_medica_id: BIGINT FK&lt;br/&gt;# servicio_medico_id: SMALLINT FK&lt;br/&gt;* costo_base: NUMERIC(12,2)&lt;br/&gt;* disponible: BOOLEAN" vertex="1">
+          <mxGeometry height="125" width="240" x="20" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="espacio_hospitalario" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;espacio_hospitalario&lt;/b&gt;&lt;hr/&gt;# espacio_hospitalario_id: BIGINT&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;o unidad_medica_id: BIGINT FK&lt;br/&gt;* codigo: VARCHAR(20)&lt;br/&gt;* tipo: VARCHAR(15)&lt;br/&gt;o nombre: VARCHAR(100)&lt;br/&gt;* estado: VARCHAR(20)&lt;br/&gt;o costo_diario: NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="197" width="218" x="440" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="institucion_externa" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;institucion_externa&lt;/b&gt;&lt;hr/&gt;# institucion_externa_id: BIGINT&lt;br/&gt;o direccion_id: BIGINT FK&lt;br/&gt;* nombre: VARCHAR(150)&lt;br/&gt;* tipo: VARCHAR(30)&lt;br/&gt;o telefono: VARCHAR(20)" vertex="1">
+          <mxGeometry height="160" width="210" x="860" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_municipio" edge="1" parent="1" source="departamento" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="municipio" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_direccion" edge="1" parent="1" source="municipio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="direccion" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_hospital" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="hospital" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="870" y="160" as="sourcePoint" />
+            <mxPoint x="216" y="394" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4_unidad_medica" edge="1" parent="1" source="hospital" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="unidad_medica" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="155" y="390.04" />
+              <mxPoint x="155" y="483.48" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5_unidad_servicio" edge="1" parent="1" source="unidad_medica" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="unidad_servicio" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6_unidad_servicio" edge="1" parent="1" source="servicio_medico" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="unidad_servicio" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="170.04" y="458.52" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7_espacio_hospitalario" edge="1" parent="1" source="hospital" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="espacio_hospitalario" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8_espacio_hospitalario" edge="1" parent="1" source="unidad_medica" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="espacio_hospitalario" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="492.47" />
+              <mxPoint x="590" y="492.47" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9_institucion_externa" edge="1" parent="1" source="direccion" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="institucion_externa" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="2" name="Personas y personal">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1282" pageHeight="1375" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="persona" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;persona&lt;/b&gt;&lt;hr/&gt;# persona_id: BIGINT&lt;br/&gt;o direccion_id: BIGINT FK&lt;br/&gt;* nombres: VARCHAR(100)&lt;br/&gt;* apellidos: VARCHAR(100)&lt;br/&gt;o dpi: CHAR(13)&lt;br/&gt;* fecha_nacimiento: DATE&lt;br/&gt;* sexo: VARCHAR(10)&lt;br/&gt;o estado_civil: VARCHAR(15)&lt;br/&gt;o telefono: VARCHAR(20)&lt;br/&gt;o correo: VARCHAR(120)" vertex="1">
+          <mxGeometry height="222" width="190" x="20" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="paciente" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;paciente&lt;/b&gt;&lt;hr/&gt;# paciente_id: BIGINT FK&lt;br/&gt;* numero_expediente: VARCHAR(25)&lt;br/&gt;o numero_seguro_social: VARCHAR(30)&lt;br/&gt;* fecha_registro: DATE&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="140" width="250" x="440" as="geometry" />
+        </mxCell>
+        <mxCell id="encargado_paciente" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;encargado_paciente&lt;/b&gt;&lt;hr/&gt;# encargado_paciente_id: BIGINT&lt;br/&gt;* paciente_id: BIGINT FK&lt;br/&gt;* encargado_persona_id: BIGINT FK&lt;br/&gt;* parentesco: VARCHAR(40)&lt;br/&gt;* es_principal: BOOLEAN&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="172" width="240" x="880" y="-60" as="geometry" />
+        </mxCell>
+        <mxCell id="empleado" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;empleado&lt;/b&gt;&lt;hr/&gt;# empleado_id: BIGINT&lt;br/&gt;* persona_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* codigo_empleado: VARCHAR(20)&lt;br/&gt;* tipo_empleado: VARCHAR(25)&lt;br/&gt;* fecha_contratacion: DATE&lt;br/&gt;o fecha_finalizacion: DATE&lt;br/&gt;* estado_laboral: VARCHAR(15)" vertex="1">
+          <mxGeometry height="197" width="220" x="-90" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="especialidad" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;especialidad&lt;/b&gt;&lt;hr/&gt;# especialidad_id: SMALLINT&lt;br/&gt;* nombre: VARCHAR(120)&lt;br/&gt;o descripcion: VARCHAR(300)&lt;br/&gt;* activa: BOOLEAN" vertex="1">
+          <mxGeometry height="130" width="196" x="445" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="medico" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;medico&lt;/b&gt;&lt;hr/&gt;# medico_id: BIGINT FK&lt;br/&gt;* numero_colegiado: VARCHAR(25)&lt;br/&gt;* clase_medico: VARCHAR(12)&lt;br/&gt;o institucion_externa_id: BIGINT FK&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="140" width="230" x="1190" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="medico_especialidad" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;medico_especialidad&lt;/b&gt;&lt;hr/&gt;# medico_id: BIGINT FK&lt;br/&gt;# especialidad_id: SMALLINT FK&lt;br/&gt;* es_principal: BOOLEAN" vertex="1">
+          <mxGeometry height="110" width="210" x="150" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="medico_hospital" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;medico_hospital&lt;/b&gt;&lt;hr/&gt;# medico_hospital_id: BIGINT&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* condicion: VARCHAR(12)&lt;br/&gt;* fecha_inicio: DATE&lt;br/&gt;o fecha_fin: DATE&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="180" width="190" x="390" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="enfermero" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;enfermero&lt;/b&gt;&lt;hr/&gt;# enfermero_id: BIGINT FK&lt;br/&gt;o numero_registro: VARCHAR(25)&lt;br/&gt;* nivel: VARCHAR(12)" vertex="1">
+          <mxGeometry height="110" width="210" x="950" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="practicante_medicina" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;practicante_medicina&lt;/b&gt;&lt;hr/&gt;# practicante_id: BIGINT FK&lt;br/&gt;* institucion_educativa: VARCHAR(150)&lt;br/&gt;* numero_carnet: VARCHAR(30)&lt;br/&gt;* fecha_inicio: DATE&lt;br/&gt;* fecha_fin: DATE" vertex="1">
+          <mxGeometry height="155" width="260" x="20" y="1055" as="geometry" />
+        </mxCell>
+        <mxCell id="turno_personal" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;turno_personal&lt;/b&gt;&lt;hr/&gt;# turno_personal_id: BIGINT&lt;br/&gt;* empleado_id: BIGINT FK&lt;br/&gt;* unidad_medica_id: BIGINT FK&lt;br/&gt;* fecha: DATE&lt;br/&gt;* hora_inicio: TIME&lt;br/&gt;* hora_fin: TIME&lt;br/&gt;* estado: VARCHAR(12)" vertex="1">
+          <mxGeometry height="165" width="210" x="530" y="1055" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_paciente" edge="1" parent="1" source="persona" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="paciente" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_encargado_paciente" edge="1" parent="1" source="paciente" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="encargado_paciente" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_encargado_paciente" edge="1" parent="1" source="persona" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="encargado_paciente" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1000" y="230.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4_empleado" edge="1" parent="1" source="persona" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="empleado" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5_medico" edge="1" parent="1" source="persona" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="medico" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1056" y="180" />
+              <mxPoint x="1056" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6_medico_especialidad" edge="1" parent="1" source="medico" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="medico_especialidad" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7_medico_especialidad" edge="1" parent="1" source="especialidad" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="medico_especialidad" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="405" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8_medico_hospital" edge="1" parent="1" source="medico" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="medico_hospital" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="485.06" y="569.94" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9_enfermero" edge="1" parent="1" source="empleado" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="enfermero" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1056" y="529.94" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10_practicante_medicina" edge="1" parent="1" source="empleado" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="practicante_medicina" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11_turno_personal" edge="1" parent="1" source="empleado" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="turno_personal" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="636" y="609.94" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="3" name="Expediente clinico">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1282" pageHeight="1290" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="episodio_atencion" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;episodio_atencion&lt;/b&gt;&lt;hr/&gt;# episodio_atencion_id: BIGINT&lt;br/&gt;* paciente_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* fecha_apertura: TIMESTAMPTZ&lt;br/&gt;o fecha_cierre: TIMESTAMPTZ&lt;br/&gt;* estado: VARCHAR(12)&lt;br/&gt;* motivo_apertura: TEXT" vertex="1">
+          <mxGeometry height="172" width="220" x="-200" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ingreso" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;ingreso&lt;/b&gt;&lt;hr/&gt;# ingreso_id: BIGINT&lt;br/&gt;* episodio_atencion_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* unidad_medica_id: BIGINT FK&lt;br/&gt;* servicio_medico_id: SMALLINT FK&lt;br/&gt;* medico_encargado_id: BIGINT FK&lt;br/&gt;o encargado_paciente_id: BIGINT FK&lt;br/&gt;o espacio_hospitalario_id: BIGINT FK&lt;br/&gt;* fecha_ingreso: TIMESTAMPTZ&lt;br/&gt;* motivo_ingreso: TEXT&lt;br/&gt;* diagnostico_presuntivo: TEXT&lt;br/&gt;* estado: VARCHAR(10)" vertex="1">
+          <mxGeometry height="260" width="230" x="440" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="diagnostico" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;diagnostico&lt;/b&gt;&lt;hr/&gt;# diagnostico_id: BIGINT&lt;br/&gt;o codigo: VARCHAR(25)&lt;br/&gt;* nombre: VARCHAR(200)&lt;br/&gt;o descripcion: TEXT" vertex="1">
+          <mxGeometry height="120" width="170" x="1020" y="-20" as="geometry" />
+        </mxCell>
+        <mxCell id="egreso" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;egreso&lt;/b&gt;&lt;hr/&gt;# egreso_id: BIGINT&lt;br/&gt;* ingreso_id: BIGINT FK&lt;br/&gt;* medico_asignado_id: BIGINT FK&lt;br/&gt;o institucion_referida_id: BIGINT FK&lt;br/&gt;* fecha_egreso: TIMESTAMPTZ&lt;br/&gt;* motivo_egreso: TEXT&lt;br/&gt;* codigo_egreso: VARCHAR(10)&lt;br/&gt;* sin_consentimiento_medico: BOOLEAN&lt;br/&gt;o motivo_sin_consentimiento: TEXT&lt;br/&gt;o operaciones_intervenciones: TEXT&lt;br/&gt;o codigo_traslado: VARCHAR(40)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="250" width="260" x="-110" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="egreso_diagnostico" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;egreso_diagnostico&lt;/b&gt;&lt;hr/&gt;# egreso_id: BIGINT FK&lt;br/&gt;# diagnostico_id: BIGINT FK&lt;br/&gt;* tipo: VARCHAR(10)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="130" width="190" x="590" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="traslado" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;traslado&lt;/b&gt;&lt;hr/&gt;# traslado_id: BIGINT&lt;br/&gt;* episodio_atencion_id: BIGINT FK&lt;br/&gt;o ingreso_origen_id: BIGINT FK&lt;br/&gt;* medico_indicador_id: BIGINT FK&lt;br/&gt;* unidad_origen_id: BIGINT FK&lt;br/&gt;o unidad_destino_id: BIGINT FK&lt;br/&gt;o institucion_destino_id: BIGINT FK&lt;br/&gt;o servicio_destino_id: SMALLINT FK&lt;br/&gt;* fecha_traslado: TIMESTAMPTZ&lt;br/&gt;* tipo: VARCHAR(10)&lt;br/&gt;* motivo: TEXT&lt;br/&gt;* codigo_traslado: VARCHAR(40)" vertex="1">
+          <mxGeometry height="260" width="240" x="860" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="consentimiento_general" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;consentimiento_general&lt;/b&gt;&lt;hr/&gt;# consentimiento_general_id: BIGINT&lt;br/&gt;* episodio_atencion_id: BIGINT FK&lt;br/&gt;* firmante_persona_id: BIGINT FK&lt;br/&gt;* medico_solicitante_id: BIGINT FK&lt;br/&gt;* tipo: VARCHAR(17)&lt;br/&gt;* fecha: TIMESTAMPTZ&lt;br/&gt;* aceptado: BOOLEAN&lt;br/&gt;* descripcion_procedimiento: TEXT&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="210" width="230" x="230" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_ingreso" edge="1" parent="1" source="episodio_atencion" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="ingreso" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230.05" y="106.05" />
+              <mxPoint x="230.05" y="200.05" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2_egreso" edge="1" parent="1" source="ingreso" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="egreso" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_egreso_diagnostico" edge="1" parent="1" source="egreso" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="egreso_diagnostico" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4_egreso_diagnostico" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="egreso_diagnostico" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1103.95" y="49.99761904761904" as="sourcePoint" />
+            <mxPoint x="719.9976190476189" y="519.95" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5_traslado" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="20" y="84.02761904761893" as="sourcePoint" />
+            <mxPoint x="1056.0476190476188" y="487.98" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6_traslado" edge="1" parent="1" source="ingreso" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="traslado" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7_consentimiento_general" edge="1" parent="1" source="episodio_atencion" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="consentimiento_general" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="345" y="130.05" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="4" name="Consulta y emergencia">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1282" pageHeight="1710" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="horario_consulta" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;horario_consulta&lt;/b&gt;&lt;hr/&gt;# horario_consulta_id: BIGINT&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* unidad_medica_id: BIGINT FK&lt;br/&gt;* clinica_id: BIGINT FK&lt;br/&gt;* dia_semana: SMALLINT&lt;br/&gt;* hora_inicio: TIME&lt;br/&gt;* hora_fin: TIME&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="197" width="196" x="-180" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cita" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;cita&lt;/b&gt;&lt;hr/&gt;# cita_id: BIGINT&lt;br/&gt;* paciente_id: BIGINT FK&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* unidad_medica_id: BIGINT FK&lt;br/&gt;* clinica_id: BIGINT FK&lt;br/&gt;o cita_anterior_id: BIGINT FK&lt;br/&gt;* fecha_hora: TIMESTAMPTZ&lt;br/&gt;* canal: VARCHAR(10)&lt;br/&gt;* tipo: VARCHAR(12)&lt;br/&gt;* estado: VARCHAR(15)&lt;br/&gt;* precio_base: NUMERIC(12,2)&lt;br/&gt;* aplica_recargo_cancelacion: BOOLEAN&lt;br/&gt;o motivo_cancelacion: TEXT&lt;br/&gt;* fecha_registro: TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="300" width="270" x="440" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="historial_estado_cita" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;historial_estado_cita&lt;/b&gt;&lt;hr/&gt;# historial_estado_cita_id: BIGINT&lt;br/&gt;* cita_id: BIGINT FK&lt;br/&gt;o estado_anterior: VARCHAR(15)&lt;br/&gt;* estado_nuevo: VARCHAR(15)&lt;br/&gt;* fecha_cambio: TIMESTAMPTZ&lt;br/&gt;o motivo: TEXT" vertex="1">
+          <mxGeometry height="160" width="210" x="860" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="consulta_externa" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;consulta_externa&lt;/b&gt;&lt;hr/&gt;# consulta_externa_id: BIGINT&lt;br/&gt;* cita_id: BIGINT FK&lt;br/&gt;* fecha_atencion: TIMESTAMPTZ&lt;br/&gt;* diagnostico: TEXT&lt;br/&gt;o datos_interes: TEXT&lt;br/&gt;o observaciones: TEXT&lt;br/&gt;o orientacion_paciente: TEXT" vertex="1">
+          <mxGeometry height="190" width="210" x="-54" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="receta" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;receta&lt;/b&gt;&lt;hr/&gt;# receta_id: BIGINT&lt;br/&gt;* consulta_externa_id: BIGINT FK&lt;br/&gt;* fecha_emision: DATE&lt;br/&gt;o fecha_proxima_cita: DATE&lt;br/&gt;o indicaciones: TEXT" vertex="1">
+          <mxGeometry height="150" width="210" x="490" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="medicamento" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;medicamento&lt;/b&gt;&lt;hr/&gt;# medicamento_id: BIGINT&lt;br/&gt;* nombre: VARCHAR(120)&lt;br/&gt;* presentacion: VARCHAR(100)&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="130" width="196" x="860" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="receta_detalle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;receta_detalle&lt;/b&gt;&lt;hr/&gt;# receta_detalle_id: BIGINT&lt;br/&gt;* receta_id: BIGINT FK&lt;br/&gt;* medicamento_id: BIGINT FK&lt;br/&gt;* dosis: VARCHAR(100)&lt;br/&gt;* frecuencia: VARCHAR(100)&lt;br/&gt;* duracion_dias: SMALLINT&lt;br/&gt;o instrucciones: TEXT" vertex="1">
+          <mxGeometry height="172" width="190" x="170" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="orden_laboratorio" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;orden_laboratorio&lt;/b&gt;&lt;hr/&gt;# orden_laboratorio_id: BIGINT&lt;br/&gt;* consulta_externa_id: BIGINT FK&lt;br/&gt;* fecha_emision: TIMESTAMPTZ&lt;br/&gt;o indicaciones: TEXT&lt;br/&gt;* estado: VARCHAR(12)" vertex="1">
+          <mxGeometry height="150" width="210" x="440" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="orden_laboratorio_detalle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;orden_laboratorio_detalle&lt;/b&gt;&lt;hr/&gt;# orden_laboratorio_detalle_id: BIGINT&lt;br/&gt;* orden_laboratorio_id: BIGINT FK&lt;br/&gt;* examen: VARCHAR(150)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="130" width="240" x="860" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="atencion_emergencia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;atencion_emergencia&lt;/b&gt;&lt;hr/&gt;# atencion_emergencia_id: BIGINT&lt;br/&gt;* ingreso_id: BIGINT FK&lt;br/&gt;* fecha_evaluacion: TIMESTAMPTZ&lt;br/&gt;* prioridad: SMALLINT&lt;br/&gt;* estado_clinico: TEXT&lt;br/&gt;o resultado: TEXT" vertex="1">
+          <mxGeometry height="172" width="220" x="20" y="1130" as="geometry" />
+        </mxCell>
+        <mxCell id="procedimiento_emergencia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;procedimiento_emergencia&lt;/b&gt;&lt;hr/&gt;# procedimiento_emergencia_id: BIGINT&lt;br/&gt;* nombre: VARCHAR(180)&lt;br/&gt;* tipo: VARCHAR(15)&lt;br/&gt;o descripcion: TEXT&lt;br/&gt;* costo_base: NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="140" width="250" x="450" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="emergencia_procedimiento" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;emergencia_procedimiento&lt;/b&gt;&lt;hr/&gt;# emergencia_procedimiento_id: BIGINT&lt;br/&gt;* atencion_emergencia_id: BIGINT FK&lt;br/&gt;* procedimiento_emergencia_id: BIGINT FK&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* fecha_realizacion: TIMESTAMPTZ&lt;br/&gt;o resultado: TEXT&lt;br/&gt;* costo_aplicado: NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="172" width="270" x="960" y="1120" as="geometry" />
+        </mxCell>
+        <mxCell id="cola_emergencia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;cola_emergencia&lt;/b&gt;&lt;hr/&gt;# cola_emergencia_id: BIGINT&lt;br/&gt;* atencion_emergencia_id: BIGINT FK&lt;br/&gt;* fecha_inicio: TIMESTAMPTZ&lt;br/&gt;o fecha_fin: TIMESTAMPTZ&lt;br/&gt;* prioridad: SMALLINT&lt;br/&gt;* estado: VARCHAR(12)" vertex="1">
+          <mxGeometry height="165" width="230" x="15" y="1415" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_cita" edge="1" parent="1" source="cita" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cita" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_historial_estado_cita" edge="1" parent="1" source="cita" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="historial_estado_cita" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_consulta_externa" edge="1" parent="1" source="cita" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="consulta_externa" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4_receta" edge="1" parent="1" source="consulta_externa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="receta" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5_receta_detalle" edge="1" parent="1" source="receta" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="receta_detalle" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="265" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6_receta_detalle" edge="1" parent="1" source="medicamento" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="receta_detalle" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7_orden_laboratorio" edge="1" parent="1" source="consulta_externa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="orden_laboratorio" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8_orden_laboratorio_detalle" edge="1" parent="1" source="orden_laboratorio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="orden_laboratorio_detalle" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9_emergencia_procedimiento" edge="1" parent="1" source="atencion_emergencia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="emergencia_procedimiento" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10_emergencia_procedimiento" edge="1" parent="1" source="procedimiento_emergencia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="emergencia_procedimiento" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="1110" />
+              <mxPoint x="830" y="1190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11_cola_emergencia" edge="1" parent="1" source="atencion_emergencia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cola_emergencia" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="5" name="Cirugia">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1282" pageHeight="1910" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="solicitud_cirugia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;solicitud_cirugia&lt;/b&gt;&lt;hr/&gt;# solicitud_cirugia_id: BIGINT&lt;br/&gt;* paciente_id: BIGINT FK&lt;br/&gt;* hospital_id: BIGINT FK&lt;br/&gt;* cirujano_id: BIGINT FK&lt;br/&gt;o episodio_atencion_id: BIGINT FK&lt;br/&gt;* fecha_solicitud: TIMESTAMPTZ&lt;br/&gt;* caracter: VARCHAR(10)&lt;br/&gt;* historia_clinica: TEXT&lt;br/&gt;* procedimiento_propuesto: TEXT&lt;br/&gt;* duracion_estimada_minutos: INTEGER&lt;br/&gt;* tipo_anestesia: VARCHAR(80)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="260" width="250" x="-560" y="-140" as="geometry" />
+        </mxCell>
+        <mxCell id="evaluacion_solicitud_cirugia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;evaluacion_solicitud_cirugia&lt;/b&gt;&lt;hr/&gt;# evaluacion_solicitud_cirugia_id: BIGINT&lt;br/&gt;* solicitud_cirugia_id: BIGINT FK&lt;br/&gt;* medico_evaluador_id: BIGINT FK&lt;br/&gt;* fecha_evaluacion: TIMESTAMPTZ&lt;br/&gt;* decision: VARCHAR(10)&lt;br/&gt;o razones: TEXT" vertex="1">
+          <mxGeometry height="161" width="250" x="460" y="-171" as="geometry" />
+        </mxCell>
+        <mxCell id="cirugia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;cirugia&lt;/b&gt;&lt;hr/&gt;# cirugia_id: BIGINT&lt;br/&gt;* solicitud_cirugia_id: BIGINT FK&lt;br/&gt;* evaluacion_solicitud_cirugia_id: BIGINT FK&lt;br/&gt;* decision_requerida: VARCHAR(10) FK&lt;br/&gt;* quirofano_id: BIGINT FK&lt;br/&gt;* fecha_programada: TIMESTAMPTZ&lt;br/&gt;o fecha_inicio: TIMESTAMPTZ&lt;br/&gt;o fecha_fin: TIMESTAMPTZ&lt;br/&gt;* estado: VARCHAR(12)&lt;br/&gt;o procedimiento_realizado: TEXT" vertex="1">
+          <mxGeometry height="230" width="270" x="1170" y="-30" as="geometry" />
+        </mxCell>
+        <mxCell id="participante_cirugia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;participante_cirugia&lt;/b&gt;&lt;hr/&gt;# participante_cirugia_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* persona_id: BIGINT FK&lt;br/&gt;* rol: VARCHAR(25)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="140" width="210" x="-340" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="recurso" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;recurso&lt;/b&gt;&lt;hr/&gt;# recurso_id: BIGINT&lt;br/&gt;* nombre: VARCHAR(150)&lt;br/&gt;o descripcion: TEXT&lt;br/&gt;* categoria: VARCHAR(11)&lt;br/&gt;* tipo: VARCHAR(12)&lt;br/&gt;o material: VARCHAR(100)&lt;br/&gt;o funcion: VARCHAR(20)&lt;br/&gt;* costo_unitario: NUMERIC(12,2)&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="210" width="220" x="310" y="472" as="geometry" />
+        </mxCell>
+        <mxCell id="solicitud_recurso" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;solicitud_recurso&lt;/b&gt;&lt;hr/&gt;# solicitud_cirugia_id: BIGINT FK&lt;br/&gt;# recurso_id: BIGINT FK&lt;br/&gt;* cantidad: NUMERIC(10,2)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="120" width="210" x="800" y="517" as="geometry" />
+        </mxCell>
+        <mxCell id="uso_recurso_cirugia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;uso_recurso_cirugia&lt;/b&gt;&lt;hr/&gt;# uso_recurso_cirugia_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* recurso_id: BIGINT FK&lt;br/&gt;* cantidad: NUMERIC(10,2)&lt;br/&gt;* costo_unitario_aplicado: NUMERIC(12,2)&lt;br/&gt;* fecha_uso: TIMESTAMPTZ&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="186" width="270" x="-150" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="consentimiento_quirurgico" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;consentimiento_quirurgico&lt;/b&gt;&lt;hr/&gt;# consentimiento_quirurgico_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* medico_firmante_id: BIGINT FK&lt;br/&gt;* firmante_persona_id: BIGINT FK&lt;br/&gt;* calidad_firmante: VARCHAR(20)&lt;br/&gt;* procedimiento: TEXT&lt;br/&gt;* objetivo: TEXT&lt;br/&gt;* caracteristicas: TEXT&lt;br/&gt;* riesgos: TEXT&lt;br/&gt;* fecha_obtencion: TIMESTAMPTZ&lt;br/&gt;* firma_medico_confirmada: BOOLEAN&lt;br/&gt;* firma_paciente_o_representante_confirmada: BOOLEAN" vertex="1">
+          <mxGeometry height="272" width="360" x="440" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="chequeo_preanestesico" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;chequeo_preanestesico&lt;/b&gt;&lt;hr/&gt;# chequeo_preanestesico_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* medico_evaluador_id: BIGINT FK&lt;br/&gt;* anestesista_id: BIGINT FK&lt;br/&gt;* clasificacion_asa: VARCHAR(3)&lt;br/&gt;* plan_anestesia: TEXT&lt;br/&gt;* fecha_evaluacion: TIMESTAMPTZ&lt;br/&gt;* firma_evaluador_confirmada: BOOLEAN&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="230" width="270" x="1050" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="etapa_cirugia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;etapa_cirugia&lt;/b&gt;&lt;hr/&gt;# etapa_cirugia_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;* enfermero_responsable_id: BIGINT FK&lt;br/&gt;* etapa: VARCHAR(16)&lt;br/&gt;* fecha_inicio: TIMESTAMPTZ&lt;br/&gt;o fecha_fin: TIMESTAMPTZ&lt;br/&gt;o fecha_envio_secretaria: TIMESTAMPTZ&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="222" width="260" x="-150" y="1270" as="geometry" />
+        </mxCell>
+        <mxCell id="item_control_quirurgico" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;item_control_quirurgico&lt;/b&gt;&lt;hr/&gt;# item_control_quirurgico_id: BIGINT&lt;br/&gt;* etapa: VARCHAR(16)&lt;br/&gt;* grupo: VARCHAR(40)&lt;br/&gt;* descripcion: VARCHAR(250)&lt;br/&gt;* tipo_resultado: VARCHAR(12)&lt;br/&gt;* activo: BOOLEAN" vertex="1">
+          <mxGeometry height="175" width="230" x="440" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="resultado_control_quirurgico" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;resultado_control_quirurgico&lt;/b&gt;&lt;hr/&gt;# resultado_control_quirurgico_id: BIGINT&lt;br/&gt;* etapa_cirugia_id: BIGINT FK&lt;br/&gt;* item_control_quirurgico_id: BIGINT FK&lt;br/&gt;* etapa: VARCHAR(16) FK&lt;br/&gt;* resultado: VARCHAR(25)&lt;br/&gt;* fecha_registro: TIMESTAMPTZ&lt;br/&gt;* registrado_por_enfermero_id: BIGINT FK&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="210" width="260" x="870" y="1320" as="geometry" />
+        </mxCell>
+        <mxCell id="registro_clinico_cirugia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;registro_clinico_cirugia&lt;/b&gt;&lt;hr/&gt;# registro_clinico_cirugia_id: BIGINT&lt;br/&gt;* cirugia_id: BIGINT FK&lt;br/&gt;o etapa_cirugia_id: BIGINT FK&lt;br/&gt;* registrador_persona_id: BIGINT FK&lt;br/&gt;* categoria: VARCHAR(32)&lt;br/&gt;* descripcion: TEXT&lt;br/&gt;o valor: TEXT&lt;br/&gt;* fecha_registro: TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="210" width="230" x="130" y="1570" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_evaluacion_solicitud_cirugia" edge="1" parent="1" source="solicitud_cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="evaluacion_solicitud_cirugia" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="74.95" y="-40" />
+              <mxPoint x="74.95" y="-90.53" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2_cirugia" edge="1" parent="1" source="solicitud_cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cirugia" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_cirugia" edge="1" parent="1" source="evaluacion_solicitud_cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cirugia" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="-90.53" />
+              <mxPoint x="940" y="40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4_participante_cirugia" edge="1" parent="1" source="cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="participante_cirugia" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5_solicitud_recurso" edge="1" parent="1" source="solicitud_cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="solicitud_recurso" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="904.95" y="10" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6_solicitud_recurso" edge="1" parent="1" source="recurso" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="solicitud_recurso" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7_uso_recurso_cirugia" edge="1" parent="1" source="cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="uso_recurso_cirugia" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8_uso_recurso_cirugia" edge="1" parent="1" source="recurso" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="uso_recurso_cirugia" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="577.08" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9_consentimiento_quirurgico" edge="1" parent="1" source="cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="consentimiento_quirurgico" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10_chequeo_preanestesico" edge="1" parent="1" source="cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="chequeo_preanestesico" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11_etapa_cirugia" edge="1" parent="1" source="cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="etapa_cirugia" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="216" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12_resultado_control_quirurgico" edge="1" parent="1" source="etapa_cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="resultado_control_quirurgico" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13_resultado_control_quirurgico" edge="1" parent="1" source="item_control_quirurgico" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="resultado_control_quirurgico" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="1237.54" />
+              <mxPoint x="770" y="1410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14_registro_clinico_cirugia" edge="1" parent="1" source="cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="registro_clinico_cirugia" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="216" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15_registro_clinico_cirugia" edge="1" parent="1" source="etapa_cirugia" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="registro_clinico_cirugia" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="245.08" y="1340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="6" name="Hospitalizacion">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1282" pageHeight="705" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hospitalizacion" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;hospitalizacion&lt;/b&gt;&lt;hr/&gt;# hospitalizacion_id: BIGINT&lt;br/&gt;* ingreso_id: BIGINT FK&lt;br/&gt;* medico_encargado_id: BIGINT FK&lt;br/&gt;o fecha_alta_prevista: TIMESTAMPTZ&lt;br/&gt;o fecha_alta_real: TIMESTAMPTZ&lt;br/&gt;* costo_diario_aplicado: NUMERIC(12,2)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="180" width="260" x="20" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="asignacion_cama" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;asignacion_cama&lt;/b&gt;&lt;hr/&gt;# asignacion_cama_id: BIGINT&lt;br/&gt;* hospitalizacion_id: BIGINT FK&lt;br/&gt;* cama_id: BIGINT FK&lt;br/&gt;* fecha_inicio: TIMESTAMPTZ&lt;br/&gt;o fecha_fin: TIMESTAMPTZ&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="150" width="220" x="440" y="-30" as="geometry" />
+        </mxCell>
+        <mxCell id="hospitalizacion_servicio" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;hospitalizacion_servicio&lt;/b&gt;&lt;hr/&gt;# hospitalizacion_servicio_id: BIGINT&lt;br/&gt;* hospitalizacion_id: BIGINT FK&lt;br/&gt;* servicio_medico_id: SMALLINT FK&lt;br/&gt;* medico_id: BIGINT FK&lt;br/&gt;* fecha_servicio: TIMESTAMPTZ&lt;br/&gt;* descripcion: TEXT&lt;br/&gt;* costo_aplicado: NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="180" width="230" x="860" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="hospitalizacion_insumo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;b&gt;hospitalizacion_insumo&lt;/b&gt;&lt;hr/&gt;# hospitalizacion_insumo_id: BIGINT&lt;br/&gt;* hospitalizacion_id: BIGINT FK&lt;br/&gt;* recurso_id: BIGINT FK&lt;br/&gt;* fecha_uso: TIMESTAMPTZ&lt;br/&gt;* cantidad: NUMERIC(10,2)&lt;br/&gt;* costo_unitario_aplicado: NUMERIC(12,2)&lt;br/&gt;o observaciones: TEXT" vertex="1">
+          <mxGeometry height="180" width="260" x="20" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_asignacion_cama" edge="1" parent="1" source="hospitalizacion" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="asignacion_cama" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="170.06" />
+              <mxPoint x="360" y="45" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2_hospitalizacion_servicio" edge="1" parent="1" source="hospitalizacion" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="hospitalizacion_servicio" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_hospitalizacion_insumo" edge="1" parent="1" source="hospitalizacion" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="hospitalizacion_insumo" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7" name="Facturacion y calidad">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1282" pageHeight="1065" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="factura" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;factura&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;hr&gt;&lt;/li&gt;&lt;li&gt;# factura_id: BIGINT&lt;/li&gt;&lt;li&gt;* numero_factura: VARCHAR(30)&lt;/li&gt;&lt;li&gt;* paciente_id: BIGINT FK&lt;/li&gt;&lt;li&gt;* hospital_id: BIGINT FK&lt;/li&gt;&lt;li&gt;o ingreso_id: BIGINT FK&lt;/li&gt;&lt;li&gt;o consulta_externa_id: BIGINT FK&lt;/li&gt;&lt;li&gt;* fecha_emision: TIMESTAMPTZ&lt;/li&gt;&lt;li&gt;* descripcion: VARCHAR(300)&lt;/li&gt;&lt;li&gt;* estado: VARCHAR(12)&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="222" width="262" x="-170" y="-302" as="geometry" />
+        </mxCell>
+        <mxCell id="factura_detalle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;factura_detalle&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;hr&gt;&lt;/li&gt;&lt;li&gt;# factura_detalle_id: BIGINT&lt;/li&gt;&lt;li&gt;* factura_id: BIGINT FK&lt;/li&gt;&lt;li&gt;* concepto: VARCHAR(250)&lt;/li&gt;&lt;li&gt;* cantidad: NUMERIC(10,2)&lt;/li&gt;&lt;li&gt;* precio_unitario: NUMERIC(12,2)&lt;/li&gt;&lt;li&gt;* porcentaje_descuento: NUMERIC(5,2)&lt;/li&gt;&lt;li&gt;* porcentaje_recargo: NUMERIC(5,2)&lt;/li&gt;&lt;li&gt;o subtotal: NUMERIC(14,2)&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="280" x="810" y="-160" as="geometry" />
+        </mxCell>
+        <mxCell id="plan_pago" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;plan_pago&lt;/b&gt;&lt;hr&gt;# plan_pago_id: BIGINT&lt;br&gt;* factura_id: BIGINT FK&lt;br&gt;* numero_cuotas: SMALLINT&lt;br&gt;* fecha_inicio: DATE&lt;br&gt;* estado: VARCHAR(12)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="197" width="180" x="220" y="-700" as="geometry" />
+        </mxCell>
+        <mxCell id="cuota" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;cuota&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;hr&gt;&lt;/li&gt;&lt;li&gt;# cuota_id: BIGINT&lt;/li&gt;&lt;li&gt;* plan_pago_id: BIGINT FK&lt;/li&gt;&lt;li&gt;* numero: SMALLINT&lt;/li&gt;&lt;li&gt;* fecha_vencimiento: DATE&lt;/li&gt;&lt;li&gt;* monto: NUMERIC(12,2)&lt;/li&gt;&lt;li&gt;* estado: VARCHAR(12)&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="210" x="-550" y="-50" as="geometry" />
+        </mxCell>
+        <mxCell id="pago" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;pago&lt;/b&gt;&lt;hr&gt;# pago_id: BIGINT&lt;br&gt;* factura_id: BIGINT FK&lt;br&gt;o plan_pago_id: BIGINT FK&lt;br&gt;o cuota_id: BIGINT FK&lt;br&gt;* unidad_recepcion_id: BIGINT FK&lt;br&gt;* fecha_pago: TIMESTAMPTZ&lt;br&gt;* monto: NUMERIC(12,2)&lt;br&gt;* metodo: VARCHAR(15)&lt;br&gt;o referencia: VARCHAR(80)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="232" x="440" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="evaluacion_calidad" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;evaluacion_calidad&lt;/b&gt;&lt;hr&gt;# evaluacion_calidad_id: BIGINT&lt;br&gt;* paciente_id: BIGINT FK&lt;br&gt;* hospital_id: BIGINT FK&lt;br&gt;o ingreso_id: BIGINT FK&lt;br&gt;o consulta_externa_id: BIGINT FK&lt;br&gt;* fecha_evaluacion: TIMESTAMPTZ&lt;br&gt;o observaciones: TEXT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="260" x="20" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="evaluacion_objetivo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=top;spacing=10;fillColor=#F8FBFF;strokeColor=#8096AA;fontSize=13;" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;evaluacion_objetivo&lt;/b&gt;&lt;hr&gt;# evaluacion_objetivo_id: BIGINT&lt;br&gt;* evaluacion_calidad_id: BIGINT FK&lt;br&gt;o hospital_objetivo_id: BIGINT FK&lt;br&gt;o persona_objetivo_id: BIGINT FK&lt;br&gt;* nota: SMALLINT&lt;br&gt;o comentario: TEXT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="232" x="34" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_factura_detalle" edge="1" parent="1" source="factura" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="factura_detalle" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="451.03" y="-170" />
+              <mxPoint x="451.03" y="-54.97" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2_plan_pago" edge="1" parent="1" source="factura" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="plan_pago" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3_cuota" edge="1" parent="1" source="plan_pago" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="cuota" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4_pago" edge="1" parent="1" source="factura" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="pago" value="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="556" y="-150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5_pago" edge="1" parent="1" source="plan_pago" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="pago" value="0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6_pago" edge="1" parent="1" source="cuota" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="pago" value="0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7_evaluacion_objetivo" edge="1" parent="1" source="evaluacion_calidad" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#66819B;strokeWidth=1.4;startArrow=ERone;endArrow=ERmany;startFill=0;endFill=0;fontSize=10;" target="evaluacion_objetivo" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
