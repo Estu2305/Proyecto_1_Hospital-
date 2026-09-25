@@ -18,14 +18,19 @@ CREATE TABLE solicitud_cirugia (
     CONSTRAINT pk_solicitud_cirugia PRIMARY KEY (solicitud_cirugia_id),
     CONSTRAINT uq_solicitud_paciente UNIQUE (solicitud_cirugia_id, paciente_id),
    
+    -- Exige que historia clinica contenga texto.
     CONSTRAINT ck_solicitud_caracter CHECK (caracter IN ('Urgente', 'Programado')),
     
+    -- Exige que historia clinica contenga texto.
     CONSTRAINT ck_solicitud_duracion CHECK (duracion_estimada_minutos > 0),
     
+    -- Exige que historia clinica contenga texto.
     CONSTRAINT ck_solicitud_historia CHECK (BTRIM(historia_clinica) <> ''),
     
+    -- Exige que procedimiento propuesto contenga texto.
     CONSTRAINT ck_solicitud_procedimiento CHECK (BTRIM(procedimiento_propuesto) <> ''),
     
+    -- Exige que tipo anestesia contenga texto.
     CONSTRAINT ck_solicitud_anestesia CHECK (BTRIM(tipo_anestesia) <> ''),
     CONSTRAINT fk_solicitud_paciente FOREIGN KEY (paciente_id)
         REFERENCES paciente (paciente_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -52,8 +57,10 @@ CREATE TABLE evaluacion_solicitud_cirugia (
     CONSTRAINT uq_evaluacion_solicitud_decision
         UNIQUE (evaluacion_solicitud_cirugia_id, solicitud_cirugia_id, decision),
     
+    -- Limita decision a los valores permitidos.
     CONSTRAINT ck_evaluacion_decision CHECK (decision IN ('Aprobada', 'Rechazada')),
     
+    -- Valida la regla de integridad de evaluacion razones.
     CONSTRAINT ck_evaluacion_razones CHECK (
         decision <> 'Rechazada' OR NULLIF(BTRIM(razones), '') IS NOT NULL
     ),
@@ -80,17 +87,21 @@ CREATE TABLE cirugia (
     CONSTRAINT uq_cirugia_solicitud UNIQUE (solicitud_cirugia_id),
     CONSTRAINT uq_cirugia_evaluacion UNIQUE (evaluacion_solicitud_cirugia_id),
     
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_cirugia_aprobada CHECK (decision_requerida = 'Aprobada'),
     
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_cirugia_estado CHECK (
         estado IN ('Programada', 'En curso', 'Finalizada', 'Cancelada')
     ),
     
+    -- Valida la secuencia cronologica de cirugia fechas.
     CONSTRAINT ck_cirugia_fechas CHECK (
         (fecha_fin IS NULL OR fecha_inicio IS NOT NULL)
         AND (fecha_fin IS NULL OR fecha_fin >= fecha_inicio)
     ),
     
+    -- Garantiza la coherencia de cirugia finalizada.
     CONSTRAINT ck_cirugia_finalizada CHECK (
         estado <> 'Finalizada' OR
         (fecha_inicio IS NOT NULL AND fecha_fin IS NOT NULL
@@ -119,6 +130,7 @@ CREATE TABLE participante_cirugia (
     CONSTRAINT pk_participante_cirugia PRIMARY KEY (participante_cirugia_id),
     CONSTRAINT uq_participante_cirugia_rol UNIQUE (cirugia_id, persona_id, rol),
    
+    -- Limita rol a los valores permitidos.
     CONSTRAINT ck_participante_rol CHECK (rol IN (
         'Cirujano', 'Anestesiologo', 'Enfermero',
         'Practicante medicina', 'Practicante enfermeria', 'Otro'
@@ -143,12 +155,15 @@ CREATE TABLE recurso (
     CONSTRAINT pk_recurso PRIMARY KEY (recurso_id),
     CONSTRAINT uq_recurso_nombre_categoria UNIQUE (nombre, categoria),
    
+    -- Limita categoria a los valores permitidos.
     CONSTRAINT ck_recurso_categoria CHECK (
         categoria IN ('Insumo', 'Instrumento', 'Equipo')
     ),
   
+    -- Limita tipo a los valores permitidos.
     CONSTRAINT ck_recurso_tipo CHECK (tipo IN ('Medico', 'Quirurgico', 'Otro')),
    
+    -- Limita funcion a los valores permitidos.
     CONSTRAINT ck_recurso_funcion CHECK (
         funcion IS NULL OR funcion IN (
             'Corte', 'Contenido', 'Hemostatica', 'Retractor',
@@ -157,14 +172,18 @@ CREATE TABLE recurso (
         )
     ),
   
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_recurso_costo CHECK (costo_unitario >= 0),
    
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_recurso_nombre CHECK (BTRIM(nombre) <> ''),
    
+    -- Garantiza la coherencia de recurso material insumo.
     CONSTRAINT ck_recurso_material_insumo CHECK (
         categoria <> 'Insumo' OR NULLIF(BTRIM(material), '') IS NOT NULL
     ),
    
+    -- Garantiza la coherencia de recurso funcion equipo.
     CONSTRAINT ck_recurso_funcion_equipo CHECK (
         categoria = 'Insumo' OR funcion IS NOT NULL
     )
@@ -178,6 +197,7 @@ CREATE TABLE solicitud_recurso (
     observaciones TEXT,
     CONSTRAINT pk_solicitud_recurso PRIMARY KEY (solicitud_cirugia_id, recurso_id),
   
+    -- Exige que cantidad sea mayor que cero.
     CONSTRAINT ck_solicitud_recurso_cantidad CHECK (cantidad > 0),
     CONSTRAINT fk_solicitud_recurso_solicitud FOREIGN KEY (solicitud_cirugia_id)
         REFERENCES solicitud_cirugia (solicitud_cirugia_id)
@@ -197,8 +217,10 @@ CREATE TABLE uso_recurso_cirugia (
     observaciones TEXT,
     CONSTRAINT pk_uso_recurso_cirugia PRIMARY KEY (uso_recurso_cirugia_id),
     
+    -- Exige que cantidad sea mayor que cero.
     CONSTRAINT ck_uso_recurso_cantidad CHECK (cantidad > 0),
    
+    -- Impide valores negativos en costo unitario aplicado.
     CONSTRAINT ck_uso_recurso_costo CHECK (costo_unitario_aplicado >= 0),
     CONSTRAINT fk_uso_recurso_cirugia FOREIGN KEY (cirugia_id)
         REFERENCES cirugia (cirugia_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -223,16 +245,21 @@ CREATE TABLE consentimiento_quirurgico (
     CONSTRAINT pk_consentimiento_quirurgico PRIMARY KEY (consentimiento_quirurgico_id),
     CONSTRAINT uq_consentimiento_quirurgico_cirugia UNIQUE (cirugia_id),
     
+    -- Exige que procedimiento contenga texto.
     CONSTRAINT ck_consentimiento_quirurgico_firmante CHECK (
         calidad_firmante IN ('Paciente', 'Familiar', 'Tutor', 'Representante')
     ),
     
+    -- Exige que procedimiento contenga texto.
     CONSTRAINT ck_consentimiento_quirurgico_procedimiento CHECK (BTRIM(procedimiento) <> ''),
    
+    -- Exige que objetivo contenga texto.
     CONSTRAINT ck_consentimiento_quirurgico_objetivo CHECK (BTRIM(objetivo) <> ''),
     
+    -- Exige que caracteristicas contenga texto.
     CONSTRAINT ck_consentimiento_quirurgico_caracteristicas CHECK (BTRIM(caracteristicas) <> ''),
     
+    -- Exige que riesgos contenga texto.
     CONSTRAINT ck_consentimiento_quirurgico_riesgos CHECK (BTRIM(riesgos) <> ''),
     CONSTRAINT fk_consentimiento_quirurgico_cirugia FOREIGN KEY (cirugia_id)
         REFERENCES cirugia (cirugia_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -256,10 +283,12 @@ CREATE TABLE chequeo_preanestesico (
     CONSTRAINT pk_chequeo_preanestesico PRIMARY KEY (chequeo_preanestesico_id),
     CONSTRAINT uq_chequeo_preanestesico_cirugia UNIQUE (cirugia_id),
     
+    -- Exige que plan anestesia contenga texto.
     CONSTRAINT ck_chequeo_asa CHECK (
         clasificacion_asa IN ('I', 'II', 'III', 'IV', 'V', 'VI')
     ),
     
+    -- Exige que plan anestesia contenga texto.
     CONSTRAINT ck_chequeo_plan CHECK (BTRIM(plan_anestesia) <> ''),
     CONSTRAINT fk_chequeo_cirugia FOREIGN KEY (cirugia_id)
         REFERENCES cirugia (cirugia_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -283,12 +312,15 @@ CREATE TABLE etapa_cirugia (
     CONSTRAINT uq_etapa_cirugia_tipo UNIQUE (cirugia_id, etapa),
     CONSTRAINT uq_etapa_cirugia_tipo_ref UNIQUE (etapa_cirugia_id, etapa),
    
+    -- Limita etapa a los valores permitidos.
     CONSTRAINT ck_etapa_tipo CHECK (
         etapa IN ('Preoperatorio', 'Intraoperatorio', 'Postoperatorio')
     ),
    
+    -- Valida la secuencia cronologica de etapa fechas.
     CONSTRAINT ck_etapa_fechas CHECK (fecha_fin IS NULL OR fecha_fin >= fecha_inicio),
    
+    -- Garantiza la coherencia de etapa envio.
     CONSTRAINT ck_etapa_envio CHECK (
         fecha_envio_secretaria IS NULL OR
         (fecha_fin IS NOT NULL AND fecha_envio_secretaria >= fecha_fin)
@@ -311,14 +343,18 @@ CREATE TABLE item_control_quirurgico (
     CONSTRAINT uq_item_control_grupo_descripcion UNIQUE (etapa, grupo, descripcion),
     CONSTRAINT uq_item_control_etapa_ref UNIQUE (item_control_quirurgico_id, etapa),
    
+    -- Exige que grupo contenga texto.
     CONSTRAINT ck_item_control_etapa CHECK (
         etapa IN ('Preoperatorio', 'Intraoperatorio', 'Postoperatorio')
     ),
     
+    -- Exige que grupo contenga texto.
     CONSTRAINT ck_item_control_tipo CHECK (tipo_resultado IN ('ExitoFalla', 'Aceptacion')),
    
+    -- Exige que grupo contenga texto.
     CONSTRAINT ck_item_control_grupo CHECK (BTRIM(grupo) <> ''),
     
+    -- Exige que descripcion contenga texto.
     CONSTRAINT ck_item_control_descripcion CHECK (BTRIM(descripcion) <> '')
 );
 
@@ -335,6 +371,7 @@ CREATE TABLE resultado_control_quirurgico (
     CONSTRAINT pk_resultado_control PRIMARY KEY (resultado_control_quirurgico_id),
     CONSTRAINT uq_resultado_control_item UNIQUE (etapa_cirugia_id, item_control_quirurgico_id),
     
+    -- Limita resultado a los valores permitidos.
     CONSTRAINT ck_resultado_control_valor CHECK (
         resultado IN ('Exito', 'Falla', 'Aceptable',
                       'Medianamente aceptable', 'No aceptable')
@@ -361,6 +398,7 @@ CREATE TABLE registro_clinico_cirugia (
     fecha_registro TIMESTAMPTZ NOT NULL,
     CONSTRAINT pk_registro_clinico_cirugia PRIMARY KEY (registro_clinico_cirugia_id),
     
+    -- Exige que descripcion contenga texto.
     CONSTRAINT ck_registro_clinico_categoria CHECK (categoria IN (
         'Interrogatorio', 'Antecedentes', 'Exploracion fisica',
         'Signos vitales', 'Balance hidrico', 'Medicamentos',

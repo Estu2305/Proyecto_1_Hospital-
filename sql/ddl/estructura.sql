@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS departamento (
    CONSTRAINT pk_departamento PRIMARY KEY (departamento_id),
    CONSTRAINT uq_departamento_nombre UNIQUE (nombre),
 
+   -- Exige que nombre contenga texto.
    CONSTRAINT cK_departamento_nombre_no_vacio
       CHECK (BTRIM(nombre) <> '')
 );
@@ -50,9 +51,11 @@ CREATE TABLE IF NOT EXISTS direccion (
     area VARCHAR(10) NOT NULL,
     CONSTRAINT pk_direccion PRIMARY KEY (direccion_id),
    
+    -- Exige que detalle contenga texto.
     CONSTRAINT ck_direccion_detalle_no_vacio
         CHECK (BTRIM(detalle) <> ''),
    
+    -- Limita area a los valores permitidos.
     CONSTRAINT ck_direccion_area
         CHECK (area IN ('Urbana', 'Rural')),
     CONSTRAINT fk_direccion_municipio
@@ -75,15 +78,19 @@ CREATE TABLE IF NOT EXISTS hospital (
     CONSTRAINT uq_hospital_codigo UNIQUE (codigo),
     CONSTRAINT uq_hospital_nombre UNIQUE (nombre),
    
+    -- Exige que codigo contenga texto.
     CONSTRAINT ck_hospital_codigo_no_vacio
         CHECK (BTRIM(codigo) <> ''),
    
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_hospital_nombre_no_vacio
         CHECK (BTRIM(nombre) <> ''),
    
+    -- Valida el formato establecido para hospital telefono.
     CONSTRAINT ck_hospital_telefono_formato
         CHECK (telefono ~ '^[-+() 0-9]{8,20}$'),
    
+    -- Valida el formato establecido para hospital correo.
     CONSTRAINT ck_hospital_correo_formato
         CHECK (correo IS NULL OR correo ~* '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$'),
     CONSTRAINT fk_hospital_direccion
@@ -105,9 +112,11 @@ CREATE TABLE IF NOT EXISTS unidad_medica (
     CONSTRAINT pk_unidad_medica PRIMARY KEY (unidad_medica_id),
     CONSTRAINT uq_unidad_medica_hospital_tipo UNIQUE (hospital_id, tipo),
     
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_unidad_medica_tipo
         CHECK (tipo IN ('Consulta Externa', 'Emergencias', 'Cirugia', 'Hospitalizacion')),
     
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_unidad_medica_nombre_no_vacio
         CHECK (BTRIM(nombre) <> ''),
     CONSTRAINT fk_unidad_medica_hospital
@@ -127,9 +136,11 @@ CREATE TABLE IF NOT EXISTS servicio_medico (
     CONSTRAINT pk_servicio_medico PRIMARY KEY (servicio_medico_id),
     CONSTRAINT uq_servicio_medico_nombre UNIQUE (nombre),
    
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_servicio_medico_categoria
         CHECK (categoria IN ('Consulta Externa', 'Emergencias', 'Cirugia', 'Hospitalizacion', 'General')),
    
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_servicio_medico_nombre_no_vacio
         CHECK (BTRIM(nombre) <> '')
 );
@@ -143,6 +154,7 @@ CREATE TABLE IF NOT EXISTS unidad_servicio (
     CONSTRAINT pk_unidad_servicio
         PRIMARY KEY (unidad_medica_id, servicio_medico_id),
   
+    -- Impide valores negativos en costo base.
     CONSTRAINT ck_unidad_servicio_costo_base
         CHECK (costo_base >= 0),
     CONSTRAINT fk_unidad_servicio_unidad
@@ -170,15 +182,19 @@ CREATE TABLE IF NOT EXISTS espacio_hospitalario (
     CONSTRAINT pk_espacio_hospitalario PRIMARY KEY (espacio_hospitalario_id),
     CONSTRAINT uq_espacio_hospitalario_codigo UNIQUE (hospital_id, codigo),
     
+    -- Limita tipo a los valores permitidos.
     CONSTRAINT ck_espacio_hospitalario_tipo
         CHECK (tipo IN ('Clinica', 'Camilla', 'Quirofano', 'Sala', 'Cama')),
     
+    -- Exige que codigo contenga texto.
     CONSTRAINT ck_espacio_hospitalario_estado
         CHECK (estado IN ('Disponible', 'Ocupado', 'Mantenimiento', 'Inactivo')),
     
+    -- Exige que codigo contenga texto.
     CONSTRAINT ck_espacio_hospitalario_costo_diario
         CHECK (costo_diario IS NULL OR costo_diario >= 0),
     
+    -- Exige que codigo contenga texto.
     CONSTRAINT ck_espacio_hospitalario_codigo_no_vacio
         CHECK (BTRIM(codigo) <> ''),
     CONSTRAINT fk_espacio_hospitalario_hospital
@@ -203,12 +219,15 @@ CREATE TABLE IF NOT EXISTS institucion_externa (
     CONSTRAINT pk_institucion_externa PRIMARY KEY (institucion_externa_id),
     CONSTRAINT uq_institucion_externa_nombre UNIQUE (nombre),
     
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_institucion_externa_tipo
         CHECK (tipo IN ('Hospital', 'Clinica', 'Laboratorio', 'Organizacion', 'Otra')),
     
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_institucion_externa_nombre_no_vacio
         CHECK (BTRIM(nombre) <> ''),
     
+    -- Valida el formato establecido para institucion externa telefono.
     CONSTRAINT ck_institucion_externa_telefono_formato
         CHECK (telefono IS NULL OR telefono ~ '^[-+() 0-9]{8,20}$'),
     CONSTRAINT fk_institucion_externa_direccion
@@ -235,27 +254,35 @@ CREATE TABLE IF NOT EXISTS persona (
     CONSTRAINT pk_persona PRIMARY KEY (persona_id),
     CONSTRAINT uq_persona_dpi UNIQUE (dpi),
     
+    -- Exige que nombres contenga texto.
     CONSTRAINT ck_persona_nombres_no_vacios
         CHECK (BTRIM(nombres) <> ''),
     
+    -- Exige que apellidos contenga texto.
     CONSTRAINT ck_persona_apellidos_no_vacios
         CHECK (BTRIM(apellidos) <> ''),
     
+    -- Limita sexo a los valores permitidos.
     CONSTRAINT ck_persona_sexo
         CHECK (sexo IN ('Masculino', 'Femenino')),
     
+    -- Limita estado civil a los valores permitidos.
     CONSTRAINT ck_persona_estado_civil
         CHECK (estado_civil IS NULL OR estado_civil IN ('Soltero', 'Casado', 'Unido', 'Divorciado', 'Viudo')),
     
+    -- Valida la secuencia cronologica de persona fecha nacimiento.
     CONSTRAINT ck_persona_fecha_nacimiento
         CHECK (fecha_nacimiento >= DATE '1900-01-01'),
     
+    -- Valida el formato establecido para persona dpi.
     CONSTRAINT ck_persona_dpi_formato
         CHECK (dpi IS NULL OR dpi ~ '^[0-9]{13}$'),
     
+    -- Valida el formato establecido para persona telefono.
     CONSTRAINT ck_persona_telefono_formato
         CHECK (telefono IS NULL OR telefono ~ '^[-+() 0-9]{8,20}$'),
     
+    -- Valida el formato establecido para persona correo.
     CONSTRAINT ck_persona_correo_formato
         CHECK (correo IS NULL OR correo ~* '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$'),
     CONSTRAINT fk_persona_direccion
@@ -276,6 +303,7 @@ CREATE TABLE IF NOT EXISTS paciente (
     CONSTRAINT uq_paciente_expediente UNIQUE (numero_expediente),
     CONSTRAINT uq_paciente_seguro_social UNIQUE (numero_seguro_social),
     
+    -- Exige que numero expediente contenga texto.
     CONSTRAINT ck_paciente_expediente_no_vacio
         CHECK (BTRIM(numero_expediente) <> ''),
     CONSTRAINT fk_paciente_persona
@@ -297,9 +325,11 @@ CREATE TABLE IF NOT EXISTS encargado_paciente (
     CONSTRAINT uq_encargado_paciente_relacion
         UNIQUE (paciente_id, encargado_persona_id),
     
+    -- Exige que parentesco contenga texto.
     CONSTRAINT ck_encargado_paciente_parentesco_no_vacio
         CHECK (BTRIM(parentesco) <> ''),
     
+    -- Garantiza la coherencia de encargado paciente personas distintas.
     CONSTRAINT ck_encargado_paciente_personas_distintas
         CHECK (paciente_id <> encargado_persona_id),
     CONSTRAINT fk_encargado_paciente_paciente
@@ -328,15 +358,19 @@ CREATE TABLE IF NOT EXISTS empleado (
     CONSTRAINT uq_empleado_hospital_codigo UNIQUE (hospital_id, codigo_empleado),
     CONSTRAINT uq_empleado_persona_hospital UNIQUE (persona_id, hospital_id),
     
+    -- Limita tipo empleado a los valores permitidos.
     CONSTRAINT ck_empleado_tipo
         CHECK (tipo_empleado IN ('Medico', 'Enfermero', 'Practicante', 'Recepcionista', 'Administrativo', 'Otro')),
     
+    -- Exige que codigo empleado contenga texto.
     CONSTRAINT ck_empleado_estado_laboral
         CHECK (estado_laboral IN ('Activo', 'Suspendido', 'Finalizado')),
     
+    -- Exige que codigo empleado contenga texto.
     CONSTRAINT ck_empleado_fechas
         CHECK (fecha_finalizacion IS NULL OR fecha_finalizacion >= fecha_contratacion),
     
+    -- Exige que codigo empleado contenga texto.
     CONSTRAINT ck_empleado_codigo_no_vacio
         CHECK (BTRIM(codigo_empleado) <> ''),
     CONSTRAINT fk_empleado_persona
@@ -360,6 +394,7 @@ CREATE TABLE IF NOT EXISTS especialidad (
     CONSTRAINT pk_especialidad PRIMARY KEY (especialidad_id),
     CONSTRAINT uq_especialidad_nombre UNIQUE (nombre),
     
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_especialidad_nombre_no_vacio
         CHECK (BTRIM(nombre) <> '')
 );
@@ -374,15 +409,18 @@ CREATE TABLE IF NOT EXISTS medico (
     CONSTRAINT pk_medico PRIMARY KEY (medico_id),
     CONSTRAINT uq_medico_numero_colegiado UNIQUE (numero_colegiado),
     
+    -- Limita clase medico a los valores permitidos.
     CONSTRAINT ck_medico_clase
         CHECK (clase_medico IN ('Residente', 'Interno', 'Externo')),
     
+    -- Exige que numero colegiado contenga texto.
     CONSTRAINT ck_medico_institucion_externa
         CHECK (
             (clase_medico = 'Externo' AND institucion_externa_id IS NOT NULL)
             OR (clase_medico IN ('Residente', 'Interno') AND institucion_externa_id IS NULL)
         ),
     
+    -- Exige que numero colegiado contenga texto.
     CONSTRAINT ck_medico_colegiado_no_vacio
         CHECK (BTRIM(numero_colegiado) <> ''),
     CONSTRAINT fk_medico_persona
@@ -428,9 +466,11 @@ CREATE TABLE IF NOT EXISTS medico_hospital (
     CONSTRAINT pk_medico_hospital PRIMARY KEY (medico_hospital_id),
     CONSTRAINT uq_medico_hospital_vinculo UNIQUE (medico_id, hospital_id, fecha_inicio),
     
+    -- Limita condicion a los valores permitidos.
     CONSTRAINT ck_medico_hospital_condicion
         CHECK (condicion IN ('Residente', 'Interno', 'Externo')),
     
+    -- Valida la secuencia cronologica de medico hospital fechas.
     CONSTRAINT ck_medico_hospital_fechas
         CHECK (fecha_fin IS NULL OR fecha_fin >= fecha_inicio),
     CONSTRAINT fk_medico_hospital_medico
@@ -453,9 +493,11 @@ CREATE TABLE IF NOT EXISTS enfermero (
     CONSTRAINT pk_enfermero PRIMARY KEY (enfermero_id),
     CONSTRAINT uq_enfermero_numero_registro UNIQUE (numero_registro),
     
+    -- Exige que numero registro contenga texto.
     CONSTRAINT ck_enfermero_nivel
         CHECK (nivel IN ('Registrado', 'Practicante')),
     
+    -- Exige que numero registro contenga texto.
     CONSTRAINT ck_enfermero_registro_segun_nivel
         CHECK (
             (nivel = 'Registrado' AND numero_registro IS NOT NULL AND BTRIM(numero_registro) <> '')
@@ -478,12 +520,15 @@ CREATE TABLE IF NOT EXISTS practicante_medicina (
     CONSTRAINT pk_practicante_medicina PRIMARY KEY (practicante_id),
     CONSTRAINT uq_practicante_medicina_carnet UNIQUE (institucion_educativa, numero_carnet),
     
+    -- Exige que institucion educativa contenga texto.
     CONSTRAINT ck_practicante_institucion_no_vacia
         CHECK (BTRIM(institucion_educativa) <> ''),
     
+    -- Exige que numero carnet contenga texto.
     CONSTRAINT ck_practicante_carnet_no_vacio
         CHECK (BTRIM(numero_carnet) <> ''),
     
+    -- Valida la secuencia cronologica de practicante fechas.
     CONSTRAINT ck_practicante_fechas
         CHECK (fecha_fin >= fecha_inicio),
     CONSTRAINT fk_practicante_medicina_empleado
@@ -506,9 +551,11 @@ CREATE TABLE IF NOT EXISTS turno_personal (
     CONSTRAINT uq_turno_personal_asignacion
         UNIQUE (empleado_id, unidad_medica_id, fecha, hora_inicio),
     
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_turno_personal_horas
         CHECK (hora_fin > hora_inicio),
     
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_turno_personal_estado
         CHECK (estado IN ('Programado', 'Cumplido', 'Cancelado')),
     CONSTRAINT fk_turno_personal_empleado

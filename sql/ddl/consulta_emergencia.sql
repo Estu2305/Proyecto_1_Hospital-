@@ -14,8 +14,10 @@ CREATE TABLE horario_consulta (
     CONSTRAINT pk_horario_consulta PRIMARY KEY (horario_consulta_id),
     CONSTRAINT uq_horario_consulta UNIQUE (medico_id, clinica_id, dia_semana, hora_inicio),
    
+    -- Limita dia semana al rango permitido.
     CONSTRAINT ck_horario_dia CHECK (dia_semana BETWEEN 1 AND 7),
   
+    -- Valida la regla de integridad de horario matutino.
     CONSTRAINT ck_horario_matutino CHECK (hora_inicio >= TIME '06:00'
         AND hora_fin <= TIME '12:00' AND hora_fin > hora_inicio),
     CONSTRAINT fk_horario_medico FOREIGN KEY (medico_id)
@@ -47,18 +49,24 @@ CREATE TABLE cita (
     CONSTRAINT uq_cita_medico_hora UNIQUE (medico_id, fecha_hora),
     CONSTRAINT uq_cita_clinica_hora UNIQUE (clinica_id, fecha_hora),
    
+    -- Limita canal a los valores permitidos.
     CONSTRAINT ck_cita_canal CHECK (canal IN ('Telefono', 'Correo', 'Recepcion')),
    
+    -- Limita tipo a los valores permitidos.
     CONSTRAINT ck_cita_tipo CHECK (tipo IN ('Primera', 'Reconsulta', 'Referida')),
    
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_cita_estado CHECK (estado IN ('Programada', 'Realizada', 'Reprogramada', 'Cancelada')),
     
+    -- Impide valores negativos en precio base.
     CONSTRAINT ck_cita_precio CHECK (precio_base >= 0),
     
+    -- Garantiza la coherencia de cita cancelacion.
     CONSTRAINT ck_cita_cancelacion CHECK (
         estado <> 'Cancelada' OR NULLIF(BTRIM(motivo_cancelacion), '') IS NOT NULL
     ),
    
+    -- Garantiza la coherencia de cita anterior distinta.
     CONSTRAINT ck_cita_anterior_distinta CHECK (cita_anterior_id IS NULL OR cita_anterior_id <> cita_id),
     CONSTRAINT fk_cita_paciente FOREIGN KEY (paciente_id)
         REFERENCES paciente (paciente_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -83,9 +91,11 @@ CREATE TABLE historial_estado_cita (
     motivo TEXT,
     CONSTRAINT pk_historial_estado_cita PRIMARY KEY (historial_estado_cita_id),
     
+    -- Limita estado anterior a los valores permitidos.
     CONSTRAINT ck_historial_estado_anterior CHECK (estado_anterior IS NULL OR
         estado_anterior IN ('Programada', 'Realizada', 'Reprogramada', 'Cancelada')),
     
+    -- Limita estado nuevo a los valores permitidos.
     CONSTRAINT ck_historial_estado_nuevo CHECK (estado_nuevo IN
         ('Programada', 'Realizada', 'Reprogramada', 'Cancelada')),
     CONSTRAINT fk_historial_cita FOREIGN KEY (cita_id)
@@ -104,6 +114,7 @@ CREATE TABLE consulta_externa (
     CONSTRAINT pk_consulta_externa PRIMARY KEY (consulta_externa_id),
     CONSTRAINT uq_consulta_externa_cita UNIQUE (cita_id),
     
+    -- Exige que diagnostico contenga texto.
     CONSTRAINT ck_consulta_diagnostico CHECK (BTRIM(diagnostico) <> ''),
     CONSTRAINT fk_consulta_cita FOREIGN KEY (cita_id)
         REFERENCES cita (cita_id) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -118,6 +129,7 @@ CREATE TABLE receta (
     indicaciones TEXT,
     CONSTRAINT pk_receta PRIMARY KEY (receta_id),
    
+    -- Valida la regla de integridad de receta proxima cita.
     CONSTRAINT ck_receta_proxima_cita CHECK (
         fecha_proxima_cita IS NULL OR fecha_proxima_cita >= fecha_emision
     ),
@@ -135,8 +147,10 @@ CREATE TABLE medicamento (
     CONSTRAINT pk_medicamento PRIMARY KEY (medicamento_id),
     CONSTRAINT uq_medicamento_nombre_presentacion UNIQUE (nombre, presentacion),
     
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_medicamento_nombre CHECK (BTRIM(nombre) <> ''),
     
+    -- Exige que presentacion contenga texto.
     CONSTRAINT ck_medicamento_presentacion CHECK (BTRIM(presentacion) <> '')
 );
 
@@ -151,10 +165,13 @@ CREATE TABLE receta_detalle (
     instrucciones TEXT,
     CONSTRAINT pk_receta_detalle PRIMARY KEY (receta_detalle_id),
     
+    -- Exige que dosis contenga texto.
     CONSTRAINT ck_receta_detalle_duracion CHECK (duracion_dias > 0),
     
+    -- Exige que dosis contenga texto.
     CONSTRAINT ck_receta_detalle_dosis CHECK (BTRIM(dosis) <> ''),
     
+    -- Exige que frecuencia contenga texto.
     CONSTRAINT ck_receta_detalle_frecuencia CHECK (BTRIM(frecuencia) <> ''),
     CONSTRAINT fk_receta_detalle_receta FOREIGN KEY (receta_id)
         REFERENCES receta (receta_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -171,6 +188,7 @@ CREATE TABLE orden_laboratorio (
     estado VARCHAR(12) NOT NULL DEFAULT 'Pendiente',
     CONSTRAINT pk_orden_laboratorio PRIMARY KEY (orden_laboratorio_id),
    
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_orden_laboratorio_estado CHECK (
         estado IN ('Pendiente', 'Realizada', 'Cancelada')
     ),
@@ -187,6 +205,7 @@ CREATE TABLE orden_laboratorio_detalle (
     observaciones TEXT,
     CONSTRAINT pk_orden_laboratorio_detalle PRIMARY KEY (orden_laboratorio_detalle_id),
    
+    -- Exige que examen contenga texto.
     CONSTRAINT ck_orden_detalle_examen CHECK (BTRIM(examen) <> ''),
     CONSTRAINT fk_orden_detalle_orden FOREIGN KEY (orden_laboratorio_id)
         REFERENCES orden_laboratorio (orden_laboratorio_id)
@@ -204,8 +223,10 @@ CREATE TABLE atencion_emergencia (
     CONSTRAINT pk_atencion_emergencia PRIMARY KEY (atencion_emergencia_id),
     CONSTRAINT uq_atencion_emergencia_ingreso UNIQUE (ingreso_id),
     
+    -- Exige que estado clinico contenga texto.
     CONSTRAINT ck_emergencia_prioridad CHECK (prioridad BETWEEN 1 AND 5),
     
+    -- Exige que estado clinico contenga texto.
     CONSTRAINT ck_emergencia_estado_clinico CHECK (BTRIM(estado_clinico) <> ''),
     CONSTRAINT fk_emergencia_ingreso FOREIGN KEY (ingreso_id)
         REFERENCES ingreso (ingreso_id) ON DELETE RESTRICT ON UPDATE CASCADE

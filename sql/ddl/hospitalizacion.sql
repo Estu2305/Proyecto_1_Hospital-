@@ -13,6 +13,7 @@ CREATE TABLE hospitalizacion (
     CONSTRAINT pk_hospitalizacion PRIMARY KEY (hospitalizacion_id),
     CONSTRAINT uq_hospitalizacion_ingreso UNIQUE (ingreso_id),
    
+    -- Impide valores negativos en costo diario aplicado.
     CONSTRAINT ck_hospitalizacion_costo CHECK (costo_diario_aplicado >= 0),
     CONSTRAINT fk_hospitalizacion_ingreso FOREIGN KEY (ingreso_id)
         REFERENCES ingreso (ingreso_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -30,6 +31,7 @@ CREATE TABLE asignacion_cama (
     observaciones TEXT,
     CONSTRAINT pk_asignacion_cama PRIMARY KEY (asignacion_cama_id),
     
+    -- Valida la secuencia cronologica de asignacion cama fechas.
     CONSTRAINT ck_asignacion_cama_fechas CHECK (
         fecha_fin IS NULL OR fecha_fin > fecha_inicio
     ),
@@ -52,8 +54,10 @@ CREATE TABLE hospitalizacion_servicio (
     costo_aplicado NUMERIC(12,2) NOT NULL,
     CONSTRAINT pk_hospitalizacion_servicio PRIMARY KEY (hospitalizacion_servicio_id),
    
+    -- Exige que descripcion contenga texto.
     CONSTRAINT ck_hospitalizacion_servicio_descripcion CHECK (BTRIM(descripcion) <> ''),
    
+    -- Impide valores negativos en costo aplicado.
     CONSTRAINT ck_hospitalizacion_servicio_costo CHECK (costo_aplicado >= 0),
     CONSTRAINT fk_hospitalizacion_servicio_estadia FOREIGN KEY (hospitalizacion_id)
         REFERENCES hospitalizacion (hospitalizacion_id)
@@ -76,8 +80,10 @@ CREATE TABLE hospitalizacion_insumo (
     observaciones TEXT,
     CONSTRAINT pk_hospitalizacion_insumo PRIMARY KEY (hospitalizacion_insumo_id),
    
+    -- Exige que cantidad sea mayor que cero.
     CONSTRAINT ck_hospitalizacion_insumo_cantidad CHECK (cantidad > 0),
     
+    -- Impide valores negativos en costo unitario aplicado.
     CONSTRAINT ck_hospitalizacion_insumo_costo CHECK (costo_unitario_aplicado >= 0),
     CONSTRAINT fk_hospitalizacion_insumo_estadia FOREIGN KEY (hospitalizacion_id)
         REFERENCES hospitalizacion (hospitalizacion_id)

@@ -17,13 +17,16 @@ CREATE TABLE factura (
     CONSTRAINT uq_factura_ingreso UNIQUE (ingreso_id),
     CONSTRAINT uq_factura_consulta UNIQUE (consulta_externa_id),
     
+    -- Exige que descripcion contenga texto.
     CONSTRAINT ck_factura_origen CHECK (
         (ingreso_id IS NOT NULL AND consulta_externa_id IS NULL)
         OR (ingreso_id IS NULL AND consulta_externa_id IS NOT NULL)
     ),
     
+    -- Exige que descripcion contenga texto.
     CONSTRAINT ck_factura_estado CHECK (estado IN ('Pendiente', 'Parcial', 'Pagada', 'Anulada')),
     
+    -- Exige que descripcion contenga texto.
     CONSTRAINT ck_factura_descripcion CHECK (BTRIM(descripcion) <> ''),
     CONSTRAINT fk_factura_paciente FOREIGN KEY (paciente_id)
         REFERENCES paciente (paciente_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -51,14 +54,19 @@ CREATE TABLE factura_detalle (
     ) STORED,
     CONSTRAINT pk_factura_detalle PRIMARY KEY (factura_detalle_id),
     
+    -- Exige que concepto contenga texto.
     CONSTRAINT ck_factura_detalle_concepto CHECK (BTRIM(concepto) <> ''),
     
+    -- Limita porcentaje descuento al rango permitido.
     CONSTRAINT ck_factura_detalle_cantidad CHECK (cantidad > 0),
     
+    -- Limita porcentaje descuento al rango permitido.
     CONSTRAINT ck_factura_detalle_precio CHECK (precio_unitario >= 0),
     
+    -- Limita porcentaje descuento al rango permitido.
     CONSTRAINT ck_factura_detalle_descuento CHECK (porcentaje_descuento BETWEEN 0 AND 100),
   
+    -- Limita porcentaje recargo al rango permitido.
     CONSTRAINT ck_factura_detalle_recargo CHECK (porcentaje_recargo BETWEEN 0 AND 100),
     CONSTRAINT fk_factura_detalle_factura FOREIGN KEY (factura_id)
         REFERENCES factura (factura_id) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -75,8 +83,10 @@ CREATE TABLE plan_pago (
     CONSTRAINT uq_plan_pago_factura UNIQUE (factura_id),
     CONSTRAINT uq_plan_pago_factura_ref UNIQUE (plan_pago_id, factura_id),
  
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_plan_pago_cuotas CHECK (numero_cuotas BETWEEN 1 AND 12),
   
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_plan_pago_estado CHECK (estado IN ('Activo', 'Liquidado', 'Cancelado')),
     CONSTRAINT fk_plan_pago_factura FOREIGN KEY (factura_id)
         REFERENCES factura (factura_id) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -94,10 +104,13 @@ CREATE TABLE cuota (
     CONSTRAINT uq_cuota_numero UNIQUE (plan_pago_id, numero),
     CONSTRAINT uq_cuota_plan_ref UNIQUE (cuota_id, plan_pago_id),
    
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_cuota_numero CHECK (numero BETWEEN 1 AND 12),
    
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_cuota_monto CHECK (monto > 0),
    
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_cuota_estado CHECK (estado IN ('Pendiente', 'Parcial', 'Pagada')),
     CONSTRAINT fk_cuota_plan FOREIGN KEY (plan_pago_id)
         REFERENCES plan_pago (plan_pago_id) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -116,12 +129,15 @@ CREATE TABLE pago (
     referencia VARCHAR(80),
     CONSTRAINT pk_pago PRIMARY KEY (pago_id),
    
+    -- Limita metodo a los valores permitidos.
     CONSTRAINT ck_pago_monto CHECK (monto > 0),
    
+    -- Limita metodo a los valores permitidos.
     CONSTRAINT ck_pago_metodo CHECK (
         metodo IN ('Efectivo', 'Tarjeta', 'Transferencia', 'Deposito')
     ),
   
+    -- Garantiza la coherencia de pago plan cuota.
     CONSTRAINT ck_pago_plan_cuota CHECK (cuota_id IS NULL OR plan_pago_id IS NOT NULL),
     CONSTRAINT fk_pago_factura FOREIGN KEY (factura_id)
         REFERENCES factura (factura_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -147,6 +163,7 @@ CREATE TABLE evaluacion_calidad (
     observaciones TEXT,
     CONSTRAINT pk_evaluacion_calidad PRIMARY KEY (evaluacion_calidad_id),
     
+    -- Garantiza la coherencia de evaluacion calidad origen.
     CONSTRAINT ck_evaluacion_calidad_origen CHECK (
         (ingreso_id IS NOT NULL AND consulta_externa_id IS NULL)
         OR (ingreso_id IS NULL AND consulta_externa_id IS NOT NULL)
@@ -172,11 +189,13 @@ CREATE TABLE evaluacion_objetivo (
     comentario TEXT,
     CONSTRAINT pk_evaluacion_objetivo PRIMARY KEY (evaluacion_objetivo_id),
    
+    -- Limita nota al rango permitido.
     CONSTRAINT ck_evaluacion_objetivo_unico CHECK (
         (hospital_objetivo_id IS NOT NULL AND persona_objetivo_id IS NULL)
         OR (hospital_objetivo_id IS NULL AND persona_objetivo_id IS NOT NULL)
     ),
     
+    -- Limita nota al rango permitido.
     CONSTRAINT ck_evaluacion_nota CHECK (nota BETWEEN 1 AND 5),
     CONSTRAINT fk_objetivo_evaluacion FOREIGN KEY (evaluacion_calidad_id)
         REFERENCES evaluacion_calidad (evaluacion_calidad_id)

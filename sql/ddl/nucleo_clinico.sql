@@ -20,10 +20,13 @@ CREATE TABLE episodio_atencion (
     CONSTRAINT pk_episodio_atencion PRIMARY KEY (episodio_atencion_id),
     CONSTRAINT uq_episodio_hospital UNIQUE (episodio_atencion_id, hospital_id),
     
+    -- Limita estado a los valores permitidos.
     CONSTRAINT ck_episodio_estado CHECK (estado IN ('Abierto', 'Cerrado')),
     
+    -- Exige que motivo apertura contenga texto.
     CONSTRAINT ck_episodio_fechas CHECK (fecha_cierre IS NULL OR fecha_cierre >= fecha_apertura),
     
+    -- Exige que motivo apertura contenga texto.
     CONSTRAINT ck_episodio_cierre CHECK (
         (estado = 'Abierto' AND fecha_cierre IS NULL)
         OR (estado = 'Cerrado' AND fecha_cierre IS NOT NULL)
@@ -53,10 +56,13 @@ CREATE TABLE ingreso (
     CONSTRAINT pk_ingreso PRIMARY KEY (ingreso_id),
     CONSTRAINT uq_ingreso_episodio UNIQUE (ingreso_id, episodio_atencion_id),
     
+    -- Exige que motivo ingreso contenga texto.
     CONSTRAINT ck_ingreso_estado CHECK (estado IN ('Abierto', 'Cerrado')),
     
+    -- Exige que motivo ingreso contenga texto.
     CONSTRAINT ck_ingreso_motivo CHECK (BTRIM(motivo_ingreso) <> ''),
     
+    -- Exige que diagnostico presuntivo contenga texto.
     CONSTRAINT ck_ingreso_diagnostico CHECK (BTRIM(diagnostico_presuntivo) <> ''),
     CONSTRAINT fk_ingreso_episodio_hospital
         FOREIGN KEY (episodio_atencion_id, hospital_id)
@@ -90,6 +96,7 @@ CREATE TABLE diagnostico (
     CONSTRAINT pk_diagnostico PRIMARY KEY (diagnostico_id),
     CONSTRAINT uq_diagnostico_codigo UNIQUE (codigo),
     
+    -- Exige que nombre contenga texto.
     CONSTRAINT ck_diagnostico_nombre CHECK (BTRIM(nombre) <> '')
 );
 
@@ -110,13 +117,16 @@ CREATE TABLE egreso (
     CONSTRAINT pk_egreso PRIMARY KEY (egreso_id),
     CONSTRAINT uq_egreso_ingreso UNIQUE (ingreso_id),
     
+    -- Exige que motivo egreso contenga texto.
     CONSTRAINT ck_egreso_codigo CHECK (codigo_egreso IN ('Vivo', 'Muerto', 'Embarazo', 'Parto')),
     
+    -- Exige que motivo egreso contenga texto.
     CONSTRAINT ck_egreso_sin_consentimiento CHECK (
         (sin_consentimiento_medico AND NULLIF(BTRIM(motivo_sin_consentimiento), '') IS NOT NULL)
         OR (NOT sin_consentimiento_medico AND motivo_sin_consentimiento IS NULL)
     ),
     
+    -- Exige que motivo egreso contenga texto.
     CONSTRAINT ck_egreso_motivo CHECK (BTRIM(motivo_egreso) <> ''),
     CONSTRAINT fk_egreso_ingreso FOREIGN KEY (ingreso_id)
         REFERENCES ingreso (ingreso_id) ON DELETE RESTRICT ON UPDATE CASCADE,
